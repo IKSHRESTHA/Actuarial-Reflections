@@ -1,22 +1,23 @@
 # Actuarial Reflections
 
-A Quarto website for actuarial and data science reflections, structured for GitHub Pages deployment.
+A simple Quarto website for actuarial and data science reflections by Krishna Kumar Shrestha.
+
+## Visit the Website
+
+Once published, view the site at:
+
+[https://krishna-k-shrestha.github.io/actuarial-reflections/](https://krishna-k-shrestha.github.io/actuarial-reflections/)
 
 ## Features
-- Top navigation bar: Home, Actuarial Projects, Data Science Projects, About
-- 3-column project grid on homepage
-- Project listing pages with filterable tags, date sorting, summaries
-- Standardized YAML headers for projects
-- SEO: sitemap.xml, robots.txt
-- Actuarial project cards with icons and blue/green color scheme
-- Data science project template with code snippets and ML badges
-- Automated Related Articles section
-- Responsive author bio, CV download, contact form with CAPTCHA
-- Mobile responsive, hamburger menu, dark/light mode toggle
-- GitHub Actions for build/deploy
-- Accessibility (WCAG 2.1 AA)
-- Page speed optimizations
-- 404 error page with search and home link
+- Clean, easy-to-read layout
+- No tracking, analytics, or unnecessary scripts
+- Actuarial and data science project examples
+
+## How to Publish on GitHub Pages
+1. Push this project to a new GitHub repository (e.g., `actuarial-reflections`).
+2. In GitHub, go to **Settings > Pages** and set the source to the `main` branch and `/docs` folder.
+3. The included GitHub Actions workflow will automatically build and deploy your site on every push to `main`.
+4. Visit your site at the link above!
 
 ## Local Preview
 1. Install [Quarto](https://quarto.org/docs/get-started/)
@@ -24,13 +25,7 @@ A Quarto website for actuarial and data science reflections, structured for GitH
    ```powershell
    quarto preview
    ```
-3. Check for missing dependencies in the Quarto output
 
-## GitHub Pages Deployment
-1. Push this project to a new GitHub repository
-2. In repo settings, set GitHub Pages source to `main` branch, `/docs` folder
-3. Add the provided GitHub Actions workflow for auto-deploy
-4. Visit your site at `https://<your-github-username>.github.io/<your-repo-name>/`
+---
 
-## License
-[MIT](LICENSE)
+© 2025 Krishna Kumar Shrestha
