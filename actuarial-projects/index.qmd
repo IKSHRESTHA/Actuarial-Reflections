@@ -1,0 +1,10 @@
+---
+title: "Actuarial Projects"
+description: "Explore actuarial projects with insurance and finance themes. Filter by tags, sort by date, and read detailed summaries."
+---
+
+# Actuarial Projects
+
+::: {.project-list}
+<!-- Filterable, sortable project cards will be generated here -->
+:::

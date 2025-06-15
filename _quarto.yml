@@ -1,0 +1,39 @@
+project:
+  type: website
+  output-dir: docs
+  title: "Actuarial Reflections"
+
+website:
+  title: "Actuarial Reflections"
+  navbar:
+    left:
+      - text: Home
+        href: index.qmd
+      - text: Actuarial Projects
+        href: actuarial-projects/index.qmd
+      - text: Data Science Projects
+        href: data-science-projects/index.qmd
+      - text: About
+        href: about/index.qmd
+  search: true
+  page-navigation: true
+  page-footer:
+    left: "© 2025 Actuarial Reflections"
+    right: "Built with Quarto"
+  sidebar: false
+
+format:
+  html:
+    theme:
+      light: [cosmo, flatly, minimal]
+      dark: [darkly, cyborg]
+    css: styles.css
+    toc: true
+    code-copy: true
+    code-overflow: wrap
+    smooth-scroll: true
+    link-external-newwindow: true
+    page-layout: full
+    search: true
+    anchor-sections: true
+    highlight-style: github

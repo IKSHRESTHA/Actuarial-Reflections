@@ -1,0 +1,26 @@
+---
+title: "Sample Data Science Project"
+date: 2025-06-15
+description: "A sample data science project with code snippets and ML badges."
+tags: [data-science, machine-learning]
+featured-image: data-science-sample.jpg
+---
+
+# Sample Data Science Project
+
+::: {.project-card data-science}
+![ML Badge](ml-badge.svg){alt="ML badge" aria-label="ML badge"}
+
+```python
+# Example code snippet
+def predict():
+    return "ML prediction"
+```
+
+---
+
+## Related Articles
+
+::: {.related-articles}
+<!-- Related articles will be auto-generated here -->
+:::

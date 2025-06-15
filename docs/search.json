@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Actuarial Reflections",
+    "section": "",
+    "text": "Welcome to Actuarial Reflections—a personal collection of actuarial and data science projects, insights, and resources.\n\n\n\n\n\nSample Actuarial Project\nA sample actuarial project with insurance/finance theme.\n\n\nSample Data Science Project\nA sample data science project with code snippets and ML badges.\n\n\n\nEnjoy reading!"
+  },
+  {
+    "objectID": "data-science-projects/sample-data-science.html",
+    "href": "data-science-projects/sample-data-science.html",
+    "title": "Sample Data Science Project",
+    "section": "",
+    "text": "::: {.project-card data-science} \n# Example code snippet\ndef predict():\n    return \"ML prediction\""
+  },
+  {
+    "objectID": "actuarial-projects/sample-actuarial.html",
+    "href": "actuarial-projects/sample-actuarial.html",
+    "title": "Sample Actuarial Project",
+    "section": "",
+    "text": "::: {.project-card actuarial} \nThis is a sample actuarial project."
+  },
+  {
+    "objectID": "about/index.html",
+    "href": "about/index.html",
+    "title": "About",
+    "section": "",
+    "text": "Professional Photo\n\n\nDownload CV{.btn .btn-primary download}\nConnect: - LinkedIn - Twitter - GitHub\n\n\n\n\nName  Email  Message\n\n\n\n[CAPTCHA]\n\n\nSend"
+  },
+  {
+    "objectID": "about/index.html#contact",
+    "href": "about/index.html#contact",
+    "title": "About",
+    "section": "",
+    "text": "Name  Email  Message\n\n\n\n[CAPTCHA]\n\n\nSend"
+  },
+  {
+    "objectID": "actuarial-projects/index.html",
+    "href": "actuarial-projects/index.html",
+    "title": "Actuarial Projects",
+    "section": "",
+    "text": "Actuarial Projects"
+  },
+  {
+    "objectID": "data-science-projects/index.html",
+    "href": "data-science-projects/index.html",
+    "title": "Data Science Projects",
+    "section": "",
+    "text": "Data Science Projects"
+  },
+  {
+    "objectID": "index.html#latest-projects",
+    "href": "index.html#latest-projects",
+    "title": "Actuarial Reflections",
+    "section": "",
+    "text": "Sample Actuarial Project\nA sample actuarial project with insurance/finance theme.\n\n\nSample Data Science Project\nA sample data science project with code snippets and ML badges.\n\n\n\nEnjoy reading!"
+  }
+]

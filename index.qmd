@@ -1,0 +1,26 @@
+# Actuarial Reflections
+
+Welcome to Actuarial Reflections—a personal collection of actuarial and data science projects, insights, and resources.
+
+---
+
+## Latest Projects
+
+::: {.project-grid}
+
+::: {.project-card}
+**[Sample Actuarial Project](actuarial-projects/sample-actuarial.qmd)**  
+A sample actuarial project with insurance/finance theme.
+:::
+
+::: {.project-card}
+**[Sample Data Science Project](data-science-projects/sample-data-science.qmd)**  
+A sample data science project with code snippets and ML badges.
+:::
+
+:::
+
+---
+
+Enjoy reading!
+

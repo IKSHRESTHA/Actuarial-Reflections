@@ -1,0 +1,10 @@
+---
+title: "Data Science Projects"
+description: "Browse data science projects with code snippets, ML badges, and interactive features. Filter by tags, sort by date, and read summaries."
+---
+
+# Data Science Projects
+
+::: {.project-list}
+<!-- Filterable, sortable project cards will be generated here -->
+:::

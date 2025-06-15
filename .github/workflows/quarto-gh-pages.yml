@@ -1,0 +1,15 @@
+name: Quarto Publish to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+      - name: Render site
+        run: quarto render
