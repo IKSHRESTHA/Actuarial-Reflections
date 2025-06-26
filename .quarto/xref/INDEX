@@ -1,23 +1,11 @@
 {
   "index.qmd": {
-    "index.html": "b98ac21e"
+    "index.html": "8c764d8b"
   },
-  "404.qmd": {
-    "404.html": "b20cef21"
+  "about.qmd": {
+    "about.html": "aed7526c"
   },
-  "about/index.qmd": {
-    "index.html": "7abc3ea1"
-  },
-  "actuarial-projects/index.qmd": {
-    "index.html": "d07ca356"
-  },
-  "actuarial-projects/sample-actuarial.qmd": {
-    "sample-actuarial.html": "71539edb"
-  },
-  "data-science-projects/index.qmd": {
-    "index.html": "331595bb"
-  },
-  "data-science-projects/sample-data-science.qmd": {
-    "sample-data-science.html": "04963dc9"
+  "posts/actuary-in-nepal.qmd": {
+    "actuary-in-nepal.html": "673aa5f5"
   }
 }
