@@ -2,13 +2,23 @@ project:
   type: website
 
 website:
-  title: "My Personal Blog"
+  title: "Actuarial-Reflections"
+  description: "Reflections, projects, and insights by Krishna Shrestha"
+  favicon: favicon.ico   # Place your favicon.ico in the project root
+
   navbar:
     left:
       - href: index.qmd
-        text: Blog
+        text: Home
       - href: about.qmd
         text: About Me
+    right:
+      - icon: github
+        href: https://github.com/YOUR_GITHUB_USERNAME
+        aria-label: GitHub
+      - icon: linkedin
+        href: https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME
+        aria-label: LinkedIn
 
 format:
   html:
