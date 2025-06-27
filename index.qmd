@@ -8,7 +8,11 @@ listing:
   filter-ui: false
 page-layout: article
 ---
-> All the content of this website is my personal view. 
+::: {.callout-note}
+
+All the content of this website is my personal view. 
+
+:::
 
 <!-- Typewriter with Name Reveal -->
 <div style="width: 100%; text-align: center; margin-top: 44px;">
