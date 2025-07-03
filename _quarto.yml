@@ -5,6 +5,7 @@ website:
   title: "Actuarial-Reflections"
   description: "Reflections, projects, and insights by Krishna Shrestha"
   favicon: favicon.ico   # Place your favicon.ico in the project root
+  google-analytics: "G-LSZ7YTNKVY"
 
   navbar:
     left:
