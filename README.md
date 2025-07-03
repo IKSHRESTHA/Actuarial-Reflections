@@ -1,56 +1,50 @@
-# Quarto Website Project
+---
+editor: 
+  markdown: 
+    wrap: 72
+---
 
-This is a simple Quarto website created with a blog structure similar to themockup.blog. The website includes:
+Actuarial Reflections - Personal Blog Welcome to Actuarial Reflections,
+my personal blog where I share insights on actuarial science, data
+science, and my professional journey. This repository hosts all the
+source code and content that powers my blog.
 
-## Features
+🔗 Live Site: Explore the live blog here:
+https://ikshrestha.github.io/Actuarial-Reflections/
 
-- **Blog section**: Main page displaying blog posts in a listing format
-- **About Me section**: Simple about page
-- **Article**: "How to Become an Actuary in Nepal" - a comprehensive guide
-- **Clean design**: Modern styling with hover effects and responsive design
-- **GitHub Actions**: Automated deployment to GitHub Pages
+📚 About This Blog
 
-## Structure
+Actuarial Reflections serves as my digital notebook and a platform for
+continuous learning. Here, I document and explore:
 
-```
-quarto_website/
-├── _quarto.yml          # Main configuration file
-├── index.qmd            # Blog listing page
-├── about.qmd            # About me page
-├── styles.css           # Custom CSS styling
-├── posts/
-│   └── actuary-in-nepal.qmd  # Blog post about becoming an actuary in Nepal
-└── .github/
-    └── workflows/
-        └── publish.yml  # GitHub Actions workflow for deployment
-```
+-   Deep Dives: Comprehensive explorations into actuarial concepts,
+    methodologies, and their real-world applications.
 
-## Local Development
+-   Data Science in Practice: Practical applications of data science
+    techniques within the insurance and finance industries.
 
-1. Install Quarto from https://quarto.org/docs/get-started/
-2. Navigate to the project directory
-3. Run `quarto preview` to start a local development server
-4. Run `quarto render` to build the static site
+-   Technical Tutorials: Step-by-step guides on statistical modeling,
+    machine learning, and programming relevant to actuarial and data
+    science fields.
 
-## GitHub Pages Deployment
+-   Career Development: Insights and reflections on navigating the
+    actuarial exams and professional career path.
 
-1. Push this project to a GitHub repository
-2. Go to repository Settings > Pages
-3. Set Source to "GitHub Actions"
-4. The workflow will automatically build and deploy on every push to main branch
+-   Personal Journey: A candid look at my experiences and continuous
+    learning in the interdisciplinary fields of actuarial science and
+    data analytics.
 
-## Customization
+This blog is a testament to my commitment to knowledge sharing and a
+reflection of my ongoing growth in these dynamic fields. I hope you find
+the content valuable and insightful!
 
-- Edit `_quarto.yml` to change site title and navigation
-- Modify `styles.css` to customize the appearance
-- Add new blog posts in the `posts/` directory
-- Update the About Me page in `about.qmd`
+🤝 Contributions
 
-## Navigation
+While this is a personal blog, I welcome suggestions and feedback. If
+you have any ideas for topics or improvements, feel free to open an
+issue or reach out.
 
-The website has a simple navigation bar with:
-- **Blog**: Main page with blog post listings
-- **About Me**: Information about the site creator
+📄 License
 
-No external integrations like GitHub links, LinkedIn, comments, or Google Analytics are included as requested.
-
+This project is licensed under the MIT License - see the LICENSE file
+for details.
