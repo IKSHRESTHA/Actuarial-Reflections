@@ -28,3 +28,119 @@ In this article, we'll explore:
 -   Help us Validate assumptions
 
 -   Help us in feature engineering
+
+Lets start now exploring the data. First thing First, we need to import library that we are going to use for this project:
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| paged-print: false
+
+
+library(dplyr)
+library(ggplot2)
+
+
+```
+
+
+After loaing the library, we will read the data.
+
+## About the data
+
+The data has been downloaded from the kaggle and you can find about the data more on here:
+
+```{r}
+
+
+
+personality_dataset <-readr::read_csv("https://raw.githubusercontent.com/IKSHRESTHA/Actuarial-Reflections/refs/heads/main/data/06272925/personality_datasert.csv")
+
+# cleaning the columns name 
+df <- personality_dataset |>
+  janitor::clean_names()
+
+colnames(df)
+```
+```{r}
+library(extrafont)  # For font consistency
+
+theme_actuarial <- function(base_size = 12, 
+                            base_family = "mono",
+                            title_position = "middle",
+                            border_color = "black") {
+  
+  # Load monospaced font (install first if needed)
+  extrafont::loadfonts(quiet = TRUE)
+  
+  theme_minimal(base_size = base_size, base_family = base_family) %+replace%
+    theme(
+      # Text elements
+      text = element_text(family = base_family, color = "black"),
+      title = element_text(face = "bold", size = base_size * 1.2),
+      plot.title = element_text(
+        hjust = 0.5, 
+        margin = margin(b = base_size),
+        size = base_size * 1.4
+      ),
+      plot.subtitle = element_text(
+        hjust = 0.5, 
+        margin = margin(b = base_size)
+      ),
+      plot.caption = element_text(
+        hjust = 1, 
+        size = base_size * 0.8,
+        color = "grey40"
+      ),
+      
+      # Axis elements
+      axis.title = element_text(
+        face = "bold", 
+        color = "black",
+        size = base_size * 1.1
+      ),
+      axis.title.x = element_text(
+        margin = margin(t = base_size * 0.5),
+        hjust = title_position
+      ),
+      axis.title.y = element_text(
+        margin = margin(r = base_size * 0.5),
+        angle = 90,
+        hjust = title_position
+      ),
+      axis.text = element_text(color = "grey30"),
+      axis.line = element_line(
+        color = border_color, 
+        linewidth = 0.8
+      ),
+      
+      # Panel elements
+      panel.grid.major = element_line(
+        color = "grey92", 
+        linewidth = 0.3
+      ),
+      panel.grid.minor = element_blank(),
+      panel.background = element_rect(fill = "white", color = NA),
+      panel.border = element_blank(),
+      
+      # Legend elements
+      legend.title = element_text(face = "bold"),
+      legend.background = element_rect(fill = "white", color = NA),
+      legend.key = element_rect(fill = "white", color = NA),
+      
+      # Plot elements
+      plot.background = element_rect(fill = "white", color = NA),
+      plot.margin = margin(base_size, base_size, base_size, base_size),
+      strip.background = element_rect(fill = "grey95", color = NA),
+      strip.text = element_text(face = "bold")
+    )
+}
+```
+
+
+```{r}
+
+rstatix::get_summary_stats(df,type="full")
+```
+
