@@ -1,0 +1,30 @@
+---
+title: "Decoding Personality: ML Models as Your Guide to Introverts vs. Extroverts"
+author: "Krishna Kumar Shrestha"
+date: "2025-05-26"
+categories: [data science, descriptive, ml]
+---
+
+# Part 1: Descriptive  Analysis - Mapping the Personality Spectrum
+
+## Introduction 
+
+Welcome to the first installment in our series decoding the human personality through data science! Before we build predictive models in latter posts, we must answer a fundamental question: What do we really mean by `introvert` and `extrovert` - and how can data reveal their true behavioral patters?
+
+In this article, we'll explore:
+
+-   Why Exploratory Data Analysis (EDA) is your essential first step
+
+-   Visual storytelling with ggplot2 uncovers hidden patterns
+
+## Why EDA?
+
+-   EDA helps us understand our variables.
+
+-   Helps us detect data Quality Issues ( `Missing Values`, `Outliers` )
+
+-   Helps us uncover hidden relationships
+
+-   Help us Validate assumptions
+
+-   Help us in feature engineering
