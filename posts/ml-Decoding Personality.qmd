@@ -141,8 +141,8 @@ theme_actuarial <- function(base_size = 12,
 
 ```{r}
 
-df_summary=rstatix::get_summary_stats(df,type="full")
-df_summary
+#df_summary=rstatix::get_summary_stats(df,type="full")
+#df_summary
 
 ```
 
