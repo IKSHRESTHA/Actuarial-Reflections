@@ -1,0 +1,90 @@
+---
+title: "Understanding Experience Study"
+author: "Krishna Kumar Shrestha"
+date: "2025-06-26"
+categories: [actuarial science, life insurance,non-life insurance]
+---
+
+# Summary: Experience Studies – Understanding the Past While Planning for the Future
+
+*Based on the article by Matthew Dunscombe and Alexander Zaidlin*
+
+------------------------------------------------------------------------
+
+## Overview
+
+This document summarizes the key points from the article “Experience Studies – Understanding the Past While Planning for the Future,” which explores the critical role of experience studies in actuarial science and modern insurance. Experience studies analyze actual versus expected insurance events (such as deaths, lapses, and claims) within defined populations. The process supports actuaries in understanding trends, identifying risk drivers, refining assumptions, and complying with evolving financial standards.
+
+------------------------------------------------------------------------
+
+## Highlights
+
+-   📊 **Foundational Role:** Experience studies are fundamental to actuarial work, dating back to the 17th century.
+-   🔍 **Core Metric:** The comparison of actual insurance events to expected figures produces the actual-to-expected (A/E) ratio.
+-   🛠️ **Seven-Step Process:** Steps include data gathering, preparation, exposure calculation, actual/expected comparison, aggregation, analysis, validation, and reporting.
+-   📈 **Trend Analysis:** Identifying data trends and outliers is vital for setting accurate assumptions.
+-   ⚖️ **Credibility and Adjustment:** Credibility methods and manual adjustments help refine and stabilize results.
+-   🌍 **External Factors:** External variables and incurred-but-not-reported (IBNR) claims add complexity and require expert judgment.
+-   💻 **Technology:** Tools like SQL Server and SAS enable large-scale, efficient experience studies in addition to traditional Excel-based approaches.
+
+------------------------------------------------------------------------
+
+## Key Insights
+
+### 📚 Historical Significance and Evolution
+
+Experience studies have shaped actuarial science for centuries—beginning with Edmund Halley’s annuity analysis. Over time, these studies evolved from simple mortality tables to complex, data-driven models essential for modern pricing, reserving, and regulatory compliance.
+
+### 🧮 Data Structure and Preparation
+
+Careful selection between policy snapshot datasets and transactional records is critical. Snapshot datasets provide a static policy view, while transactional datasets offer granular, event-level insights. Collaboration with IT and claims departments is vital to ensure data quality, making data preparation the most labor-intensive step.
+
+### 📊 Exposure Calculations
+
+Calculating exposure quantifies the risk period for insurance events, enabling actuaries to derive rates by count and by amount (the latter reflecting financial impact). The choice between calendar year and policy year studies affects how exposure is segmented and analyzed.
+
+### 🔍 Actual vs. Expected and A/E Ratios
+
+The main analytical output is the A/E ratio, which compares observed claims to expected figures (from industry tables or internal assumptions). This ratio highlights deviations, guiding assumption changes or further analysis.
+
+### ⚖️ Aggregation and Credibility
+
+Grouping results (by gender, product, etc.) enables actionable insights. Credibility theory determines the statistical reliability of groupings and whether to use benchmarks or granular analysis. Advanced methods like generalized linear models (GLMs) and Bayesian approaches enhance credibility assessments.
+
+### 🔄 Manual Adjustments and Trend Analysis
+
+Actuaries must apply judgment in adjusting outputs for volatility and external events. Peer review and stakeholder feedback ensure assumptions are robust. Trend analysis links changes to underwriting, economic shifts, or product mix, informing future projections.
+
+### 🌐 External Factors and Claims Reporting
+
+Non-core influences like regulatory changes and market conditions can distort results. IBNR and in-course-of-settlement (ICOS) claims create uncertainty, requiring careful estimation to avoid understating actual experience.
+
+### 💻 Technology Adoption
+
+Modern tools (SQL Server, SAS, etc.) handle large volumes and complex calculations more efficiently than traditional spreadsheet tools, enabling faster and more reproducible analyses.
+
+### 📄 Comprehensive Reporting and Validation
+
+Rigorous validation (reconciliation, sampling, analytical review) ensures accuracy. Documentation of methodology, assumptions, and findings supports transparency and sound decision-making.
+
+### 🤝 Cross-Department Collaboration
+
+Effective studies require coordination between actuaries, claims, underwriting, IT, and business units. This teamwork improves data accuracy, result interpretation, and agreement on adjustments.
+
+------------------------------------------------------------------------
+
+## Extended Discussion
+
+Experience studies are the empirical foundation of actuarial analysis. While the main concept—comparing actual to expected events—is straightforward, practical implementation involves complex data preparation, nuanced exposure calculation, trend/outlier analysis, and expert judgment.
+
+**Key aspects include:** - **Data Preparation:** The most resource-intensive step, involving cleansing, linking, and validating from various sources. The chosen data structure influences study design and insights. - **Exposure Measurement:** Accurate measurement underpins rates and A/E ratios, revealing alignment or deviation from expectations. - **Trend and Outlier Detection:** Helps refine assumptions and uncover extraordinary events or data issues. - **Credibility and Modeling:** Sophisticated statistical techniques balance observed data with prior information. - **Manual Adjustments:** Required to smooth volatility and reflect external events—peer-reviewed for transparency. - **Handling External Factors:** Considered through advanced statistical methods and judgment. - **IBNR and ICOS:** Properly estimating late or unsettled claims is essential for accuracy. - **Technology:** Modern platforms streamline large, complex studies, letting actuaries focus on interpretation. - **Documentation & Validation:** Ensures stakeholder confidence and future usability. - **Collaboration:** Critical for ensuring data accuracy and relevance of findings.
+
+------------------------------------------------------------------------
+
+## Conclusion
+
+Experience studies remain vital for pricing, reserving, and risk management in insurance. Their success hinges on robust data preparation, accurate measurement, sound statistical practice, effective technology, and strong cross-department collaboration. Comprehensive documentation and validation underpin credibility, ensuring that experience studies remain a cornerstone of informed, data-driven actuarial decision-making.
+
+------------------------------------------------------------------------
+
+## 
