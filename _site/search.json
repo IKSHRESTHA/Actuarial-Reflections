@@ -11,7 +11,7 @@
     "href": "index.html",
     "title": "Actuarial-Reflections",
     "section": "",
-    "text": "Note\n\n\n\nAll the content of this website is my personal view.\n\n\n\n\n\n\n\n\nKrishna Shrestha\n\n\n\n\n\n\n&lt;a href=\"https://tenor.com/view/pikachu-pokemon-waving-wave-hi-gif-16091246\"&gt;Pikachu Pokemon Sticker&lt;/a&gt;\nfrom &lt;a href=\"https://tenor.com/search/pikachu-stickers\"&gt;Pikachu Stickers&lt;/a&gt;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUnderstanding Experience Study\n\n\n\n\n\n\nactuarial science\n\n\nlife insurance\n\n\nnon-life insurance\n\n\n\n\n\n\n\n\n\nJun 26, 2025\n\n\nKrishna Kumar Shrestha\n\n\n\n\n\n\n\n\n\n\n\n\nDecoding Personality: ML Models as Your Guide to Introverts vs. Extroverts\n\n\n\n\n\n\ndata science\n\n\ndescriptive\n\n\nml\n\n\n\n\n\n\n\n\n\nMay 26, 2025\n\n\nKrishna Kumar Shrestha\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Become an Actuary in Nepal\n\n\n\n\n\n\nActuary\n\n\nNepal\n\n\nCareer\n\n\n\n\n\n\n\n\n\nMay 20, 2025\n\n\nKrishna Kumar Shrestha\n\n\n\n\n\n\nNo matching items"
+    "text": "Note\n\n\n\nAll the content of this website is my personal view.\n\n\n\n\n\n\n\n\nKrishna Shrestha\n\n\n\n\n\n\n&lt;a href=\"https://tenor.com/view/pikachu-pokemon-waving-wave-hi-gif-16091246\"&gt;Pikachu Pokemon Sticker&lt;/a&gt;\nfrom &lt;a href=\"https://tenor.com/search/pikachu-stickers\"&gt;Pikachu Stickers&lt;/a&gt;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUnderstanding Experience Study\n\n\n\n\n\n\nactuarial science\n\n\nlife insurance\n\n\nnon-life insurance\n\n\n\n\n\n\n\n\n\nJun 26, 2025\n\n\nKrishna Kumar Shrestha\n\n\n\n\n\n\n\n\n\n\n\n\nDecoding Personality: ML Models as Your Guide to Introverts vs. Extroverts\n\n\n\n\n\n\ndata science\n\n\ndescriptive\n\n\nml\n\n\n\n\n\n\n\n\n\nMay 26, 2025\n\n\nKrishna Kumar Shrestha\n\n\n\n\n\n\n\n\n\n\n\n\nHow to Become an Actuary in Nepal\n\n\n\n\n\n\nActuary\n\n\nNepal\n\n\nCareer\n\n\n\n\n\n\n\n\n\nMay 20, 2025\n\n\nKrishna Kumar Shrestha\n\n\n\n\n\n\n\n\n\n\n\n\nUnderstanding Risk\n\n\n\n\n\n\nactuarial science\n\n\nlife insurance\n\n\nnon-life insurance\n\n\nrisk\n\n\nrisk Managment\n\n\n\n\n\n\n\n\n\nApr 26, 2025\n\n\nKrishna Kumar Shrestha\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -124,5 +124,33 @@
     "title": "Understanding Experience Study",
     "section": "",
     "text": "Experience studies remain vital for pricing, reserving, and risk management in insurance. Their success hinges on robust data preparation, accurate measurement, sound statistical practice, effective technology, and strong cross-department collaboration. Comprehensive documentation and validation underpin credibility, ensuring that experience studies remain a cornerstone of informed, data-driven actuarial decision-making."
+  },
+  {
+    "objectID": "posts/understanding risk.html",
+    "href": "posts/understanding risk.html",
+    "title": "Understanding Risk",
+    "section": "",
+    "text": "Risk is a part of everyday life, whether in business, projects, or personal decisions. In simple terms, risk is the chance that something unexpected or undesirable might happen, leading to negative consequences.\n\n\nWhen thinking about risk, there are two main questions to ask: - How likely is it to happen? (Probability) - How bad would it be if it happens? (Impact)\nManaging risk means understanding both how often something might go wrong and how serious it would be if it does.\n\n\n\nRisks can be grouped based on their likelihood and impact. Here are four common types, and how you can manage each:\n\n\n\nThese are unlikely to happen and wouldn’t cause much harm if they did.\nHow to manage: - Accept the risk. These are often so small they aren’t worth much attention. - Monitor just in case. Keep an eye on them to make sure nothing changes.\nExample: Occasionally running out of printer paper at the office.\n\n\n\n\nUnlikely to occur, but if they do, the consequences could be severe.\nHow to manage: - Prepare contingency plans. Develop a plan for what to do if the risk happens. - Transfer the risk. Use insurance or contracts to share the risk with others. - Monitor regularly. Review the situation in case the likelihood increases.\nExample: An earthquake or other natural disaster.\n\n\n\n\nThese happen often, but their effects are minor.\nHow to manage: - Reduce how often they happen. Improve processes, provide training, or maintain equipment. - Keep records. Monitor how often these risks occur to spot any trends.\nExample: Minor technical glitches or small delays in routine tasks.\n\n\n\n\nBoth likely to happen and would have major consequences.\nHow to manage: - Act immediately. Address these risks with urgency. - Implement strong controls. Set up barriers or protections to reduce both likelihood and impact. - Develop and test response plans. Be ready to act if the risk materializes. - Monitor closely. Regularly review your controls and plans.\nExample: Cyberattacks that could expose sensitive data.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType of Risk\nExample\nHow to Manage\n\n\n\n\nMinor\nPrinter out of paper\nAccept, Monitor\n\n\nRare but Serious\nEarthquake\nPlan, Transfer, Monitor\n\n\nFrequent, Low-Impact\nSmall IT glitches\nReduce, Monitor\n\n\nCritical\nCyberattack/data breach\nAct, Control, Respond, Monitor\n\n\n\n\nTip:\nGood risk management means focusing your efforts on the most important risks—those that could happen frequently or cause the most harm."
+  },
+  {
+    "objectID": "posts/understanding risk.html#key-elements-of-risk",
+    "href": "posts/understanding risk.html#key-elements-of-risk",
+    "title": "Understanding Risk",
+    "section": "",
+    "text": "When thinking about risk, there are two main questions to ask: - How likely is it to happen? (Probability) - How bad would it be if it happens? (Impact)\nManaging risk means understanding both how often something might go wrong and how serious it would be if it does."
+  },
+  {
+    "objectID": "posts/understanding risk.html#types-of-risk-and-how-to-manage-them",
+    "href": "posts/understanding risk.html#types-of-risk-and-how-to-manage-them",
+    "title": "Understanding Risk",
+    "section": "",
+    "text": "Risks can be grouped based on their likelihood and impact. Here are four common types, and how you can manage each:\n\n\n\nThese are unlikely to happen and wouldn’t cause much harm if they did.\nHow to manage: - Accept the risk. These are often so small they aren’t worth much attention. - Monitor just in case. Keep an eye on them to make sure nothing changes.\nExample: Occasionally running out of printer paper at the office.\n\n\n\n\nUnlikely to occur, but if they do, the consequences could be severe.\nHow to manage: - Prepare contingency plans. Develop a plan for what to do if the risk happens. - Transfer the risk. Use insurance or contracts to share the risk with others. - Monitor regularly. Review the situation in case the likelihood increases.\nExample: An earthquake or other natural disaster.\n\n\n\n\nThese happen often, but their effects are minor.\nHow to manage: - Reduce how often they happen. Improve processes, provide training, or maintain equipment. - Keep records. Monitor how often these risks occur to spot any trends.\nExample: Minor technical glitches or small delays in routine tasks.\n\n\n\n\nBoth likely to happen and would have major consequences.\nHow to manage: - Act immediately. Address these risks with urgency. - Implement strong controls. Set up barriers or protections to reduce both likelihood and impact. - Develop and test response plans. Be ready to act if the risk materializes. - Monitor closely. Regularly review your controls and plans.\nExample: Cyberattacks that could expose sensitive data."
+  },
+  {
+    "objectID": "posts/understanding risk.html#summary-table",
+    "href": "posts/understanding risk.html#summary-table",
+    "title": "Understanding Risk",
+    "section": "",
+    "text": "Type of Risk\nExample\nHow to Manage\n\n\n\n\nMinor\nPrinter out of paper\nAccept, Monitor\n\n\nRare but Serious\nEarthquake\nPlan, Transfer, Monitor\n\n\nFrequent, Low-Impact\nSmall IT glitches\nReduce, Monitor\n\n\nCritical\nCyberattack/data breach\nAct, Control, Respond, Monitor\n\n\n\n\nTip:\nGood risk management means focusing your efforts on the most important risks—those that could happen frequently or cause the most harm."
   }
 ]
