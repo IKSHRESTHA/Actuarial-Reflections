@@ -15,10 +15,10 @@ website:
         text: About Me
     right:
       - icon: github
-        href: https://github.com/YOUR_GITHUB_USERNAME
+        href: https://github.com/IKSHRESTHA
         aria-label: GitHub
       - icon: linkedin
-        href: https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME
+        href: https://www.linkedin.com/in/ikshrestha/
         aria-label: LinkedIn
 
 format:
