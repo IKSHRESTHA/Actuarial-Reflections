@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Krishna Kumar Shrestha">
+<meta name="dcterms.date" content="2025-04-26">
 
-<title>Actuarial-Reflections</title>
+<title>Understanding Risk – Actuarial-Reflections</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./favicon.ico" rel="icon">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a98ec624fb63d9b712fc3a6f62e2b305.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-a98ec624fb63d9b712fc3a6f62e2b305.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,35 +70,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-LSZ7YTNKVY"></script>
 
 <script type="text/javascript">
@@ -109,37 +80,8 @@ gtag('js', new Date());
 gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -149,7 +91,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Actuarial-Reflections</span>
     </a>
   </div>
@@ -160,11 +102,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About Me</span></a>
   </li>  
 </ul>
@@ -191,221 +133,154 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="YWN0dWFyaWFsJTIwc2NpZW5jZQ==">actuarial science <span class="quarto-category-count">(2)</span></div><div class="category" data-category="QWN0dWFyeQ==">Actuary <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2FyZWVy">Career <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YSUyMHNjaWVuY2U=">data science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGVzY3JpcHRpdmU=">descriptive <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bGlmZSUyMGluc3VyYW5jZQ==">life insurance <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bWw=">ml <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TmVwYWw=">Nepal <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bm9uLWxpZmUlMjBpbnN1cmFuY2U=">non-life insurance <span class="quarto-category-count">(2)</span></div><div class="category" data-category="cmlzaw==">risk <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmlzayUyME1hbmFnbWVudA==">risk Managment <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#understanding-risk-and-how-to-manage-it" id="toc-understanding-risk-and-how-to-manage-it" class="nav-link active" data-scroll-target="#understanding-risk-and-how-to-manage-it">Understanding Risk and How to Manage It</a>
+  <ul class="collapse">
+  <li><a href="#key-elements-of-risk" id="toc-key-elements-of-risk" class="nav-link" data-scroll-target="#key-elements-of-risk">Key Elements of Risk</a></li>
+  <li><a href="#types-of-risk-and-how-to-manage-them" id="toc-types-of-risk-and-how-to-manage-them" class="nav-link" data-scroll-target="#types-of-risk-and-how-to-manage-them">Types of Risk and How to Manage Them</a>
+  <ul class="collapse">
+  <li><a href="#minor-risks" id="toc-minor-risks" class="nav-link" data-scroll-target="#minor-risks">1. Minor Risks</a></li>
+  <li><a href="#rare-but-serious-risks" id="toc-rare-but-serious-risks" class="nav-link" data-scroll-target="#rare-but-serious-risks">2. Rare but Serious Risks</a></li>
+  <li><a href="#frequent-but-low-impact-risks" id="toc-frequent-but-low-impact-risks" class="nav-link" data-scroll-target="#frequent-but-low-impact-risks">3. Frequent but Low-Impact Risks</a></li>
+  <li><a href="#critical-risks" id="toc-critical-risks" class="nav-link" data-scroll-target="#critical-risks">4. Critical Risks</a></li>
+  </ul></li>
+  <li><a href="#summary-table" id="toc-summary-table" class="nav-link" data-scroll-target="#summary-table">Summary Table</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Understanding Risk</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">actuarial science</div>
+    <div class="quarto-category">life insurance</div>
+    <div class="quarto-category">non-life insurance</div>
+    <div class="quarto-category">risk</div>
+    <div class="quarto-category">risk Managment</div>
+  </div>
+  </div>
 
 
 
+<div class="quarto-title-meta">
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>All the content of this website is my personal view.</p>
-</div>
-</div>
-<!-- Typewriter with Name Reveal -->
-<div style="width: 100%; text-align: center; margin-top: 44px;">
-<div id="typewriter" style="font-size: 1.4em; font-weight: bold; font-family: monospace; color: #1565c0; display: inline-block;">
-
-</div>
-<div id="typewriter-name" style="display: none; font-size: 1.2em; color: #263238; margin-top: 16px; font-family:  monospace; letter-spacing: 1.5px;color: #1565c0; ">
-Krishna Shrestha
-</div>
-</div>
-<script>
-  const text = "Hello, welcome to my website. Hope you will enjoy my content!";
-  let i = 0;
-  function typeWriter() {
-    const tw = document.getElementById("typewriter");
-    const name = document.getElementById("typewriter-name");
-    if (i < text.length) {
-      tw.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typeWriter, 55);
-    } else {
-      name.style.display = "block"; // Show the name after typing
-      setTimeout(() => {
-        tw.innerHTML = "";
-        name.style.display = "none"; // Hide name for next loop
-        i = 0;
-        setTimeout(typeWriter, 800); // Short pause before repeating
-      }, 1200); // Pause before erasing
-    }
-  }
-  typeWriter();
-</script>
-<!-- Pikachu GIF Fixed Bottom Right -->
-<div style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 110px;
-  z-index: 9999;
-">
-<div class="tenor-gif-embed" data-postid="16091246" data-share-method="host" data-aspect-ratio="1" data-width="100%">
-<pre><code>&lt;a href="https://tenor.com/view/pikachu-pokemon-waving-wave-hi-gif-16091246"&gt;Pikachu Pokemon Sticker&lt;/a&gt;
-from &lt;a href="https://tenor.com/search/pikachu-stickers"&gt;Pikachu Stickers&lt;/a&gt;</code></pre>
-</div>
-<script type="text/javascript" async="" src="https://tenor.com/embed.js"></script>
-</div>
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Krishna Kumar Shrestha </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 26, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
 
+</header>
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="YWN0dWFyaWFsJTIwc2NpZW5jZSUyQ2xpZmUlMjBpbnN1cmFuY2UlMkNub24tbGlmZSUyMGluc3VyYW5jZQ==" data-listing-date-sort="1750896000000" data-listing-file-modified-sort="1751838027665" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="783">
-<div class="thumbnail"><a href="./posts/Understanding Experiance Study.html" class="no-external">
+<section id="understanding-risk-and-how-to-manage-it" class="level1">
+<h1>Understanding Risk and How to Manage It</h1>
+<p>Risk is a part of everyday life, whether in business, projects, or personal decisions. In simple terms, risk is the chance that something unexpected or undesirable might happen, leading to negative consequences.</p>
+<section id="key-elements-of-risk" class="level2">
+<h2 class="anchored" data-anchor-id="key-elements-of-risk">Key Elements of Risk</h2>
+<p>When thinking about risk, there are two main questions to ask: - <strong>How likely is it to happen?</strong> (Probability) - <strong>How bad would it be if it happens?</strong> (Impact)</p>
+<p>Managing risk means understanding both how often something might go wrong and how serious it would be if it does.</p>
+</section>
+<section id="types-of-risk-and-how-to-manage-them" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-risk-and-how-to-manage-them">Types of Risk and How to Manage Them</h2>
+<p>Risks can be grouped based on their likelihood and impact. Here are four common types, and how you can manage each:</p>
+<hr>
+<section id="minor-risks" class="level3">
+<h3 class="anchored" data-anchor-id="minor-risks">1. Minor Risks</h3>
+<p><em>These are unlikely to happen and wouldn’t cause much harm if they did.</em></p>
+<p><strong>How to manage:</strong> - <strong>Accept the risk.</strong> These are often so small they aren’t worth much attention. - <strong>Monitor just in case.</strong> Keep an eye on them to make sure nothing changes.</p>
+<p><em>Example: Occasionally running out of printer paper at the office.</em></p>
+<hr>
+</section>
+<section id="rare-but-serious-risks" class="level3">
+<h3 class="anchored" data-anchor-id="rare-but-serious-risks">2. Rare but Serious Risks</h3>
+<p><em>Unlikely to occur, but if they do, the consequences could be severe.</em></p>
+<p><strong>How to manage:</strong> - <strong>Prepare contingency plans.</strong> Develop a plan for what to do if the risk happens. - <strong>Transfer the risk.</strong> Use insurance or contracts to share the risk with others. - <strong>Monitor regularly.</strong> Review the situation in case the likelihood increases.</p>
+<p><em>Example: An earthquake or other natural disaster.</em></p>
+<hr>
+</section>
+<section id="frequent-but-low-impact-risks" class="level3">
+<h3 class="anchored" data-anchor-id="frequent-but-low-impact-risks">3. Frequent but Low-Impact Risks</h3>
+<p><em>These happen often, but their effects are minor.</em></p>
+<p><strong>How to manage:</strong> - <strong>Reduce how often they happen.</strong> Improve processes, provide training, or maintain equipment. - <strong>Keep records.</strong> Monitor how often these risks occur to spot any trends.</p>
+<p><em>Example: Minor technical glitches or small delays in routine tasks.</em></p>
+<hr>
+</section>
+<section id="critical-risks" class="level3">
+<h3 class="anchored" data-anchor-id="critical-risks">4. Critical Risks</h3>
+<p><em>Both likely to happen and would have major consequences.</em></p>
+<p><strong>How to manage:</strong> - <strong>Act immediately.</strong> Address these risks with urgency. - <strong>Implement strong controls.</strong> Set up barriers or protections to reduce both likelihood and impact. - <strong>Develop and test response plans.</strong> Be ready to act if the risk materializes. - <strong>Monitor closely.</strong> Regularly review your controls and plans.</p>
+<p><em>Example: Cyberattacks that could expose sensitive data.</em></p>
+<hr>
+</section>
+</section>
+<section id="summary-table" class="level2">
+<h2 class="anchored" data-anchor-id="summary-table">Summary Table</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 30%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type of Risk</th>
+<th>Example</th>
+<th>How to Manage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Minor</td>
+<td>Printer out of paper</td>
+<td>Accept, Monitor</td>
+</tr>
+<tr class="even">
+<td>Rare but Serious</td>
+<td>Earthquake</td>
+<td>Plan, Transfer, Monitor</td>
+</tr>
+<tr class="odd">
+<td>Frequent, Low-Impact</td>
+<td>Small IT glitches</td>
+<td>Reduce, Monitor</td>
+</tr>
+<tr class="even">
+<td>Critical</td>
+<td>Cyberattack/data breach</td>
+<td>Act, Control, Respond, Monitor</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong>Tip:</strong><br>
+Good risk management means focusing your efforts on the most important risks—those that could happen frequently or cause the most harm.</p>
 
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
 
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Understanding Experiance Study.html" class="no-external">Understanding Experience Study</a>
-</h3>
-<div class="listing-categories">
+</section>
+</section>
 
-<div class="listing-category" onclick="window.quartoListingCategory('YWN0dWFyaWFsJTIwc2NpZW5jZQ=='); return false;">actuarial science</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bGlmZSUyMGluc3VyYW5jZQ=='); return false;">life insurance</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bm9uLWxpZmUlMjBpbnN1cmFuY2U='); return false;">non-life insurance</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Understanding Experiance Study.html" class="no-external">
-<em>Based on the article by Matthew Dunscombe and Alexander Zaidlin</em>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Understanding Experiance Study.html" class="no-external">
-<div class="listing-date">
-Jun 26, 2025
-</div>
-<div class="listing-author">
-Krishna Kumar Shrestha
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNkZXNjcmlwdGl2ZSUyQ21s" data-listing-date-sort="1748217600000" data-listing-file-modified-sort="1751838027665" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="871">
-<div class="thumbnail"><a href="./posts/ml-Decoding Personality.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/ml-Decoding Personality.html" class="no-external">Decoding Personality: ML Models as Your Guide to Introverts vs.&nbsp;Extroverts</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YSUyMHNjaWVuY2U='); return false;">data science</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('ZGVzY3JpcHRpdmU='); return false;">descriptive</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWw='); return false;">ml</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/ml-Decoding Personality.html" class="no-external">
-Welcome to the first installment in our series decoding the human personality through data science! Before we build predictive models in latter posts, we must answer a…<code></code><code></code>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/ml-Decoding Personality.html" class="no-external">
-<div class="listing-date">
-May 26, 2025
-</div>
-<div class="listing-author">
-Krishna Kumar Shrestha
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="QWN0dWFyeSUyQ05lcGFsJTJDQ2FyZWVy" data-listing-date-sort="1747699200000" data-listing-file-modified-sort="1751838027665" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="653">
-<div class="thumbnail"><a href="./posts/actuary-in-nepal.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/actuary-in-nepal.html" class="no-external">How to Become an Actuary in Nepal</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('QWN0dWFyeQ=='); return false;">Actuary</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TmVwYWw='); return false;">Nepal</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Q2FyZWVy'); return false;">Career</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/actuary-in-nepal.html" class="no-external">
-Are you aspiring to become an actuary in Nepal? This guide will walk you through the essential steps, requirements, and resources to kick start your actuarial career.
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/actuary-in-nepal.html" class="no-external">
-<div class="listing-date">
-May 20, 2025
-</div>
-<div class="listing-author">
-Krishna Kumar Shrestha
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="YWN0dWFyaWFsJTIwc2NpZW5jZSUyQ2xpZmUlMjBpbnN1cmFuY2UlMkNub24tbGlmZSUyMGluc3VyYW5jZSUyQ3Jpc2slMkNyaXNrJTIwTWFuYWdtZW50" data-listing-date-sort="1745625600000" data-listing-file-modified-sort="1751838027665" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="416">
-<div class="thumbnail"><a href="./posts/understanding risk.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/understanding risk.html" class="no-external">Understanding Risk</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWN0dWFyaWFsJTIwc2NpZW5jZQ=='); return false;">actuarial science</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bGlmZSUyMGluc3VyYW5jZQ=='); return false;">life insurance</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bm9uLWxpZmUlMjBpbnN1cmFuY2U='); return false;">non-life insurance</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cmlzaw=='); return false;">risk</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cmlzayUyME1hbmFnbWVudA=='); return false;">risk Managment</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/understanding risk.html" class="no-external">
-Risk is a part of everyday life, whether in business, projects, or personal decisions. In simple terms, risk is the chance that something unexpected or undesirable might…
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/understanding risk.html" class="no-external">
-<div class="listing-date">
-Apr 26, 2025
-</div>
-<div class="listing-author">
-Krishna Kumar Shrestha
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
