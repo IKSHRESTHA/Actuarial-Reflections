@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Krishna Kumar Shrestha">
-<meta name="dcterms.date" content="2025-05-20">
 
-<title>How to Become an Actuary in Nepal – Actuarial-Reflections</title>
+<title>All Blog Posts – Actuarial-Reflections</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,23 +23,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../favicon.ico" rel="icon">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-LSZ7YTNKVY"></script>
 
 <script type="text/javascript">
@@ -79,8 +108,37 @@ gtag('js', new Date());
 gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -90,7 +148,7 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Actuarial-Reflections</span>
     </a>
   </div>
@@ -101,15 +159,15 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../all-blogs.html"> 
+    <a class="nav-link active" href="./all-blogs.html" aria-current="page"> 
 <span class="menu-text">All Blog Posts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About Me</span></a>
   </li>  
 </ul>
@@ -140,40 +198,23 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#your-actuarial-journey-in-nepal-a-comprehensive-guide" id="toc-your-actuarial-journey-in-nepal-a-comprehensive-guide" class="nav-link active" data-scroll-target="#your-actuarial-journey-in-nepal-a-comprehensive-guide">Your Actuarial Journey in Nepal: A Comprehensive Guide</a></li>
+  <li><a href="#all-blog-posts" id="toc-all-blog-posts" class="nav-link active" data-scroll-target="#all-blog-posts">All Blog Posts</a></li>
   </ul>
 </nav>
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Actuary">Actuary <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Career">Career <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Nepal">Nepal <span class="quarto-category-count">(1)</span></div><div class="category" data-category="actuarial science">actuarial science <span class="quarto-category-count">(2)</span></div><div class="category" data-category="data science">data science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="descriptive">descriptive <span class="quarto-category-count">(1)</span></div><div class="category" data-category="life insurance">life insurance <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ml">ml <span class="quarto-category-count">(1)</span></div><div class="category" data-category="non-life insurance">non-life insurance <span class="quarto-category-count">(2)</span></div><div class="category" data-category="risk">risk <span class="quarto-category-count">(1)</span></div><div class="category" data-category="risk Managment">risk Managment <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">How to Become an Actuary in Nepal</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">Actuary</div>
-    <div class="quarto-category">Nepal</div>
-    <div class="quarto-category">Career</div>
-  </div>
-  </div>
+<h1 class="title">All Blog Posts</h1>
+</div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Krishna Kumar Shrestha </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">May 20, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -183,52 +224,208 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 </header>
 
 
-<section id="your-actuarial-journey-in-nepal-a-comprehensive-guide" class="level1">
-<h1>Your Actuarial Journey in Nepal: A Comprehensive Guide</h1>
-<p>Are you aspiring to become an actuary in Nepal? This guide will walk you through the essential steps, requirements, and resources to kick start your actuarial career.</p>
-<ol type="1">
-<li>Understanding the Actuarial Profession in Nepal</li>
-</ol>
-<p>In Nepal, the actuarial profession is gaining significant importance, particularly with the Nepal Insurance Authority (NIA) mandating actuarial analysts across the insurance sector. This creates a growing demand for qualified actuaries and actuarial professionals.</p>
-<p>Actuarial Analyst Requirements by Nepal Insurance Authority (NIA)</p>
-<p>The NIA’s ‘Guideline Related to Actuary Appointment for Insurers, 2024 (BS 2081)’ outlines the roles and qualifications for actuarial professionals. While the guideline primarily focuses on ‘Appointed Actuaries’ (Fellows), it also defines ‘Actuarial Analysts’ as individuals working towards an Associateship designation from a recognized Actuarial Association, with exposure to actuarial work.</p>
-<p>Key takeaways from the NIA guideline regarding Actuarial Analysts:</p>
-<p>• Definition: An Actuarial Analyst is a person working towards the Associateship designation from a recognized Actuarial Association, has exposure to actuarial work, and contributes to an organization.</p>
-<p>• Role: They support the statutory duties of the Appointed Actuary.</p>
-<p>• Professional Conduct: Actuarial Analysts are responsible for complying with the professional code of conduct set by the Actuarial Society of Nepal.</p>
-<p>This indicates that pursuing professional actuarial papers is a crucial step for anyone looking to work as an actuarial analyst in Nepal.</p>
-<ol start="2" type="1">
-<li>Choosing Your Professional Actuarial Institute</li>
-</ol>
-<p>To become a recognized actuary, you need to pass a series of professional examinations conducted by international actuarial bodies. The NIA guideline recognizes the following actuarial associations:</p>
-<p>• Institute and Faculty of Actuaries (IFoA), UK: A globally recognized professional body offering qualifications for actuaries. Their examinations cover a wide range of actuarial science topics.</p>
-<p>• Institute of Actuaries of India (IAI): A statutory body in India regulating the actuarial profession. It offers examinations and professional qualifications for actuaries.</p>
-<p>• Society of Actuaries (SOA), USA: The world’s largest actuarial professional organization, primarily focusing on life, health, and pension actuarial science. They offer various designations, including Associate (ASA) and Fellow (FSA).</p>
-<p>• Casualty Actuarial Society (CAS): An actuarial organization focused exclusively on property and casualty (general) insurance risks. They offer designations for actuaries specializing in this field.</p>
-<p>Each institute has its own examination structure, syllabus, and membership requirements. It’s essential to research each one to determine which aligns best with your career aspirations and study preferences.</p>
-<ol start="3" type="1">
-<li>Educational Background: Bachelor’s Degree</li>
-</ol>
-<p>While the NIA guideline doesn’t specify a particular bachelor’s degree, a strong foundation in mathematics, statistics, and related quantitative subjects is essential. A bachelor’s degree is a fundamental requirement for pursuing an actuarial career.</p>
-<p>Recommendation: Bachelor in Mathematical Sciences (Actuarial Science) at Tribhuvan University</p>
-<p>For students in Nepal, the School of Mathematical Sciences (SMS) at Tribhuvan University (TU) offers a highly recommended Bachelor in Mathematical Sciences (B.Math.Sc.) program with a major in Actuarial Science.</p>
-<p>Here’s why this program is beneficial:</p>
-<p>• Curriculum Alignment: The coursework is closely designed to help students prepare for and pass international actuarial examinations, particularly those of the SOA.</p>
-<p>• SOA UCAP Accreditation: Tribhuvan University’s actuarial science program is recognized by the Society of Actuaries (SOA) under its Universities &amp; Colleges with Actuarial Programs (UCAP) - Actuarial Collegiate (UCAP-AC) status. This means that certain courses within the program are recognized for Validation by Educational Experience (VEE) credits, which are a requirement for SOA’s Associateship and Fellowship designations. This can significantly reduce the number of professional exams you need to take.</p>
-<p>• Industry Connections: The institute’s industry connections can be invaluable for students seeking their first internships, providing practical experience and networking opportunities.</p>
-<p>• Future Accreditations: The university is actively working towards gaining accreditation from the Institute and Faculty of Actuaries (IFoA), UK, which would further benefit students pursuing IFoA qualifications.</p>
-<p>Next Steps</p>
-<ol type="1">
-<li><p>Choose an Institute: Decide which professional actuarial institute (IFoA, IAI, SOA, or CAS) best suits your career goals.</p></li>
-<li><p>Start Studying: Begin preparing for the preliminary exams of your chosen institute. Many resources are available online, including study guides and practice exams.</p></li>
-<li><p>Gain Experience: Look for internships or entry-level positions as an actuarial analyst to gain practical experience in the field.</p></li>
-</ol>
-<p>Embarking on an actuarial journey requires dedication and a strong quantitative aptitude. With the right educational foundation and professional qualifications, you can build a successful and rewarding career in Nepal’s growing insurance and financial sectors.</p>
+<section id="all-blog-posts" class="level1">
+<h1>All Blog Posts</h1>
+<p>Below you can find all blog posts published on Actuarial Reflections.</p>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-title" data-direction="asc">
+          Title
+        </option>
+         <option value="listing-date-sort" data-direction="asc">
+          Date - Oldest
+        </option>
+         <option value="listing-date-sort" data-direction="desc">
+          Date - Newest
+        </option>
+         <option value="listing-author" data-direction="asc">
+          Author
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="actuarial science,life insurance,non-life insurance" data-listing-date-sort="1750914000000" data-listing-file-modified-sort="1751769684805" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="783">
+<div class="thumbnail">
+<p><a href="./posts/Understanding Experiance Study.html" class="no-external"></a></p><a href="./posts/Understanding Experiance Study.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/Understanding Experiance Study.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/Understanding Experiance Study.html" class="no-external">Understanding Experience Study</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/Understanding Experiance Study.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('actuarial science'); return false;">
+actuarial science
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('life insurance'); return false;">
+life insurance
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('non-life insurance'); return false;">
+non-life insurance
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/Understanding Experiance Study.html" class="no-external"><em>Based on the article by Matthew Dunscombe and Alexander Zaidlin</em></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/Understanding Experiance Study.html" class="no-external">
+<div class="listing-date">
+Jun 26, 2025
+</div>
+<div class="listing-author">
+Krishna Kumar Shrestha
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="data science,descriptive,ml" data-listing-date-sort="1748235600000" data-listing-file-modified-sort="1751570464296" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="871">
+<div class="thumbnail">
+<p><a href="./posts/ml-Decoding Personality.html" class="no-external"></a></p><a href="./posts/ml-Decoding Personality.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/ml-Decoding Personality.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/ml-Decoding Personality.html" class="no-external">Decoding Personality: ML Models as Your Guide to Introverts vs.&nbsp;Extroverts</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/ml-Decoding Personality.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
+data science
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('descriptive'); return false;">
+descriptive
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ml'); return false;">
+ml
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/ml-Decoding Personality.html" class="no-external">Welcome to the first installment in our series decoding the human personality through data science! Before we build predictive models in latter posts, we must answer a…<code></code><code></code></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/ml-Decoding Personality.html" class="no-external">
+<div class="listing-date">
+May 26, 2025
+</div>
+<div class="listing-author">
+Krishna Kumar Shrestha
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="Actuary,Nepal,Career" data-listing-date-sort="1747717200000" data-listing-file-modified-sort="1751558809495" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="653">
+<div class="thumbnail">
+<p><a href="./posts/actuary-in-nepal.html" class="no-external"></a></p><a href="./posts/actuary-in-nepal.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/actuary-in-nepal.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/actuary-in-nepal.html" class="no-external">How to Become an Actuary in Nepal</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/actuary-in-nepal.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Actuary'); return false;">
+Actuary
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Nepal'); return false;">
+Nepal
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Career'); return false;">
+Career
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/actuary-in-nepal.html" class="no-external">Are you aspiring to become an actuary in Nepal? This guide will walk you through the essential steps, requirements, and resources to kick start your actuarial career.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/actuary-in-nepal.html" class="no-external">
+<div class="listing-date">
+May 20, 2025
+</div>
+<div class="listing-author">
+Krishna Kumar Shrestha
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="actuarial science,life insurance,non-life insurance,risk,risk Managment" data-listing-date-sort="1745643600000" data-listing-file-modified-sort="1751937060011" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="416">
+<div class="thumbnail">
+<p><a href="./posts/understanding risk.html" class="no-external"></a></p><a href="./posts/understanding risk.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/understanding risk.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/understanding risk.html" class="no-external">Understanding Risk</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/understanding risk.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('actuarial science'); return false;">
+actuarial science
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('life insurance'); return false;">
+life insurance
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('non-life insurance'); return false;">
+non-life insurance
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('risk'); return false;">
+risk
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('risk Managment'); return false;">
+risk Managment
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/understanding risk.html" class="no-external">Risk is a part of everyday life, whether in business, projects, or personal decisions. In simple terms, risk is the chance that something unexpected or undesirable might…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/understanding risk.html" class="no-external">
+<div class="listing-date">
+Apr 26, 2025
+</div>
+<div class="listing-author">
+Krishna Kumar Shrestha
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

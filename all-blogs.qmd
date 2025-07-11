@@ -1,0 +1,15 @@
+---
+title: "All Blog Posts"
+page-layout: article
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: true
+  filter-ui: true
+---
+
+
+
+Below you can find all blog posts published on Actuarial Reflections.

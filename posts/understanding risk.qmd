@@ -64,7 +64,7 @@ Risks can be grouped based on their likelihood and impact. Here are four common 
 ## Summary Table
 
 | Type of Risk | Example | How to Manage |
-|---------------------|----------------------|-----------------------------|
+|----|----|----|
 | Minor | Printer out of paper | Accept, Monitor |
 | Rare but Serious | Earthquake | Plan, Transfer, Monitor |
 | Frequent, Low-Impact | Small IT glitches | Reduce, Monitor |

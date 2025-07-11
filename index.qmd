@@ -8,11 +8,6 @@ listing:
   filter-ui: false
 page-layout: article
 ---
-::: {.callout-note}
-
-All the content of this website is my personal view. 
-
-:::
 
 <!-- Typewriter with Name Reveal -->
 <div style="width: 100%; text-align: center; margin-top: 44px;">
@@ -59,4 +54,53 @@ All the content of this website is my personal view.
     from <a href="https://tenor.com/search/pikachu-stickers">Pikachu Stickers</a>
   </div>
   <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+</div>
+
+<!-- Glowing Site Introduction Box -->
+<div class="glow-intro-box">
+  <p>
+    <strong style="color: #1565c0; font-size: 1.2em; letter-spacing: 1px;">Actuarial Reflections</strong><br>
+    Personal blog by Krishna Shrestha — sharing insights, tutorials, and reflections on actuarial science, data science, and professional growth.<br>
+    <span style="color: #1976d2;">Explore the latest posts below!</span>
+  </p>
+</div>
+
+<style>
+.glow-intro-box {
+  max-width: 700px;
+  margin: 40px auto 0 auto;
+  text-align: center;
+  display: block;
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.5em 2em;
+  border: 2px solid #1565c0;
+  box-shadow: 0 0 24px 4px #90caf9, 0 0 8px 2px #1565c0;
+  animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+  0% { box-shadow: 0 0 24px 4px #90caf9, 0 0 8px 2px #1565c0; }
+  100% { box-shadow: 0 0 36px 8px #1976d2, 0 0 16px 4px #42a5f5; }
+}
+</style>
+
+::: {.listing limit=4}
+:::
+
+<!-- View All Blogs Section -->
+<div style="text-align: center; margin: 32px 0 0 0;">
+  <a href="all-blogs.html" style="
+    display: inline-block;
+    background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.8em 2em;
+    border-radius: 8px;
+    font-size: 1.1em;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(21,101,192,0.12);
+    transition: background 0.3s, box-shadow 0.3s;
+  " onmouseover="this.style.background='linear-gradient(90deg,#1565c0 0%,#1976d2 100%)';this.style.boxShadow='0 4px 16px rgba(21,101,192,0.18)';" onmouseout="this.style.background='linear-gradient(90deg,#1976d2 0%,#42a5f5 100%)';this.style.boxShadow='0 2px 8px rgba(21,101,192,0.12)';">
+    View All Blogs
+  </a>
 </div>
