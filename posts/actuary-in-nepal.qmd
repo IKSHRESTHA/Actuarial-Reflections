@@ -8,123 +8,222 @@ editor:
     wrap: 72
 ---
 
-# Your Actuarial Journey in Nepal: A Comprehensive Guide
+> **Summary:**
+> This is the most comprehensive guide for aspiring actuaries in Nepal. It covers every aspect of the profession, from education and exams to career paths, regulatory context, and professional development. Use the table of contents to navigate.
 
-Are you aspiring to become an actuary in Nepal? This guide will walk you
-through the essential steps, requirements, and resources to kick start
-your actuarial career.
+# Table of Contents
+1. [Introduction](#introduction)
+2. [What is an Actuary?](#what-is-an-actuary)
+3. [The Actuarial Profession in Nepal](#the-actuarial-profession-in-nepal)
+4. [Regulatory Landscape: NIA and Law](#regulatory-landscape-nia-and-law)
+5. [Actuarial Societies: IFoA, SOA, IAI, CAS](#actuarial-societies-ifoa-soa-iai-cas)
+6. [Education Pathways in Nepal](#education-pathways-in-nepal)
+   - [Universities and Programs](#universities-and-programs)
+   - [Course Outlines and Syllabi](#course-outlines-and-syllabi)
+   - [Scholarships and Financial Aid](#scholarships-and-financial-aid)
+   - [How to Prepare in High School](#how-to-prepare-in-high-school)
+7. [Internships and Work Experience](#internships-and-work-experience)
+   - [How to Find Internships in Nepal](#how-to-find-internships-in-nepal)
+   - [Sample CVs and Cover Letters](#sample-cvs-and-cover-letters)
+   - [Interview Tips](#interview-tips)
+8. [Professional Development](#professional-development)
+   - [Soft Skills for Actuaries](#soft-skills-for-actuaries)
+   - [Networking, Conferences, and Workshops](#networking-conferences-and-workshops)
+   - [Continuing Education](#continuing-education)
+9. [Useful Links and Resources](#useful-links-and-resources)
+   - [Official Actuarial Societies](#official-actuarial-societies)
+   - [Additional Resources](#additional-resources)
+10. [Final Tips and Encouragement](#final-tips-and-encouragement)
 
-1.  Understanding the Actuarial Profession in Nepal
+---
 
-In Nepal, the actuarial profession is gaining significant importance,
-particularly with the Nepal Insurance Authority (NIA) mandating
-actuarial analysts across the insurance sector. This creates a growing
-demand for qualified actuaries and actuarial professionals.
+# Introduction
 
-Actuarial Analyst Requirements by Nepal Insurance Authority (NIA)
+Welcome to the most comprehensive guide for aspiring actuaries in Nepal. The actuarial profession is one of the most respected and intellectually rewarding careers in the world, combining mathematics, statistics, finance, and business acumen to solve real-world problems related to risk and uncertainty. In Nepal, the actuarial field is rapidly growing, offering new opportunities for students and professionals alike. This guide is designed to be your one-stop resource, whether you are a high school student considering your future, a university student planning your next steps, or a working professional looking to transition into actuarial science. Here, you will find everything you need to know—from foundational concepts to advanced career strategies, regulatory requirements, and personal stories from Nepali actuaries.
 
-The NIA's 'Guideline Related to Actuary Appointment for Insurers, 2024
-(BS 2081)' outlines the roles and qualifications for actuarial
-professionals. While the guideline primarily focuses on 'Appointed
-Actuaries' (Fellows), it also defines 'Actuarial Analysts' as
-individuals working towards an Associateship designation from a
-recognized Actuarial Association, with exposure to actuarial work.
+# What is an Actuary?
 
-Key takeaways from the NIA guideline regarding Actuarial Analysts:
+An actuary is a professional who uses mathematical, statistical, and financial theories to study uncertain future events, especially those of concern to insurance and pension programs. The roots of actuarial science date back to the 17th century, when the first life tables were developed to help price life insurance. Today, actuaries are at the heart of the insurance industry, but their expertise is also sought in finance, investment, government, healthcare, and even technology sectors.
 
-• Definition: An Actuarial Analyst is a person working towards the
-Associateship designation from a recognized Actuarial Association, has
-exposure to actuarial work, and contributes to an organization.
+Actuaries are problem solvers. They analyze data to estimate the probability and financial impact of future events—such as death, illness, accidents, or natural disasters—and help organizations make informed decisions. For example, an actuary might determine how much an insurance company should charge for a policy, how much money needs to be set aside for future claims, or how to design a pension plan that will remain solvent for decades. The work is both analytical and creative, requiring not only technical skills but also the ability to communicate complex ideas to non-specialists.
 
-• Role: They support the statutory duties of the Appointed Actuary.
+Globally, actuaries are recognized for their rigorous training and ethical standards. Becoming an actuary typically involves passing a series of challenging professional exams, gaining relevant work experience, and adhering to a code of conduct set by professional bodies. The profession is highly mobile—actuaries trained in one country often find their skills in demand around the world.
 
-• Professional Conduct: Actuarial Analysts are responsible for complying
-with the professional code of conduct set by the Actuarial Society of
-Nepal.
+# The Actuarial Profession in Nepal
 
-This indicates that pursuing professional actuarial papers is a crucial
-step for anyone looking to work as an actuarial analyst in Nepal.
+The actuarial profession in Nepal is relatively young but growing rapidly. Historically, Nepalese insurance companies relied on foreign actuaries for statutory valuations and product development. However, with the increasing complexity of the insurance and financial sectors, there is a strong push to develop local actuarial talent.
 
-2.  Choosing Your Professional Actuarial Institute
+In recent years, several key milestones have shaped the profession in Nepal. The NIA has introduced guidelines requiring insurance companies to appoint qualified actuaries and actuarial analysts. Tribhuvan University has launched a dedicated Bachelor’s program in Mathematical Sciences with a major in Actuarial Science, recognized by international bodies such as the Society of Actuaries (SOA). The Actuarial Society of Nepal (ASN) has been formed to support the professional development of actuaries and promote best practices in the industry.
 
-To become a recognized actuary, you need to pass a series of
-professional examinations conducted by international actuarial bodies.
-The NIA guideline recognizes the following actuarial associations:
+Local organizations play a crucial role in nurturing the next generation of actuaries. Universities provide academic training, while the ASN organizes seminars, workshops, and networking events. Insurance companies and consulting firms offer internships and entry-level positions, giving students practical experience. The profession is still small, but the community is close-knit and supportive, with experienced actuaries often mentoring newcomers.
 
-• Institute and Faculty of Actuaries (IFoA), UK: A globally recognized
-professional body offering qualifications for actuaries. Their
-examinations cover a wide range of actuarial science topics.
+# Regulatory Landscape: NIA and Law
 
-• Institute of Actuaries of India (IAI): A statutory body in India
-regulating the actuarial profession. It offers examinations and
-professional qualifications for actuaries.
+The regulatory environment for actuaries in Nepal is governed primarily by the Nepal Insurance Authority (NIA), which sets the standards for actuarial practice in the insurance sector. The NIA’s guidelines are designed to ensure the financial stability of insurance companies and protect policyholders’ interests.
 
-• Society of Actuaries (SOA), USA: The world's largest actuarial
-professional organization, primarily focusing on life, health, and
-pension actuarial science. They offer various designations, including
-Associate (ASA) and Fellow (FSA).
+According to the NIA, every insurance company operating in Nepal must appoint an Appointed Actuary—a Fellow of a recognized actuarial body—responsible for statutory valuations, product pricing, and risk management. In addition, companies are encouraged to employ Actuarial Analysts, who are typically students or Associates working towards full qualification. These analysts support the Appointed Actuary and gain valuable on-the-job experience.
 
-• Casualty Actuarial Society (CAS): An actuarial organization focused
-exclusively on property and casualty (general) insurance risks. They
-offer designations for actuaries specializing in this field.
+The NIA also sets out the professional and ethical standards expected of actuaries. Actuaries must comply with the code of conduct of the Actuarial Society of Nepal and maintain their professional competence through continuing education. The regulatory framework is evolving, with new requirements being introduced as the industry matures. For example, there is increasing emphasis on enterprise risk management, solvency assessment, and the use of modern actuarial techniques such as stochastic modeling.
 
-Each institute has its own examination structure, syllabus, and
-membership requirements. It's essential to research each one to
-determine which aligns best with your career aspirations and study
-preferences.
+In addition to NIA regulations, actuaries in Nepal must be aware of broader legal and financial frameworks, including insurance law, tax regulations, and international accounting standards. Staying informed about regulatory changes is essential for both students and practicing actuaries.
 
-3.  Educational Background: Bachelor's Degree
+# Actuarial Societies: IFoA, SOA, IAI, CAS
 
-While the NIA guideline doesn't specify a particular bachelor's degree,
-a strong foundation in mathematics, statistics, and related quantitative
-subjects is essential. A bachelor's degree is a fundamental requirement
-for pursuing an actuarial career.
+Aspiring actuaries in Nepal can choose to qualify through several internationally recognized professional bodies, each with its own exam system, membership structure, and areas of specialization.
 
-Recommendation: Bachelor in Mathematical Sciences (Actuarial Science) at
-Tribhuvan University
+The Institute and Faculty of Actuaries (IFoA) in the UK is one of the oldest and most prestigious actuarial organizations. It offers a comprehensive exam system covering core principles, core practices, and specialist subjects. Membership levels include Student, Associate, and Fellow. The IFoA is known for its rigorous standards and global recognition, making it a popular choice for Nepali students aiming for international careers.
 
-For students in Nepal, the School of Mathematical Sciences (SMS) at
-Tribhuvan University (TU) offers a highly recommended Bachelor in
-Mathematical Sciences (B.Math.Sc.) program with a major in Actuarial
-Science.
+The Society of Actuaries (SOA) in the USA is the world’s largest actuarial organization, focusing primarily on life insurance, health insurance, and pensions. The SOA’s exam system is modular, allowing students to progress at their own pace. Designations include Associate (ASA) and Fellow (FSA), with additional tracks for enterprise risk management and predictive analytics. The SOA is highly regarded for its emphasis on data science and modern actuarial methods.
 
-Here's why this program is beneficial:
+The Institute of Actuaries of India (IAI) is the statutory body regulating the actuarial profession in India. It is a popular choice for Nepali students due to geographic proximity and similar regulatory environments. The IAI’s exam system is similar to the IFoA’s, and it offers the Associate and Fellow designations. The IAI also conducts the Actuarial Common Entrance Test (ACET) for new students.
 
-• Curriculum Alignment: The coursework is closely designed to help
-students prepare for and pass international actuarial examinations,
-particularly those of the SOA.
+The Casualty Actuarial Society (CAS) in the USA specializes in property and casualty insurance, such as auto, home, and liability insurance. The CAS exam system is distinct from the SOA’s and leads to the Associate (ACAS) and Fellow (FCAS) designations. While fewer Nepali students pursue the CAS track, it is an excellent option for those interested in non-life insurance.
 
-• SOA UCAP Accreditation: Tribhuvan University's actuarial science
-program is recognized by the Society of Actuaries (SOA) under its
-Universities & Colleges with Actuarial Programs (UCAP) - Actuarial
-Collegiate (UCAP-AC) status. This means that certain courses within the
-program are recognized for Validation by Educational Experience (VEE)
-credits, which are a requirement for SOA's Associateship and Fellowship
-designations. This can significantly reduce the number of professional
-exams you need to take.
+Choosing the right society depends on your career goals, preferred exam structure, and areas of interest. Many Nepali actuaries start with one society and later pursue additional qualifications to broaden their expertise. All these societies maintain high ethical standards and provide extensive resources for students, including study materials, online forums, and mentoring programs.
 
-• Industry Connections: The institute's industry connections can be
-invaluable for students seeking their first internships, providing
-practical experience and networking opportunities.
+# Education Pathways in Nepal
 
-• Future Accreditations: The university is actively working towards
-gaining accreditation from the Institute and Faculty of Actuaries
-(IFoA), UK, which would further benefit students pursuing IFoA
-qualifications.
+The journey to becoming an actuary in Nepal begins with a strong educational foundation. While the profession is open to anyone with a solid background in mathematics and statistics, pursuing a formal degree in actuarial science or a related field can provide a significant advantage.
 
-Next Steps
+## Universities and Programs
 
-1.  Choose an Institute: Decide which professional actuarial institute
-    (IFoA, IAI, SOA, or CAS) best suits your career goals.
+The flagship program for actuarial education in Nepal is the Bachelor in Mathematical Sciences (Actuarial Science) offered by the School of Mathematical Sciences (SMS) at Tribhuvan University (TU). This program is designed to align with international actuarial syllabi, particularly those of the Society of Actuaries (SOA) and the Institute and Faculty of Actuaries (IFoA). The curriculum covers core areas such as probability, statistics, financial mathematics, life contingencies, risk theory, and computer programming. Students also gain exposure to economics, finance, and business, ensuring a well-rounded education.
 
-2.  Start Studying: Begin preparing for the preliminary exams of your
-    chosen institute. Many resources are available online, including
-    study guides and practice exams.
+Other universities in Nepal may offer degrees in mathematics, statistics, or economics, which can also serve as a pathway into actuarial science. However, the TU program is unique in its direct alignment with professional actuarial exams and its recognition by international bodies. Students from other universities often supplement their education with self-study or online courses to prepare for actuarial exams.
 
-3.  Gain Experience: Look for internships or entry-level positions as an
-    actuarial analyst to gain practical experience in the field.
+## Course Outlines and Syllabi
 
-Embarking on an actuarial journey requires dedication and a strong
-quantitative aptitude. With the right educational foundation and
-professional qualifications, you can build a successful and rewarding
-career in Nepal's growing insurance and financial sectors.
+The actuarial science curriculum at Tribhuvan University is comprehensive and rigorous. Key courses typically include:
+- Probability and Statistics
+- Financial Mathematics
+- Life Insurance Mathematics
+- Risk Theory
+- Survival Models
+- Stochastic Processes
+- Economics and Finance
+- Actuarial Modeling
+- Computer Programming (often in R snd Python)
+- Data Analysis and Machine Learning (in advanced years)
+
+The program is structured to help students prepare for the preliminary exams of international actuarial societies. Many courses are mapped to the Validation by Educational Experience (VEE) requirements of the SOA , allowing students to earn exemptions or credits toward professional qualifications. In addition to classroom learning, students are encouraged to participate in research projects, internships, and industry seminars.
+
+## Scholarships and Financial Aid
+
+Financing an actuarial education can be a concern for many students. Tribhuvan University, as a public institution, offers relatively affordable tuition compared to private universities. Additionally, merit-based scholarships are available for high-performing students, both at the time of admission and during the course of study. Some scholarships are specifically targeted at students from underrepresented regions or backgrounds.
+
+Professional actuarial societies, such as the SOA and IFoA, occasionally offer scholarships or exam fee waivers for students in developing countries, including Nepal. It is advisable to regularly check the official websites of these organizations for announcements. Local insurance companies and consulting firms may also sponsor promising students, especially those who demonstrate strong academic performance and a commitment to the profession.
+
+## How to Prepare in High School
+
+Aspiring actuaries should begin preparing as early as high school. A strong foundation in mathematics is essential, so students should take advanced courses in mathematics, statistics, and, if available, economics or business studies. Participation in math competitions, science fairs, or computer programming clubs can help develop problem-solving skills and demonstrate commitment to quantitative fields.
+
+Developing proficiency in English is also important, as most actuarial exams and study materials are in English. Students should practice reading technical texts, writing reports, and communicating complex ideas clearly. Familiarity with computers and basic programming concepts will be beneficial, as modern actuarial work increasingly relies on data analysis and modeling software.
+
+Finally, students should seek out mentors—teachers, university students, or professionals—who can provide guidance and encouragement. Attending career fairs, university open days, or online webinars about actuarial science can help clarify goals and build motivation for the journey ahead.
+
+
+
+# Internships and Work Experience
+
+Gaining practical experience is a crucial step in the journey to becoming an actuary. Internships and entry-level positions provide students with the opportunity to apply theoretical knowledge to real-world problems, develop professional skills, and build a network within the industry. In Nepal, the actuarial profession is still developing, but there are increasing opportunities for students to gain valuable work experience.
+
+## How to Find Internships in Nepal
+
+The best place to start your search for actuarial internships is with insurance companies, both life and non-life, as well as consulting firms that offer actuarial services. Many of these organizations are based in Kathmandu, but opportunities are expanding as the industry grows. Begin by researching the major players in the market—such as Nepal Life Insurance, National Life Insurance, and Shikhar Insurance—and visit their websites for career or internship announcements.
+
+Networking is also essential. Attend events organized by the Actuarial Society of Nepal, university career fairs, and industry seminars. Don’t hesitate to reach out directly to HR departments or actuarial teams with a polite email expressing your interest and attaching your CV. LinkedIn is a valuable tool for connecting with professionals and learning about openings. If you are a student at Tribhuvan University or another institution, ask your professors or department for leads, as they often have industry contacts.
+
+## Sample CVs and Cover Letters
+
+A strong CV and cover letter are your first chance to make a good impression. Your CV should highlight your academic achievements, relevant coursework, technical skills (such as proficiency in R, Python, or Excel), and any extracurricular activities that demonstrate leadership or teamwork. If you have passed any actuarial exams or completed relevant projects, be sure to include them.
+
+**Sample CV Outline:**
+- Name and contact information
+- Education (degree, university, expected graduation date)
+- Relevant coursework (probability, statistics, financial mathematics, etc.)
+- Technical skills (programming languages, software)
+- Actuarial exams passed (if any)
+- Projects or research experience
+- Extracurricular activities and leadership roles
+- References (optional)
+
+Your cover letter should be concise and tailored to the specific organization. Explain why you are interested in actuarial science, what you hope to learn from the internship, and how your skills and experiences make you a good fit. Show enthusiasm and a willingness to contribute.
+
+
+## Interview Tips
+
+If you are invited for an interview, preparation is key. Review the basics of actuarial science, be ready to discuss your coursework and projects, and practice explaining complex concepts in simple terms. Employers may ask technical questions (e.g., about probability or financial mathematics) as well as behavioral questions to assess your teamwork, problem-solving, and communication skills.
+
+Dress professionally, arrive on time, and bring copies of your CV. Be honest about your experience—if you don’t know the answer to a technical question, explain how you would approach solving it. Show curiosity and a willingness to learn. After the interview, send a thank-you email to express your appreciation for the opportunity.
+
+
+
+
+
+# Professional Development
+
+Professional development is a lifelong journey for actuaries, extending far beyond technical mastery. In Nepal, as in the global actuarial community, those who thrive are not only strong in mathematics and analytics but also excel in communication, leadership, and adaptability. This section explores the essential soft skills, the value of networking, and the importance of ongoing education for actuaries at every stage of their careers.
+
+## Soft Skills for Actuaries
+
+While technical expertise forms the foundation of actuarial work, soft skills are what set outstanding actuaries apart. The ability to communicate complex ideas clearly—whether in written reports or verbal presentations—is crucial, especially when working with colleagues from non-technical backgrounds. Actuaries must often explain the implications of their analyses to business leaders, regulators, or clients who may not be familiar with statistical models or financial mathematics. Clarity, patience, and empathy are invaluable in these situations.
+
+Teamwork is another vital skill. Actuaries rarely work in isolation; they collaborate with underwriters, product managers, IT specialists, and executives. Being able to listen actively, respect diverse perspectives, and contribute constructively to group discussions enhances both the quality of work and the workplace environment. Leadership skills, such as taking initiative, mentoring junior colleagues, and managing projects, become increasingly important as you advance in your career.
+
+Adaptability and a willingness to learn are essential in a rapidly changing field. The insurance and finance industries are constantly evolving, with new regulations, technologies, and risks emerging all the time. Successful actuaries embrace change, seek out new knowledge, and are open to feedback and self-improvement.
+
+## Networking, Conferences, and Workshops
+
+Building a professional network is one of the most effective ways to advance your actuarial career. In Nepal, the actuarial community is still small but growing, which makes networking both accessible and impactful. Start by joining the Actuarial Society of Nepal (ASN), which organizes regular seminars, workshops, and social events. These gatherings provide opportunities to meet experienced actuaries, learn about industry trends, and discover job or internship openings.
+
+Attending conferences—whether local, regional, or international—broadens your perspective and exposes you to the latest research and best practices. Many actuarial societies, such as the IFoA, SOA, and IAI, offer student memberships that grant access to webinars, online forums, and global events. Participating in these activities not only enhances your knowledge but also helps you build relationships with peers and mentors who can support your professional growth.
+
+Don’t underestimate the power of informal networking. Connect with classmates, professors, and colleagues on platforms like LinkedIn. Engage in online actuarial communities, contribute to discussions, and share your experiences. Over time, your network will become a valuable source of advice, encouragement, and opportunity.
+
+## Continuing Education
+
+The actuarial profession is defined by a commitment to lifelong learning. After qualifying as an actuary, you are expected to maintain and expand your knowledge through continuing professional development (CPD). This may include attending workshops, completing online courses, reading industry publications, or participating in research projects.
+
+In Nepal, as the industry matures, there is increasing emphasis on CPD. The Actuarial Society of Nepal and other professional bodies regularly offer training sessions on emerging topics such as data analytics, enterprise risk management, and regulatory changes. International societies also provide extensive resources, including e-learning modules, technical papers, and case studies.
+
+Staying current is not just a regulatory requirement—it is essential for remaining relevant and effective in your role. Make it a habit to set learning goals each year, seek feedback from peers and supervisors, and explore new areas of interest. The most successful actuaries are those who never stop learning.
+
+
+# Useful Links and Resources
+
+Navigating the actuarial profession is easier when you know where to find reliable information, connect with peers, and access study materials. Below is a curated list of resources that will be especially helpful for aspiring and practicing actuaries in Nepal.
+
+## Official Actuarial Societies
+
+- **Actuarial Society of Nepal (ASN):** [asn.org.np](https://asn.org.np) — The main professional body for actuaries in Nepal. Offers events, networking, and local guidance.
+- **Nepal Insurance Authority (NIA):** [nia.gov.np](https://nia.gov.np) — Regulatory authority for insurance and actuarial practice in Nepal.
+- **Institute and Faculty of Actuaries (IFoA):** [actuaries.org.uk](https://www.actuaries.org.uk) — UK-based society with global recognition, exam information, and resources.
+- **Society of Actuaries (SOA):** [soa.org](https://www.soa.org) — US-based society, especially strong in life and health insurance, with extensive study resources.
+- **Institute of Actuaries of India (IAI):** [actuariesindia.org](https://www.actuariesindia.org) — Indian society, popular among Nepali students.
+- **Casualty Actuarial Society (CAS):** [casact.org](https://www.casact.org) — US-based, focused on property and casualty insurance.
+
+
+## Additional Resources
+
+- **LinkedIn:** Build your professional profile and connect with actuaries in Nepal and abroad.
+- **YouTube Channels:** Search for actuarial exam walkthroughs, career talks, and technical tutorials.
+- **Open Access Journals:** Explore research in insurance, risk, and actuarial science for deeper learning.
+
+Bookmark these resources and revisit them regularly. The actuarial journey is challenging, but with the right support and information, you can navigate it successfully and make a meaningful impact in Nepal’s growing financial sector.
+
+
+# Final Tips and Encouragement
+
+Embarking on the actuarial journey in Nepal is both a challenge and a privilege. The path is demanding—filled with rigorous exams, long study hours, and moments of self-doubt—but it is also deeply rewarding. As you move forward, remember that success in this field is not just about intelligence or technical skill; it is about resilience, perseverance, and a willingness to keep going, even when things get tough.
+
+Motivation is the fuel that will carry you through the hardest parts of your actuarial studies. There will be times, especially after a difficult exam or a setback, when you feel drained and question whether you can continue. This is normal. Every actuary, including myself, has faced moments of exhaustion and doubt. After each exam, I often felt like I had no energy left to prepare for the next one. But with each challenge, I found a way to motivate myself to try one more time. Sometimes, it was the encouragement of friends and mentors; other times, it was the vision of the career I wanted to build. The key is to keep your goals in sight and remind yourself why you started this journey.
+
+It is also important to recognize that the actuarial path can seem expensive at first—exam fees, study materials, and the investment of time can feel overwhelming. But this investment pays off. Once you start working, you will see the value of your hard work, both financially and in terms of personal growth. The skills and knowledge you gain are not just for passing exams; they will serve you throughout your career, opening doors to opportunities in Nepal and around the world.
+
+Adopt a mindset of continuous improvement. Celebrate your successes, learn from your failures, and never be afraid to ask for help. The actuarial community in Nepal is supportive and growing—reach out, share your experiences, and support others on the same path. Remember, perseverance and a never-give-up attitude are just as important as any formula or theory you will learn.
+
+Finally, believe in your potential. The journey may be long, but every step brings you closer to your goals. Stay curious, stay motivated, and take pride in the progress you make. The actuarial profession needs passionate, dedicated individuals like you to shape the future of risk and finance in Nepal. Your hard work today will become the foundation of a successful and meaningful career.
+
+---
+
+*This is a living document. If you have questions or want to contribute, please comment or contact me!*
