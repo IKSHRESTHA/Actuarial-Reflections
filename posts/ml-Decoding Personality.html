@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Krishna Kumar Shrestha">
-<meta name="dcterms.date" content="2025-05-26">
+<meta name="dcterms.date" content="2025-07-12">
 
-<title>Decoding Personality: ML Models as Your Guide to Introverts vs.&nbsp;Extroverts – Actuarial-Reflections</title>
+<title>Decision Trees: A Complete Guide for Beginners – Actuarial-Reflections</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-a98ec624fb63d9b712fc3a6f62e2b305.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a986a95301e671fce2c6472dffc862a1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -176,11 +176,27 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-1-descriptive-analysis---mapping-the-personality-spectrum" id="toc-part-1-descriptive-analysis---mapping-the-personality-spectrum" class="nav-link active" data-scroll-target="#part-1-descriptive-analysis---mapping-the-personality-spectrum">Part 1: Descriptive Analysis - Mapping the Personality Spectrum</a>
+  <li><a href="#decision-trees-a-complete-guide-for-beginners" id="toc-decision-trees-a-complete-guide-for-beginners" class="nav-link active" data-scroll-target="#decision-trees-a-complete-guide-for-beginners">Decision Trees: A Complete Guide for Beginners</a>
   <ul class="collapse">
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#why-eda" id="toc-why-eda" class="nav-link" data-scroll-target="#why-eda">Why EDA?</a></li>
-  <li><a href="#about-the-data" id="toc-about-the-data" class="nav-link" data-scroll-target="#about-the-data">About the data</a></li>
+  <li><a href="#what-is-a-decision-tree" id="toc-what-is-a-decision-tree" class="nav-link" data-scroll-target="#what-is-a-decision-tree">What is a Decision Tree?</a></li>
+  <li><a href="#key-terms-in-decision-trees" id="toc-key-terms-in-decision-trees" class="nav-link" data-scroll-target="#key-terms-in-decision-trees">Key Terms in Decision Trees</a></li>
+  <li><a href="#types-of-decision-trees-classification-vs.-regression" id="toc-types-of-decision-trees-classification-vs.-regression" class="nav-link" data-scroll-target="#types-of-decision-trees-classification-vs.-regression">Types of Decision Trees: Classification vs.&nbsp;Regression</a>
+  <ul class="collapse">
+  <li><a href="#classification-trees-categorical-output" id="toc-classification-trees-categorical-output" class="nav-link" data-scroll-target="#classification-trees-categorical-output">1. Classification Trees (Categorical Output)</a></li>
+  <li><a href="#regression-trees-quantitative-output" id="toc-regression-trees-quantitative-output" class="nav-link" data-scroll-target="#regression-trees-quantitative-output">2. Regression Trees (Quantitative Output)</a></li>
+  </ul></li>
+  <li><a href="#advantages-and-limitations-of-decision-trees" id="toc-advantages-and-limitations-of-decision-trees" class="nav-link" data-scroll-target="#advantages-and-limitations-of-decision-trees">Advantages and Limitations of Decision Trees</a></li>
+  <li><a href="#step-by-step-example-building-a-decision-tree-to-predict-personality-type" id="toc-step-by-step-example-building-a-decision-tree-to-predict-personality-type" class="nav-link" data-scroll-target="#step-by-step-example-building-a-decision-tree-to-predict-personality-type">Step-by-Step Example: Building a Decision Tree to Predict Personality Type</a>
+  <ul class="collapse">
+  <li><a href="#reading-and-inspecting-the-data" id="toc-reading-and-inspecting-the-data" class="nav-link" data-scroll-target="#reading-and-inspecting-the-data">1. Reading and Inspecting the Data</a></li>
+  <li><a href="#preparing-the-data" id="toc-preparing-the-data" class="nav-link" data-scroll-target="#preparing-the-data">2. Preparing the Data</a></li>
+  <li><a href="#splitting-the-data-traintest-split" id="toc-splitting-the-data-traintest-split" class="nav-link" data-scroll-target="#splitting-the-data-traintest-split">3. Splitting the Data: Train/Test Split</a></li>
+  <li><a href="#building-the-decision-tree" id="toc-building-the-decision-tree" class="nav-link" data-scroll-target="#building-the-decision-tree">4. Building the Decision Tree</a></li>
+  <li><a href="#evaluating-the-model" id="toc-evaluating-the-model" class="nav-link" data-scroll-target="#evaluating-the-model">5. Evaluating the Model</a></li>
+  <li><a href="#pruning-the-tree" id="toc-pruning-the-tree" class="nav-link" data-scroll-target="#pruning-the-tree">6. Pruning the Tree</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -190,11 +206,12 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Decoding Personality: ML Models as Your Guide to Introverts vs.&nbsp;Extroverts</h1>
+<h1 class="title">Decision Trees: A Complete Guide for Beginners</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">data science</div>
-    <div class="quarto-category">descriptive</div>
-    <div class="quarto-category">ml</div>
+    <div class="quarto-category">machine learning</div>
+    <div class="quarto-category">decision trees</div>
+    <div class="quarto-category">classification</div>
+    <div class="quarto-category">regression</div>
   </div>
   </div>
 
@@ -212,7 +229,7 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 26, 2025</p>
+      <p class="date">July 12, 2025</p>
     </div>
   </div>
   
@@ -224,139 +241,313 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 </header>
 
 
-<section id="part-1-descriptive-analysis---mapping-the-personality-spectrum" class="level1">
-<h1>Part 1: Descriptive Analysis - Mapping the Personality Spectrum</h1>
+<section id="decision-trees-a-complete-guide-for-beginners" class="level1">
+<h1>Decision Trees: A Complete Guide for Beginners</h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Welcome to the first installment in our series decoding the human personality through data science! Before we build predictive models in latter posts, we must answer a fundamental question: What do we really mean by <code>introvert</code> and <code>extrovert</code> - and how can data reveal their true behavioral patters?</p>
-<p>In this article, we’ll explore:</p>
+<p>Decision trees are one of the most intuitive and powerful tools in machine learning and data science. They mimic the way humans make decisions: by asking a series of questions and following the answers down different paths. In this article, we’ll break down what decision trees are, define the most important terms, explore the different types of decision trees based on the kind of output they produce, and explain the key metrics used to evaluate them. By the end, you’ll have a clear understanding of how decision trees work and how to use them for both classification and regression problems.</p>
+</section>
+<section id="what-is-a-decision-tree" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-decision-tree">What is a Decision Tree?</h2>
+<p>A decision tree is a flowchart-like structure used to make decisions or predictions. Each internal node of the tree represents a test or question about a feature (for example, “Is age &gt; 30?”), each branch represents the outcome of the test, and each leaf node represents a final decision or prediction. Decision trees can be used for both classification (predicting categories) and regression (predicting numbers).</p>
+<p>Imagine you want to decide whether to play tennis based on the weather. A decision tree might first ask, “Is it sunny?” If yes, it might then ask, “Is the humidity high?” and so on, until it reaches a decision like “Play” or “Don’t play.”</p>
+</section>
+<section id="key-terms-in-decision-trees" class="level2">
+<h2 class="anchored" data-anchor-id="key-terms-in-decision-trees">Key Terms in Decision Trees</h2>
+<p>Before we dive deeper, let’s define some important terms:</p>
 <ul>
-<li><p>Why Exploratory Data Analysis (EDA) is your essential first step</p></li>
-<li><p>Visual storytelling with ggplot2 uncovers hidden patterns</p></li>
+<li><strong>Root Node:</strong> The top node of the tree, where the first split or question is made.</li>
+<li><strong>Internal Node:</strong> Any node that splits into further branches (not a leaf).</li>
+<li><strong>Leaf Node (Terminal Node):</strong> The end node that gives the final output (class or value).</li>
+<li><strong>Branch:</strong> A path from one node to another, representing the outcome of a test.</li>
+<li><strong>Split:</strong> The process of dividing a node into two or more sub-nodes based on a feature.</li>
+<li><strong>Feature (Attribute):</strong> A variable or column in your dataset used to split the data.</li>
+<li><strong>Depth:</strong> The number of levels in the tree from the root to the deepest leaf.</li>
 </ul>
 </section>
-<section id="why-eda" class="level2">
-<h2 class="anchored" data-anchor-id="why-eda">Why EDA?</h2>
+<section id="types-of-decision-trees-classification-vs.-regression" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-decision-trees-classification-vs.-regression">Types of Decision Trees: Classification vs.&nbsp;Regression</h2>
+<p>Decision trees are divided into two main types, depending on the nature of the output variable:</p>
+<section id="classification-trees-categorical-output" class="level3">
+<h3 class="anchored" data-anchor-id="classification-trees-categorical-output">1. Classification Trees (Categorical Output)</h3>
+<p>Classification trees are used when the target variable is categorical—that is, when you want to predict a class or label (such as “spam” vs.&nbsp;“not spam,” or “disease” vs.&nbsp;“no disease”). At each node, the tree asks a question that splits the data into groups that are more homogeneous with respect to the target class.</p>
+<p><strong>Example:</strong> Suppose you want to predict whether a loan applicant will default (“Yes” or “No”). The tree might split on features like income, credit score, or employment status, eventually leading to a prediction at the leaf node.</p>
+<section id="key-metrics-for-classification-trees" class="level4">
+<h4 class="anchored" data-anchor-id="key-metrics-for-classification-trees">Key Metrics for Classification Trees</h4>
+<p>To decide the best way to split the data at each node, classification trees use metrics that measure how “pure” or homogeneous the resulting groups are. The most common metrics are:</p>
 <ul>
-<li><p>EDA helps us understand our variables.</p></li>
-<li><p>Helps us detect data Quality Issues ( <code>Missing Values</code>, <code>Outliers</code> )</p></li>
-<li><p>Helps us uncover hidden relationships</p></li>
-<li><p>Help us Validate assumptions</p></li>
-<li><p>Help us in feature engineering</p></li>
+<li><strong>Gini Impurity:</strong> Measures how often a randomly chosen element would be incorrectly labeled if it was randomly labeled according to the distribution of labels in the node. Lower Gini means purer nodes.</li>
+<li><strong>Entropy (Information Gain):</strong> Measures the amount of disorder or uncertainty. Splits that reduce entropy the most are preferred.</li>
 </ul>
-<p>Lets start now exploring the data. First thing First, we need to import library that we are going to use for this project:</p>
-<p>After loaing the library, we will read the data.</p>
+<p><strong>How to choose splits:</strong> At each node, the algorithm tries all possible splits and chooses the one that results in the greatest reduction in impurity (Gini or Entropy).</p>
+<p><strong>Evaluation Metrics:</strong> After building the tree, we evaluate its performance using metrics such as: - <strong>Accuracy:</strong> The proportion of correct predictions. - <strong>Precision, Recall, F1 Score:</strong> Useful for imbalanced datasets. - <strong>Confusion Matrix:</strong> Shows the counts of true positives, false positives, etc.</p>
 </section>
-<section id="about-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="about-the-data">About the data</h2>
-<p>The data has been downloaded from the kaggle and you can find about the data more on here:</p>
+</section>
+<section id="regression-trees-quantitative-output" class="level3">
+<h3 class="anchored" data-anchor-id="regression-trees-quantitative-output">2. Regression Trees (Quantitative Output)</h3>
+<p>Regression trees are used when the target variable is continuous or numerical (such as predicting house prices or temperatures). Instead of predicting a class, the tree predicts a number.</p>
+<p><strong>Example:</strong> Suppose you want to predict the price of a house based on features like size, location, and number of bedrooms. The regression tree splits the data at each node to minimize the difference between the predicted and actual values.</p>
+<section id="key-metrics-for-regression-trees" class="level4">
+<h4 class="anchored" data-anchor-id="key-metrics-for-regression-trees">Key Metrics for Regression Trees</h4>
+<p>To choose the best splits, regression trees use metrics that measure how well the split reduces the variability of the target variable. The most common metrics are:</p>
+<ul>
+<li><strong>Mean Squared Error (MSE):</strong> The average of the squared differences between predicted and actual values.</li>
+<li><strong>Mean Absolute Error (MAE):</strong> The average of the absolute differences between predicted and actual values.</li>
+</ul>
+<p><strong>How to choose splits:</strong> At each node, the algorithm tries all possible splits and chooses the one that results in the greatest reduction in error (MSE or MAE).</p>
+<p><strong>Evaluation Metrics:</strong> After building the tree, we evaluate its performance using metrics such as: - <strong>R-squared (R²):</strong> Measures how well the model explains the variability of the target. - <strong>Root Mean Squared Error (RMSE):</strong> The square root of MSE, in the same units as the target.</p>
+</section>
+</section>
+</section>
+<section id="advantages-and-limitations-of-decision-trees" class="level2">
+<h2 class="anchored" data-anchor-id="advantages-and-limitations-of-decision-trees">Advantages and Limitations of Decision Trees</h2>
+<p><strong>Advantages:</strong> - Easy to understand and interpret. - Can handle both numerical and categorical data. - Require little data preparation. - Can model non-linear relationships.</p>
+<p><strong>Limitations:</strong> - Prone to overfitting (creating trees that are too complex and fit the training data too closely). - Can be unstable—small changes in data can lead to different trees. - Less accurate than some other algorithms (like random forests or boosting) on complex problems.</p>
+</section>
+<section id="step-by-step-example-building-a-decision-tree-to-predict-personality-type" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-example-building-a-decision-tree-to-predict-personality-type">Step-by-Step Example: Building a Decision Tree to Predict Personality Type</h2>
+<p>Let’s walk through a practical example using R, where we predict whether a person is an introvert or extrovert using a decision tree. We’ll cover every step: reading the data, cleaning it, splitting into training and test sets, building the tree, evaluating it, and pruning for better performance.</p>
+<section id="reading-and-inspecting-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="reading-and-inspecting-the-data">1. Reading and Inspecting the Data</h3>
+<p>First, we load the necessary libraries and read the dataset directly from the provided URL. We’ll use Quarto chunk options to suppress warnings and messages for a cleaner output.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>personality_dataset <span class="ot">&lt;-</span>readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/IKSHRESTHA/Actuarial-Reflections/refs/heads/main/data/06272925/personality_datasert.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`curl` package not installed, falling back to using `url()`
-Rows: 2900 Columns: 8
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (3): Stage_fear, Drained_after_socializing, Personality
-dbl (5): Time_spent_Alone, Social_event_attendance, Going_outside, Friends_c...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cleaning the columns name </span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> personality_dataset <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret) <span class="co"># for train/test split</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/IKSHRESTHA/Actuarial-Reflections/refs/heads/main/data/06272925/personality_datasert.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the data</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "time_spent_alone"          "stage_fear"               
-[3] "social_event_attendance"   "going_outside"            
-[5] "drained_after_socializing" "friends_circle_size"      
-[7] "post_frequency"            "personality"              </code></pre>
+<pre><code>spc_tbl_ [2,900 × 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ time_spent_alone         : num [1:2900] 4 9 9 0 3 1 4 2 10 0 ...
+ $ stage_fear               : chr [1:2900] "No" "Yes" "Yes" "No" ...
+ $ social_event_attendance  : num [1:2900] 4 0 1 6 9 7 9 8 1 8 ...
+ $ going_outside            : num [1:2900] 6 0 2 7 4 5 3 4 3 6 ...
+ $ drained_after_socializing: chr [1:2900] "No" "Yes" "Yes" "No" ...
+ $ friends_circle_size      : num [1:2900] 13 0 5 14 8 6 7 7 0 13 ...
+ $ post_frequency           : num [1:2900] 5 3 2 8 5 6 7 8 3 8 ...
+ $ personality              : chr [1:2900] "Extrovert" "Introvert" "Introvert" "Extrovert" ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   Time_spent_Alone = col_double(),
+  ..   Stage_fear = col_character(),
+  ..   Social_event_attendance = col_double(),
+  ..   Going_outside = col_double(),
+  ..   Drained_after_socializing = col_character(),
+  ..   Friends_circle_size = col_double(),
+  ..   Post_frequency = col_double(),
+  ..   Personality = col_character()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> time_spent_alone  stage_fear        social_event_attendance going_outside
+ Min.   : 0.000   Length:2900        Min.   : 0.000          Min.   :0    
+ 1st Qu.: 2.000   Class :character   1st Qu.: 2.000          1st Qu.:1    
+ Median : 4.000   Mode  :character   Median : 3.963          Median :3    
+ Mean   : 4.506                      Mean   : 3.963          Mean   :3    
+ 3rd Qu.: 7.000                      3rd Qu.: 6.000          3rd Qu.:5    
+ Max.   :11.000                      Max.   :10.000          Max.   :7    
+ drained_after_socializing friends_circle_size post_frequency  
+ Length:2900               Min.   : 0.000      Min.   : 0.000  
+ Class :character          1st Qu.: 3.000      1st Qu.: 1.000  
+ Mode  :character          Median : 5.000      Median : 3.000  
+                           Mean   : 6.269      Mean   : 3.565  
+                           3rd Qu.:10.000      3rd Qu.: 6.000  
+                           Max.   :15.000      Max.   :10.000  
+ personality       
+ Length:2900       
+ Class :character  
+ Mode  :character  
+                   
+                   
+                   </code></pre>
 </div>
 </div>
+<p><em>The output above shows the structure and summary statistics of the dataset. You can see the variable types, ranges, and a quick overview of the data. This helps us understand what features are available and if there are any obvious data quality issues.</em></p>
+</section>
+<section id="preparing-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-the-data">2. Preparing the Data</h3>
+<p>We’ll make sure the target variable (<code>personality</code>) is a factor, and check for missing values. We’ll also suppress warnings and messages in this chunk.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extrafont)  <span class="co"># For font consistency</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Registering fonts with R</code></pre>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert target to factor</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>personality <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>personality)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing values</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         time_spent_alone                stage_fear   social_event_attendance 
+                        0                         0                         0 
+            going_outside drained_after_socializing       friends_circle_size 
+                        0                         0                         0 
+           post_frequency               personality 
+                        0                         0 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>theme_actuarial <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">12</span>, </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">base_family =</span> <span class="st">"mono"</span>,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">title_position =</span> <span class="st">"middle"</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">border_color =</span> <span class="st">"black"</span>) {</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load monospaced font (install first if needed)</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  extrafont<span class="sc">::</span><span class="fu">loadfonts</span>(<span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">%+replace%</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Text elements</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> base_family, <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> base_size <span class="sc">*</span> <span class="fl">1.2</span>),</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">hjust =</span> <span class="fl">0.5</span>, </span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span> base_size),</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> base_size <span class="sc">*</span> <span class="fl">1.4</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">hjust =</span> <span class="fl">0.5</span>, </span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span> base_size)</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> <span class="fu">element_text</span>(</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">hjust =</span> <span class="dv">1</span>, </span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> base_size <span class="sc">*</span> <span class="fl">0.8</span>,</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"grey40"</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Axis elements</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> <span class="fu">element_text</span>(</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">face =</span> <span class="st">"bold"</span>, </span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"black"</span>,</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> base_size <span class="sc">*</span> <span class="fl">1.1</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> base_size <span class="sc">*</span> <span class="fl">0.5</span>),</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">hjust =</span> title_position</span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">r =</span> base_size <span class="sc">*</span> <span class="fl">0.5</span>),</span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">angle =</span> <span class="dv">90</span>,</span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">hjust =</span> title_position</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"grey30"</span>),</span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.line =</span> <span class="fu">element_line</span>(</span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> border_color, </span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>        <span class="at">linewidth =</span> <span class="fl">0.8</span></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Panel elements</span></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(</span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"grey92"</span>, </span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>        <span class="at">linewidth =</span> <span class="fl">0.3</span></span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Legend elements</span></span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Plot elements</span></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.margin =</span> <span class="fu">margin</span>(base_size, base_size, base_size, base_size),</span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"grey95"</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><em>The output will show the number of missing values in each column. If all values are zero, there are no missing data to worry about. If not, you may need to handle them before modeling.</em></p>
+</section>
+<section id="splitting-the-data-traintest-split" class="level3">
+<h3 class="anchored" data-anchor-id="splitting-the-data-traintest-split">3. Splitting the Data: Train/Test Split</h3>
+<p>We’ll split the data into 70% training and 30% testing sets to evaluate our model’s performance on unseen data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#df_summary=rstatix::get_summary_stats(df,type="full")</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#df_summary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>train_index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(df<span class="sc">$</span>personality, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> df[train_index, ]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> df[<span class="sc">-</span>train_index, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><em>This step ensures that our model is trained on one portion of the data and tested on another, helping us assess how well it generalizes to new cases.</em></p>
+</section>
+<section id="building-the-decision-tree" class="level3">
+<h3 class="anchored" data-anchor-id="building-the-decision-tree">4. Building the Decision Tree</h3>
+<p>Now, we’ll build a classification tree to predict <code>personality</code> using all other variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tree_model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(personality <span class="sc">~</span> ., <span class="at">data =</span> train_data, <span class="at">method =</span> <span class="st">"class"</span>, <span class="at">cp =</span> <span class="fl">0.01</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the tree</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ml-Decoding-Personality_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>The plot above shows the structure of the decision tree. Each node represents a split based on a feature, and the leaves show the predicted class (introvert or extrovert).</em></p>
+</section>
+<section id="evaluating-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="evaluating-the-model">5. Evaluating the Model</h3>
+<p>We’ll use the test set to see how well our tree predicts introverts vs.&nbsp;extroverts.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree_model, test_data, <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(pred, test_data<span class="sc">$</span>personality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+           Reference
+Prediction  Extrovert Introvert
+  Extrovert       412        29
+  Introvert        35       393
+                                          
+               Accuracy : 0.9264          
+                 95% CI : (0.9069, 0.9428)
+    No Information Rate : 0.5144          
+    P-Value [Acc &gt; NIR] : &lt;2e-16          
+                                          
+                  Kappa : 0.8526          
+                                          
+ Mcnemar's Test P-Value : 0.532           
+                                          
+            Sensitivity : 0.9217          
+            Specificity : 0.9313          
+         Pos Pred Value : 0.9342          
+         Neg Pred Value : 0.9182          
+             Prevalence : 0.5144          
+         Detection Rate : 0.4741          
+   Detection Prevalence : 0.5075          
+      Balanced Accuracy : 0.9265          
+                                          
+       'Positive' Class : Extrovert       
+                                          </code></pre>
+</div>
+</div>
+<p><em>The confusion matrix output will display the number of correct and incorrect predictions for each class. Accuracy, sensitivity, and specificity are also shown, helping you judge the model’s performance.</em></p>
+</section>
+<section id="pruning-the-tree" class="level3">
+<h3 class="anchored" data-anchor-id="pruning-the-tree">6. Pruning the Tree</h3>
+<p>Decision trees can overfit, so pruning helps simplify the tree and improve generalization. We’ll use the complexity parameter (cp) to prune.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find optimal cp value</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">printcp</span>(tree_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Classification tree:
+rpart(formula = personality ~ ., data = train_data, method = "class", 
+    cp = 0.01)
+
+Variables actually used in tree construction:
+[1] drained_after_socializing stage_fear               
+
+Root node error: 987/2031 = 0.48597
+
+n= 2031 
+
+        CP nsplit rel error  xerror     xstd
+1 0.855117      0   1.00000 1.00000 0.022821
+2 0.016211      1   0.14488 0.14488 0.011681
+3 0.010000      2   0.12867 0.12969 0.011096</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose the cp with lowest cross-validated error</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>best_cp <span class="ot">&lt;-</span> tree_model<span class="sc">$</span>cptable[<span class="fu">which.min</span>(tree_model<span class="sc">$</span>cptable[,<span class="st">"xerror"</span>]), <span class="st">"CP"</span>]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Prune the tree</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>pruned_tree <span class="ot">&lt;-</span> <span class="fu">prune</span>(tree_model, <span class="at">cp =</span> best_cp)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize pruned tree</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(pruned_tree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ml-Decoding-Personality_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate pruned tree</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pruned_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(pruned_tree, test_data, <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(pruned_pred, test_data<span class="sc">$</span>personality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+           Reference
+Prediction  Extrovert Introvert
+  Extrovert       412        29
+  Introvert        35       393
+                                          
+               Accuracy : 0.9264          
+                 95% CI : (0.9069, 0.9428)
+    No Information Rate : 0.5144          
+    P-Value [Acc &gt; NIR] : &lt;2e-16          
+                                          
+                  Kappa : 0.8526          
+                                          
+ Mcnemar's Test P-Value : 0.532           
+                                          
+            Sensitivity : 0.9217          
+            Specificity : 0.9313          
+         Pos Pred Value : 0.9342          
+         Neg Pred Value : 0.9182          
+             Prevalence : 0.5144          
+         Detection Rate : 0.4741          
+   Detection Prevalence : 0.5075          
+      Balanced Accuracy : 0.9265          
+                                          
+       'Positive' Class : Extrovert       
+                                          </code></pre>
+</div>
+</div>
+<p><em>After pruning, the tree is simpler and less likely to overfit. The new confusion matrix shows how well the pruned tree performs on the test data. Compare this to the previous results to see if pruning improved generalization.</em></p>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<ul>
+<li>We loaded and cleaned the data (with warnings suppressed for clarity).</li>
+<li>Split it into training and test sets.</li>
+<li>Built and visualized a decision tree to predict personality type.</li>
+<li>Evaluated its performance with a confusion matrix.</li>
+<li>Pruned the tree and compared results.</li>
+</ul>
+<p>This step-by-step approach helps you understand not just how to build a decision tree, but also how to interpret the output and ensure it performs well on new, unseen data.</p>
 
 
+</section>
 </section>
 </section>
 
