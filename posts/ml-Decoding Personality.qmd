@@ -1,148 +1,219 @@
 ---
-title: "Decoding Personality: ML Models as Your Guide to Introverts vs. Extroverts"
+title: "Decision Trees: A Complete Guide for Beginners"
 author: "Krishna Kumar Shrestha"
-date: "2025-05-26"
-categories: [data science, descriptive, ml]
+date: "2025-07-12"
+categories: [machine learning, decision trees, classification, regression]
 ---
 
-# Part 1: Descriptive  Analysis - Mapping the Personality Spectrum
+# Decision Trees: A Complete Guide for Beginners
 
-## Introduction 
+## Introduction
 
-Welcome to the first installment in our series decoding the human personality through data science! Before we build predictive models in latter posts, we must answer a fundamental question: What do we really mean by `introvert` and `extrovert` - and how can data reveal their true behavioral patters?
+Decision trees are one of the most intuitive and powerful tools in machine learning and data science. They mimic the way humans make decisions: by asking a series of questions and following the answers down different paths. In this article, we’ll break down what decision trees are, define the most important terms, explore the different types of decision trees based on the kind of output they produce, and explain the key metrics used to evaluate them. By the end, you’ll have a clear understanding of how decision trees work and how to use them for both classification and regression problems.
 
-In this article, we'll explore:
+## What is a Decision Tree?
 
--   Why Exploratory Data Analysis (EDA) is your essential first step
+A decision tree is a flowchart-like structure used to make decisions or predictions. Each internal node of the tree represents a test or question about a feature (for example, “Is age > 30?”), each branch represents the outcome of the test, and each leaf node represents a final decision or prediction. Decision trees can be used for both classification (predicting categories) and regression (predicting numbers).
 
--   Visual storytelling with ggplot2 uncovers hidden patterns
+Imagine you want to decide whether to play tennis based on the weather. A decision tree might first ask, “Is it sunny?” If yes, it might then ask, “Is the humidity high?” and so on, until it reaches a decision like “Play” or “Don’t play.”
 
-## Why EDA?
+## Key Terms in Decision Trees
 
--   EDA helps us understand our variables.
+Before we dive deeper, let’s define some important terms:
 
--   Helps us detect data Quality Issues ( `Missing Values`, `Outliers` )
+- **Root Node:** The top node of the tree, where the first split or question is made.
+- **Internal Node:** Any node that splits into further branches (not a leaf).
+- **Leaf Node (Terminal Node):** The end node that gives the final output (class or value).
+- **Branch:** A path from one node to another, representing the outcome of a test.
+- **Split:** The process of dividing a node into two or more sub-nodes based on a feature.
+- **Feature (Attribute):** A variable or column in your dataset used to split the data.
+- **Depth:** The number of levels in the tree from the root to the deepest leaf.
 
--   Helps us uncover hidden relationships
+## Types of Decision Trees: Classification vs. Regression
 
--   Help us Validate assumptions
+Decision trees are divided into two main types, depending on the nature of the output variable:
 
--   Help us in feature engineering
+### 1. Classification Trees (Categorical Output)
 
-Lets start now exploring the data. First thing First, we need to import library that we are going to use for this project:
+Classification trees are used when the target variable is categorical—that is, when you want to predict a class or label (such as “spam” vs. “not spam,” or “disease” vs. “no disease”). At each node, the tree asks a question that splits the data into groups that are more homogeneous with respect to the target class.
+
+**Example:**
+Suppose you want to predict whether a loan applicant will default (“Yes” or “No”). The tree might split on features like income, credit score, or employment status, eventually leading to a prediction at the leaf node.
+
+#### Key Metrics for Classification Trees
+
+To decide the best way to split the data at each node, classification trees use metrics that measure how “pure” or homogeneous the resulting groups are. The most common metrics are:
+
+- **Gini Impurity:** Measures how often a randomly chosen element would be incorrectly labeled if it was randomly labeled according to the distribution of labels in the node. Lower Gini means purer nodes.
+- **Entropy (Information Gain):** Measures the amount of disorder or uncertainty. Splits that reduce entropy the most are preferred.
+
+**How to choose splits:**
+At each node, the algorithm tries all possible splits and chooses the one that results in the greatest reduction in impurity (Gini or Entropy).
+
+**Evaluation Metrics:**
+After building the tree, we evaluate its performance using metrics such as:
+- **Accuracy:** The proportion of correct predictions.
+- **Precision, Recall, F1 Score:** Useful for imbalanced datasets.
+- **Confusion Matrix:** Shows the counts of true positives, false positives, etc.
+
+### 2. Regression Trees (Quantitative Output)
+
+Regression trees are used when the target variable is continuous or numerical (such as predicting house prices or temperatures). Instead of predicting a class, the tree predicts a number.
+
+**Example:**
+Suppose you want to predict the price of a house based on features like size, location, and number of bedrooms. The regression tree splits the data at each node to minimize the difference between the predicted and actual values.
+
+#### Key Metrics for Regression Trees
+
+To choose the best splits, regression trees use metrics that measure how well the split reduces the variability of the target variable. The most common metrics are:
+
+- **Mean Squared Error (MSE):** The average of the squared differences between predicted and actual values.
+- **Mean Absolute Error (MAE):** The average of the absolute differences between predicted and actual values.
+
+**How to choose splits:**
+At each node, the algorithm tries all possible splits and chooses the one that results in the greatest reduction in error (MSE or MAE).
+
+**Evaluation Metrics:**
+After building the tree, we evaluate its performance using metrics such as:
+- **R-squared (R²):** Measures how well the model explains the variability of the target.
+- **Root Mean Squared Error (RMSE):** The square root of MSE, in the same units as the target.
+
+
+
+## Advantages and Limitations of Decision Trees
+
+**Advantages:**
+- Easy to understand and interpret.
+- Can handle both numerical and categorical data.
+- Require little data preparation.
+- Can model non-linear relationships.
+
+**Limitations:**
+- Prone to overfitting (creating trees that are too complex and fit the training data too closely).
+- Can be unstable—small changes in data can lead to different trees.
+- Less accurate than some other algorithms (like random forests or boosting) on complex problems.
+
+## Step-by-Step Example: Building a Decision Tree to Predict Personality Type
+
+Let's walk through a practical example using R, where we predict whether a person is an introvert or extrovert using a decision tree. We'll cover every step: reading the data, cleaning it, splitting into training and test sets, building the tree, evaluating it, and pruning for better performance.
+
+### 1. Reading and Inspecting the Data
+
+First, we load the necessary libraries and read the dataset directly from the provided URL. We'll use Quarto chunk options to suppress warnings and messages for a cleaner output.
 
 ```{r}
-#| echo: false
-#| message: false
 #| warning: false
-#| paged-print: false
-
-
+#| message: false
+library(readr)
+library(janitor)
 library(dplyr)
-library(ggplot2)
+library(rpart)
+library(rpart.plot)
+library(caret) # for train/test split
 
-
-```
-
-
-After loaing the library, we will read the data.
-
-## About the data
-
-The data has been downloaded from the kaggle and you can find about the data more on here:
-
-```{r}
-
-
-
-personality_dataset <-readr::read_csv("https://raw.githubusercontent.com/IKSHRESTHA/Actuarial-Reflections/refs/heads/main/data/06272925/personality_datasert.csv")
-
-# cleaning the columns name 
-df <- personality_dataset |>
+# Read the data
+df <- read_csv("https://raw.githubusercontent.com/IKSHRESTHA/Actuarial-Reflections/refs/heads/main/data/06272925/personality_datasert.csv") |> 
   janitor::clean_names()
 
-colnames(df)
-```
-```{r}
-library(extrafont)  # For font consistency
-
-theme_actuarial <- function(base_size = 12, 
-                            base_family = "mono",
-                            title_position = "middle",
-                            border_color = "black") {
-  
-  # Load monospaced font (install first if needed)
-  extrafont::loadfonts(quiet = TRUE)
-  
-  theme_minimal(base_size = base_size, base_family = base_family) %+replace%
-    theme(
-      # Text elements
-      text = element_text(family = base_family, color = "black"),
-      title = element_text(face = "bold", size = base_size * 1.2),
-      plot.title = element_text(
-        hjust = 0.5, 
-        margin = margin(b = base_size),
-        size = base_size * 1.4
-      ),
-      plot.subtitle = element_text(
-        hjust = 0.5, 
-        margin = margin(b = base_size)
-      ),
-      plot.caption = element_text(
-        hjust = 1, 
-        size = base_size * 0.8,
-        color = "grey40"
-      ),
-      
-      # Axis elements
-      axis.title = element_text(
-        face = "bold", 
-        color = "black",
-        size = base_size * 1.1
-      ),
-      axis.title.x = element_text(
-        margin = margin(t = base_size * 0.5),
-        hjust = title_position
-      ),
-      axis.title.y = element_text(
-        margin = margin(r = base_size * 0.5),
-        angle = 90,
-        hjust = title_position
-      ),
-      axis.text = element_text(color = "grey30"),
-      axis.line = element_line(
-        color = border_color, 
-        linewidth = 0.8
-      ),
-      
-      # Panel elements
-      panel.grid.major = element_line(
-        color = "grey92", 
-        linewidth = 0.3
-      ),
-      panel.grid.minor = element_blank(),
-      panel.background = element_rect(fill = "white", color = NA),
-      panel.border = element_blank(),
-      
-      # Legend elements
-      legend.title = element_text(face = "bold"),
-      legend.background = element_rect(fill = "white", color = NA),
-      legend.key = element_rect(fill = "white", color = NA),
-      
-      # Plot elements
-      plot.background = element_rect(fill = "white", color = NA),
-      plot.margin = margin(base_size, base_size, base_size, base_size),
-      strip.background = element_rect(fill = "grey95", color = NA),
-      strip.text = element_text(face = "bold")
-    )
-}
+# Inspect the data
+str(df)
+summary(df)
 ```
 
+*The output above shows the structure and summary statistics of the dataset. You can see the variable types, ranges, and a quick overview of the data. This helps us understand what features are available and if there are any obvious data quality issues.*
+
+### 2. Preparing the Data
+
+We'll make sure the target variable (`personality`) is a factor, and check for missing values. We'll also suppress warnings and messages in this chunk.
 
 ```{r}
+#| warning: false
+#| message: false
+# Convert target to factor
+df$personality <- as.factor(df$personality)
 
-#df_summary=rstatix::get_summary_stats(df,type="full")
-#df_summary
-
+# Check for missing values
+colSums(is.na(df))
 ```
+
+*The output will show the number of missing values in each column. If all values are zero, there are no missing data to worry about. If not, you may need to handle them before modeling.*
+
+### 3. Splitting the Data: Train/Test Split
+
+We'll split the data into 70% training and 30% testing sets to evaluate our model's performance on unseen data.
+
+```{r}
+#| warning: false
+#| message: false
+set.seed(123) # for reproducibility
+train_index <- createDataPartition(df$personality, p = 0.7, list = FALSE)
+train_data <- df[train_index, ]
+test_data <- df[-train_index, ]
+```
+
+*This step ensures that our model is trained on one portion of the data and tested on another, helping us assess how well it generalizes to new cases.*
+
+### 4. Building the Decision Tree
+
+Now, we'll build a classification tree to predict `personality` using all other variables.
+
+```{r}
+#| warning: false
+#| message: false
+tree_model <- rpart(personality ~ ., data = train_data, method = "class", cp = 0.01)
+
+# Visualize the tree
+rpart.plot(tree_model)
+```
+
+*The plot above shows the structure of the decision tree. Each node represents a split based on a feature, and the leaves show the predicted class (introvert or extrovert).*
+
+### 5. Evaluating the Model
+
+We'll use the test set to see how well our tree predicts introverts vs. extroverts.
+
+```{r}
+#| warning: false
+#| message: false
+pred <- predict(tree_model, test_data, type = "class")
+confusionMatrix(pred, test_data$personality)
+```
+
+*The confusion matrix output will display the number of correct and incorrect predictions for each class. Accuracy, sensitivity, and specificity are also shown, helping you judge the model's performance.*
+
+### 6. Pruning the Tree
+
+Decision trees can overfit, so pruning helps simplify the tree and improve generalization. We'll use the complexity parameter (cp) to prune.
+
+```{r}
+#| warning: false
+#| message: false
+# Find optimal cp value
+printcp(tree_model)
+
+# Choose the cp with lowest cross-validated error
+best_cp <- tree_model$cptable[which.min(tree_model$cptable[,"xerror"]), "CP"]
+
+# Prune the tree
+pruned_tree <- prune(tree_model, cp = best_cp)
+
+# Visualize pruned tree
+rpart.plot(pruned_tree)
+
+# Evaluate pruned tree
+pruned_pred <- predict(pruned_tree, test_data, type = "class")
+confusionMatrix(pruned_pred, test_data$personality)
+```
+
+*After pruning, the tree is simpler and less likely to overfit. The new confusion matrix shows how well the pruned tree performs on the test data. Compare this to the previous results to see if pruning improved generalization.*
+
+### Summary
+
+- We loaded and cleaned the data (with warnings suppressed for clarity).
+- Split it into training and test sets.
+- Built and visualized a decision tree to predict personality type.
+- Evaluated its performance with a confusion matrix.
+- Pruned the tree and compared results.
+
+This step-by-step approach helps you understand not just how to build a decision tree, but also how to interpret the output and ensure it performs well on new, unseen data.
 
