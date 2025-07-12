@@ -197,6 +197,20 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
   <li><a href="#pruning-the-tree" id="toc-pruning-the-tree" class="nav-link" data-scroll-target="#pruning-the-tree">6. Pruning the Tree</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul></li>
+  <li><a href="#advanced-tree-methods-bagging-random-forest-and-boosting" id="toc-advanced-tree-methods-bagging-random-forest-and-boosting" class="nav-link" data-scroll-target="#advanced-tree-methods-bagging-random-forest-and-boosting">Advanced Tree Methods: Bagging, Random Forest, and Boosting</a>
+  <ul class="collapse">
+  <li><a href="#bagging-bootstrap-aggregating" id="toc-bagging-bootstrap-aggregating" class="nav-link" data-scroll-target="#bagging-bootstrap-aggregating">Bagging (Bootstrap Aggregating)</a></li>
+  <li><a href="#random-forest" id="toc-random-forest" class="nav-link" data-scroll-target="#random-forest">Random Forest</a></li>
+  <li><a href="#boosting" id="toc-boosting" class="nav-link" data-scroll-target="#boosting">Boosting</a></li>
+  <li><a href="#key-differences" id="toc-key-differences" class="nav-link" data-scroll-target="#key-differences">Key Differences</a></li>
+  <li><a href="#when-to-use-each-method" id="toc-when-to-use-each-method" class="nav-link" data-scroll-target="#when-to-use-each-method">When to Use Each Method</a></li>
+  </ul></li>
+  <li><a href="#step-by-step-bagging-random-forest-and-boosting-with-r" id="toc-step-by-step-bagging-random-forest-and-boosting-with-r" class="nav-link" data-scroll-target="#step-by-step-bagging-random-forest-and-boosting-with-r">Step-by-Step: Bagging, Random Forest, and Boosting with R</a>
+  <ul class="collapse">
+  <li><a href="#bagging-bootstrap-aggregating-1" id="toc-bagging-bootstrap-aggregating-1" class="nav-link" data-scroll-target="#bagging-bootstrap-aggregating-1">1. Bagging (Bootstrap Aggregating)</a></li>
+  <li><a href="#random-forest-1" id="toc-random-forest-1" class="nav-link" data-scroll-target="#random-forest-1">2. Random Forest</a></li>
+  <li><a href="#boosting-gradient-boosting-machine" id="toc-boosting-gradient-boosting-machine" class="nav-link" data-scroll-target="#boosting-gradient-boosting-machine">3. Boosting (Gradient Boosting Machine)</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -280,7 +294,7 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 <li><strong>Entropy (Information Gain):</strong> Measures the amount of disorder or uncertainty. Splits that reduce entropy the most are preferred.</li>
 </ul>
 <p><strong>How to choose splits:</strong> At each node, the algorithm tries all possible splits and chooses the one that results in the greatest reduction in impurity (Gini or Entropy).</p>
-<p><strong>Evaluation Metrics:</strong> After building the tree, we evaluate its performance using metrics such as: - <strong>Accuracy:</strong> The proportion of correct predictions. - <strong>Precision, Recall, F1 Score:</strong> Useful for imbalanced datasets. - <strong>Confusion Matrix:</strong> Shows the counts of true positives, false positives, etc.</p>
+<p><strong>Evaluation Metrics:</strong> After building the tree, we evaluate its performance using metrics such as: * <strong>Accuracy:</strong> The proportion of correct predictions. * <strong>Precision, Recall, F1 Score:</strong> Useful for imbalanced datasets. * <strong>Confusion Matrix:</strong> Shows the counts of true positives, false positives, etc.</p>
 </section>
 </section>
 <section id="regression-trees-quantitative-output" class="level3">
@@ -295,14 +309,25 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 <li><strong>Mean Absolute Error (MAE):</strong> The average of the absolute differences between predicted and actual values.</li>
 </ul>
 <p><strong>How to choose splits:</strong> At each node, the algorithm tries all possible splits and chooses the one that results in the greatest reduction in error (MSE or MAE).</p>
-<p><strong>Evaluation Metrics:</strong> After building the tree, we evaluate its performance using metrics such as: - <strong>R-squared (R²):</strong> Measures how well the model explains the variability of the target. - <strong>Root Mean Squared Error (RMSE):</strong> The square root of MSE, in the same units as the target.</p>
+<p><strong>Evaluation Metrics:</strong> After building the tree, we evaluate its performance using metrics such as: * <strong>R-squared (R²):</strong> Measures how well the model explains the variability of the target. * <strong>Root Mean Squared Error (RMSE):</strong> The square root of MSE, in the same units as the target.</p>
 </section>
 </section>
 </section>
 <section id="advantages-and-limitations-of-decision-trees" class="level2">
 <h2 class="anchored" data-anchor-id="advantages-and-limitations-of-decision-trees">Advantages and Limitations of Decision Trees</h2>
-<p><strong>Advantages:</strong> - Easy to understand and interpret. - Can handle both numerical and categorical data. - Require little data preparation. - Can model non-linear relationships.</p>
-<p><strong>Limitations:</strong> - Prone to overfitting (creating trees that are too complex and fit the training data too closely). - Can be unstable—small changes in data can lead to different trees. - Less accurate than some other algorithms (like random forests or boosting) on complex problems.</p>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>Easy to understand and interpret.</li>
+<li>Can handle both numerical and categorical data.</li>
+<li>Require little data preparation.</li>
+<li>Can model non-linear relationships.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li>Prone to overfitting (creating trees that are too complex and fit the training data too closely).</li>
+<li>Can be unstable—small changes in data can lead to different trees.</li>
+<li>Less accurate than some other algorithms (like random forests or boosting) on complex problems.</li>
+</ul>
 </section>
 <section id="step-by-step-example-building-a-decision-tree-to-predict-personality-type" class="level2">
 <h2 class="anchored" data-anchor-id="step-by-step-example-building-a-decision-tree-to-predict-personality-type">Step-by-Step Example: Building a Decision Tree to Predict Personality Type</h2>
@@ -545,6 +570,308 @@ Prediction  Extrovert Introvert
 <li>Pruned the tree and compared results.</li>
 </ul>
 <p>This step-by-step approach helps you understand not just how to build a decision tree, but also how to interpret the output and ensure it performs well on new, unseen data.</p>
+</section>
+</section>
+<section id="advanced-tree-methods-bagging-random-forest-and-boosting" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-tree-methods-bagging-random-forest-and-boosting">Advanced Tree Methods: Bagging, Random Forest, and Boosting</h2>
+<p>As powerful as decision trees are, they have some limitations—most notably, they can be unstable and prone to overfitting. To address these issues and achieve better predictive performance, data scientists use advanced ensemble methods that combine many trees. The three most popular are bagging, random forests, and boosting. Let’s explore each, their differences, and when to use them.</p>
+<section id="bagging-bootstrap-aggregating" class="level3">
+<h3 class="anchored" data-anchor-id="bagging-bootstrap-aggregating">Bagging (Bootstrap Aggregating)</h3>
+<p>Bagging is short for “bootstrap aggregating.” The idea is simple: build many decision trees, each on a different random sample (with replacement) of the training data, and then average their predictions (for regression) or take a majority vote (for classification).</p>
+<ul>
+<li><strong>How it works:</strong>
+<ul>
+<li>Draw multiple bootstrap samples from the training data.</li>
+<li>Train a separate decision tree on each sample.</li>
+<li>For prediction, aggregate the results (average or majority vote).</li>
+</ul></li>
+<li><strong>Strengths:</strong>
+<ul>
+<li>Reduces variance and helps prevent overfitting.</li>
+<li>Each tree is independent, so the method is easy to parallelize.</li>
+</ul></li>
+<li><strong>Limitations:</strong>
+<ul>
+<li>All features are considered at each split, so trees can be highly correlated if some features are very strong predictors.</li>
+</ul></li>
+</ul>
+<p><strong>Example:</strong> Bagging is implemented in R with the <code>bagging()</code> function from the <code>ipred</code> package, or by setting <code>method = "treebag"</code> in the <code>caret</code> package.</p>
+</section>
+<section id="random-forest" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest">Random Forest</h3>
+<p>Random forest is an extension of bagging that adds an extra layer of randomness. In addition to using bootstrap samples, random forest also selects a random subset of features at each split in the tree. This decorrelates the trees, making the ensemble even more robust.</p>
+<ul>
+<li><strong>How it works:</strong>
+<ul>
+<li>Like bagging, but at each split, only a random subset of features is considered.</li>
+<li>This means each tree is more different from the others, reducing correlation.</li>
+</ul></li>
+<li><strong>Strengths:</strong>
+<ul>
+<li>Even lower variance and better generalization than bagging.</li>
+<li>Handles large datasets and many features well.</li>
+<li>Provides feature importance measures.</li>
+</ul></li>
+<li><strong>Limitations:</strong>
+<ul>
+<li>Less interpretable than a single tree.</li>
+<li>Can be slower to train and predict with very large forests.</li>
+</ul></li>
+</ul>
+<p><strong>Example:</strong> Random forest is implemented in R with the <code>randomForest</code> package or by setting <code>method = "rf"</code> in <code>caret</code>.</p>
+</section>
+<section id="boosting" class="level3">
+<h3 class="anchored" data-anchor-id="boosting">Boosting</h3>
+<p>Boosting is a different approach: instead of building trees independently, it builds them sequentially. Each new tree focuses on correcting the errors of the previous ones. The final prediction is a weighted combination of all trees.</p>
+<ul>
+<li><strong>How it works:</strong>
+<ul>
+<li>Trees are built one after another.</li>
+<li>Each tree tries to fix the mistakes of the previous trees by giving more weight to misclassified points.</li>
+<li>Predictions are combined (often by weighted sum or vote).</li>
+</ul></li>
+<li><strong>Strengths:</strong>
+<ul>
+<li>Can achieve very high accuracy.</li>
+<li>Often outperforms bagging and random forest on complex problems.</li>
+</ul></li>
+<li><strong>Limitations:</strong>
+<ul>
+<li>More sensitive to noise and outliers.</li>
+<li>Can overfit if not properly tuned.</li>
+<li>Slower to train, as trees are built sequentially.</li>
+</ul></li>
+</ul>
+<p><strong>Example:</strong> Popular boosting algorithms include AdaBoost (<code>adabag</code> package in R), Gradient Boosting Machines (<code>gbm</code> package), and XGBoost (<code>xgboost</code> package).</p>
+</section>
+<section id="key-differences" class="level3">
+<h3 class="anchored" data-anchor-id="key-differences">Key Differences</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 22%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Trees Built</th>
+<th>Feature Selection</th>
+<th>Aggregation</th>
+<th>Strengths</th>
+<th>Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bagging</td>
+<td>Parallel</td>
+<td>All features</td>
+<td>Average/Vote</td>
+<td>Reduces variance</td>
+<td>Trees can be correlated</td>
+</tr>
+<tr class="even">
+<td>Random Forest</td>
+<td>Parallel</td>
+<td>Random subset</td>
+<td>Average/Vote</td>
+<td>Lower variance, robust</td>
+<td>Less interpretable</td>
+</tr>
+<tr class="odd">
+<td>Boosting</td>
+<td>Sequential</td>
+<td>All or subset</td>
+<td>Weighted sum/vote</td>
+<td>High accuracy, flexible</td>
+<td>Sensitive to noise, slower</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="when-to-use-each-method" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-each-method">When to Use Each Method</h3>
+<ul>
+<li><strong>Bagging:</strong> When you want a simple way to reduce variance and your trees are overfitting.</li>
+<li><strong>Random Forest:</strong> When you want strong performance out-of-the-box, especially with many features or large datasets.</li>
+<li><strong>Boosting:</strong> When you need the highest possible accuracy and are willing to tune parameters and accept longer training times.</li>
+</ul>
+<p>In practice, random forest is often the first ensemble method to try, as it balances accuracy, robustness, and ease of use. Boosting can deliver even better results, but requires more careful tuning.</p>
+</section>
+</section>
+<section id="step-by-step-bagging-random-forest-and-boosting-with-r" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-bagging-random-forest-and-boosting-with-r">Step-by-Step: Bagging, Random Forest, and Boosting with R</h2>
+<p>Let’s apply bagging, random forest, and boosting to the same personality dataset, following the same clear, step-by-step approach as before. We’ll use the <code>caret</code>, <code>randomForest</code>, and <code>gbm</code> packages for these examples. Make sure these packages are installed before running the code.</p>
+<section id="bagging-bootstrap-aggregating-1" class="level3">
+<h3 class="anchored" data-anchor-id="bagging-bootstrap-aggregating-1">1. Bagging (Bootstrap Aggregating)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ipred) <span class="co"># for bagging</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Bagging model</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>bag_model <span class="ot">&lt;-</span> <span class="fu">bagging</span>(personality <span class="sc">~</span> ., <span class="at">data =</span> train_data, <span class="at">coob =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on test data</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>bag_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(bag_model, test_data, <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(bag_pred, test_data<span class="sc">$</span>personality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+           Reference
+Prediction  Extrovert Introvert
+  Extrovert       407        39
+  Introvert        40       383
+                                         
+               Accuracy : 0.9091         
+                 95% CI : (0.888, 0.9274)
+    No Information Rate : 0.5144         
+    P-Value [Acc &gt; NIR] : &lt;2e-16         
+                                         
+                  Kappa : 0.818          
+                                         
+ Mcnemar's Test P-Value : 1              
+                                         
+            Sensitivity : 0.9105         
+            Specificity : 0.9076         
+         Pos Pred Value : 0.9126         
+         Neg Pred Value : 0.9054         
+             Prevalence : 0.5144         
+         Detection Rate : 0.4684         
+   Detection Prevalence : 0.5132         
+      Balanced Accuracy : 0.9090         
+                                         
+       'Positive' Class : Extrovert      
+                                         </code></pre>
+</div>
+</div>
+<p><em>Bagging builds multiple trees on bootstrapped samples and aggregates their predictions. The confusion matrix shows the accuracy and class-wise performance of the bagged ensemble.</em></p>
+</section>
+<section id="random-forest-1" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest-1">2. Random Forest</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Random forest model</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>rf_model <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(personality <span class="sc">~</span> ., <span class="at">data =</span> train_data, <span class="at">ntree =</span> <span class="dv">100</span>, <span class="at">importance =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on test data</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>rf_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf_model, test_data)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(rf_pred, test_data<span class="sc">$</span>personality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+           Reference
+Prediction  Extrovert Introvert
+  Extrovert       412        28
+  Introvert        35       394
+                                          
+               Accuracy : 0.9275          
+                 95% CI : (0.9082, 0.9438)
+    No Information Rate : 0.5144          
+    P-Value [Acc &gt; NIR] : &lt;2e-16          
+                                          
+                  Kappa : 0.855           
+                                          
+ Mcnemar's Test P-Value : 0.4497          
+                                          
+            Sensitivity : 0.9217          
+            Specificity : 0.9336          
+         Pos Pred Value : 0.9364          
+         Neg Pred Value : 0.9184          
+             Prevalence : 0.5144          
+         Detection Rate : 0.4741          
+   Detection Prevalence : 0.5063          
+      Balanced Accuracy : 0.9277          
+                                          
+       'Positive' Class : Extrovert       
+                                          </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature importance plot</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ml-Decoding-Personality_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Random forest builds many trees, each considering a random subset of features at each split. The confusion matrix shows the model’s performance, and the variable importance plot highlights which features are most influential.</em></p>
+</section>
+<section id="boosting-gradient-boosting-machine" class="level3">
+<h3 class="anchored" data-anchor-id="boosting-gradient-boosting-machine">3. Boosting (Gradient Boosting Machine)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># For gbm, all predictors must be numeric, ordered, or factor.</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert character columns to factors in train and test data</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>train_data_gbm <span class="ot">&lt;-</span> train_data</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (col <span class="cf">in</span> <span class="fu">names</span>(train_data_gbm)) {</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.character</span>(train_data_gbm[[col]])) {</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    train_data_gbm[[col]] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(train_data_gbm[[col]])</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>test_data_gbm <span class="ot">&lt;-</span> test_data</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (col <span class="cf">in</span> <span class="fu">names</span>(test_data_gbm)) {</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.character</span>(test_data_gbm[[col]])) {</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    test_data_gbm[[col]] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(test_data_gbm[[col]])</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Encode personality as 0/1 for gbm</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>train_data_gbm<span class="sc">$</span>personality_num <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(train_data_gbm<span class="sc">$</span>personality <span class="sc">==</span> <span class="st">"Introvert"</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>test_data_gbm<span class="sc">$</span>personality_num <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(test_data_gbm<span class="sc">$</span>personality <span class="sc">==</span> <span class="st">"Introvert"</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit GBM model (distribution = "bernoulli" for binary classification)</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>gbm_model <span class="ot">&lt;-</span> <span class="fu">gbm</span>(personality_num <span class="sc">~</span> . <span class="sc">-</span>personality, <span class="at">data =</span> train_data_gbm, <span class="at">distribution =</span> <span class="st">"bernoulli"</span>, <span class="at">n.trees =</span> <span class="dv">100</span>, <span class="at">interaction.depth =</span> <span class="dv">3</span>, <span class="at">shrinkage =</span> <span class="fl">0.05</span>, <span class="at">n.minobsinnode =</span> <span class="dv">10</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict probabilities and convert to class</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>gbm_probs <span class="ot">&lt;-</span> <span class="fu">predict</span>(gbm_model, test_data_gbm, <span class="at">n.trees =</span> <span class="dv">100</span>, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>gbm_pred <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(gbm_probs <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="st">"Extrovert"</span>, <span class="st">"Introvert"</span>)</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>gbm_pred <span class="ot">&lt;-</span> <span class="fu">factor</span>(gbm_pred, <span class="at">levels =</span> <span class="fu">levels</span>(test_data<span class="sc">$</span>personality))</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(gbm_pred, test_data<span class="sc">$</span>personality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+           Reference
+Prediction  Extrovert Introvert
+  Extrovert       412        28
+  Introvert        35       394
+                                          
+               Accuracy : 0.9275          
+                 95% CI : (0.9082, 0.9438)
+    No Information Rate : 0.5144          
+    P-Value [Acc &gt; NIR] : &lt;2e-16          
+                                          
+                  Kappa : 0.855           
+                                          
+ Mcnemar's Test P-Value : 0.4497          
+                                          
+            Sensitivity : 0.9217          
+            Specificity : 0.9336          
+         Pos Pred Value : 0.9364          
+         Neg Pred Value : 0.9184          
+             Prevalence : 0.5144          
+         Detection Rate : 0.4741          
+   Detection Prevalence : 0.5063          
+      Balanced Accuracy : 0.9277          
+                                          
+       'Positive' Class : Extrovert       
+                                          </code></pre>
+</div>
+</div>
+<p><em>Boosting builds trees sequentially, each focusing on correcting the errors of the previous ones. The confusion matrix shows the boosted model’s performance. You can tune parameters like <code>n.trees</code> and <code>shrinkage</code> for better results.</em></p>
+<hr>
+<p><strong>Summary:</strong></p>
+<ul>
+<li>We applied bagging, random forest, and boosting to the same dataset.</li>
+<li>Each method was evaluated using a confusion matrix for easy comparison.</li>
+<li>Random forest also provides a feature importance plot to interpret which variables matter most.</li>
+</ul>
+<p>This hands-on approach helps you see the practical differences between these advanced tree ensemble methods and how to implement them in R.</p>
 
 
 </section>
