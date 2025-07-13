@@ -1,0 +1,12 @@
+readr
+janitor
+dplyr
+rpart
+rpart.plot
+ggplot2
+lattice
+caret
+knitr
+ipred
+randomForest
+gbm

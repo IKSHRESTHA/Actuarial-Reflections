@@ -19,5 +19,8 @@
   },
   "all-blogs.qmd": {
     "all-blogs.html": "3e112137"
+  },
+  "posts/portfolio-optimization-mean-variance.qmd": {
+    "portfolio-optimization-mean-variance.html": "642621cc"
   }
 }

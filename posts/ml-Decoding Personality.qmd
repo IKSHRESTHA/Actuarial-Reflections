@@ -3,9 +3,32 @@ title: "Decision Trees: A Complete Guide for Beginners"
 author: "Krishna Kumar Shrestha"
 date: "2025-07-12"
 categories: [machine learning, decision trees, classification, regression]
+description: "A comprehensive guide to decision trees, from basic concepts to advanced ensemble methods like bagging, random forest, and boosting, with practical R examples."
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    code-tools: true
+    df-print: paged
+execute:
+  warning: false
+  message: false
+  cache: true
 ---
 
 # Decision Trees: A Complete Guide for Beginners
+
+::: {.callout-tip}
+## What You'll Learn
+
+This comprehensive guide covers everything you need to know about decision trees:
+
+- **Fundamentals:** Core concepts, terminology, and how trees work
+- **Implementation:** Step-by-step R examples with real data
+- **Advanced Methods:** Bagging, Random Forest, and Boosting
+- **Best Practices:** Model evaluation, tuning, and interpretation
+:::
 
 ## Introduction
 
@@ -103,17 +126,28 @@ Let's walk through a practical example using R, where we predict whether a perso
 
 ### 1. Reading and Inspecting the Data
 
-First, we load the necessary libraries and read the dataset directly from the provided URL. We'll use Quarto chunk options to suppress warnings and messages for a cleaner output.
+First, we load the necessary libraries and read the dataset directly from the provided URL.
 
-```{r}
-#| warning: false
-#| message: false
+```{r setup}
+#| label: setup
+#| include: true
+
+# Load required libraries
 library(readr)
 library(janitor)
 library(dplyr)
 library(rpart)
 library(rpart.plot)
-library(caret) # for train/test split
+library(caret)
+library(knitr)
+
+# Set global options
+options(digits = 3)
+```
+
+```{r load-data}
+#| label: load-data
+#| cache: true
 
 # Read the data
 df <- read_csv("https://raw.githubusercontent.com/IKSHRESTHA/Actuarial-Reflections/refs/heads/main/data/06272925/personality_datasert.csv") |> 
@@ -128,16 +162,19 @@ summary(df)
 
 ### 2. Preparing the Data
 
-We'll make sure the target variable (`personality`) is a factor, and check for missing values. We'll also suppress warnings and messages in this chunk.
+We'll make sure the target variable (`personality`) is a factor, and check for missing values.
 
-```{r}
-#| warning: false
-#| message: false
+```{r prepare-data}
+#| label: prepare-data
+
 # Convert target to factor
 df$personality <- as.factor(df$personality)
 
 # Check for missing values
-colSums(is.na(df))
+missing_summary <- colSums(is.na(df))
+kable(data.frame(Variable = names(missing_summary), 
+                Missing_Count = missing_summary), 
+      caption = "Missing Values Summary")
 ```
 
 *The output will show the number of missing values in each column. If all values are zero, there are no missing data to worry about. If not, you may need to handle them before modeling.*
@@ -146,13 +183,19 @@ colSums(is.na(df))
 
 We'll split the data into 70% training and 30% testing sets to evaluate our model's performance on unseen data.
 
-```{r}
-#| warning: false
-#| message: false
+```{r split-data}
+#| label: split-data
+
 set.seed(123) # for reproducibility
 train_index <- createDataPartition(df$personality, p = 0.7, list = FALSE)
 train_data <- df[train_index, ]
 test_data <- df[-train_index, ]
+
+# Display split summary
+cat("Training set size:", nrow(train_data), "\n")
+cat("Test set size:", nrow(test_data), "\n")
+cat("Class distribution in training set:\n")
+table(train_data$personality)
 ```
 
 *This step ensures that our model is trained on one portion of the data and tested on another, helping us assess how well it generalizes to new cases.*
@@ -161,13 +204,15 @@ test_data <- df[-train_index, ]
 
 Now, we'll build a classification tree to predict `personality` using all other variables.
 
-```{r}
-#| warning: false
-#| message: false
+```{r build-tree}
+#| label: build-tree
+#| fig-cap: "Decision tree structure for personality prediction"
+
 tree_model <- rpart(personality ~ ., data = train_data, method = "class", cp = 0.01)
 
 # Visualize the tree
-rpart.plot(tree_model)
+rpart.plot(tree_model, extra = 106, under = TRUE, cex = 0.8,
+           main = "Decision Tree: Introvert vs Extrovert")
 ```
 
 *The plot above shows the structure of the decision tree. Each node represents a split based on a feature, and the leaves show the predicted class (introvert or extrovert).*
@@ -176,11 +221,21 @@ rpart.plot(tree_model)
 
 We'll use the test set to see how well our tree predicts introverts vs. extroverts.
 
-```{r}
-#| warning: false
-#| message: false
+```{r evaluate-tree}
+#| label: evaluate-tree
+
 pred <- predict(tree_model, test_data, type = "class")
-confusionMatrix(pred, test_data$personality)
+cm_tree <- confusionMatrix(pred, test_data$personality)
+print(cm_tree)
+
+# Create a summary table
+results_tree <- data.frame(
+  Metric = c("Accuracy", "Sensitivity", "Specificity"),
+  Value = c(cm_tree$overall['Accuracy'], 
+            cm_tree$byClass['Sensitivity'], 
+            cm_tree$byClass['Specificity'])
+)
+kable(results_tree, caption = "Decision Tree Performance Metrics", digits = 3)
 ```
 
 *The confusion matrix output will display the number of correct and incorrect predictions for each class. Accuracy, sensitivity, and specificity are also shown, helping you judge the model's performance.*
@@ -189,24 +244,36 @@ confusionMatrix(pred, test_data$personality)
 
 Decision trees can overfit, so pruning helps simplify the tree and improve generalization. We'll use the complexity parameter (cp) to prune.
 
-```{r}
-#| warning: false
-#| message: false
+```{r prune-tree}
+#| label: prune-tree
+#| fig-cap: "Pruned decision tree with optimal complexity parameter"
+
 # Find optimal cp value
 printcp(tree_model)
 
 # Choose the cp with lowest cross-validated error
 best_cp <- tree_model$cptable[which.min(tree_model$cptable[,"xerror"]), "CP"]
+cat("Optimal CP value:", best_cp, "\n")
 
 # Prune the tree
 pruned_tree <- prune(tree_model, cp = best_cp)
 
 # Visualize pruned tree
-rpart.plot(pruned_tree)
+rpart.plot(pruned_tree, extra = 106, under = TRUE, cex = 0.8,
+           main = "Pruned Decision Tree: Introvert vs Extrovert")
 
 # Evaluate pruned tree
 pruned_pred <- predict(pruned_tree, test_data, type = "class")
-confusionMatrix(pruned_pred, test_data$personality)
+cm_pruned <- confusionMatrix(pruned_pred, test_data$personality)
+
+# Compare original vs pruned
+comparison <- data.frame(
+  Model = c("Original Tree", "Pruned Tree"),
+  Accuracy = c(cm_tree$overall['Accuracy'], cm_pruned$overall['Accuracy']),
+  Sensitivity = c(cm_tree$byClass['Sensitivity'], cm_pruned$byClass['Sensitivity']),
+  Specificity = c(cm_tree$byClass['Specificity'], cm_pruned$byClass['Specificity'])
+)
+kable(comparison, caption = "Model Comparison: Original vs Pruned Tree", digits = 3)
 ```
 
 *After pruning, the tree is simpler and less likely to overfit. The new confusion matrix shows how well the pruned tree performs on the test data. Compare this to the previous results to see if pruning improved generalization.*
@@ -297,51 +364,73 @@ In practice, random forest is often the first ensemble method to try, as it bala
 
 ## Step-by-Step: Bagging, Random Forest, and Boosting with R
 
-Let's apply bagging, random forest, and boosting to the same personality dataset, following the same clear, step-by-step approach as before. We'll use the `caret`, `randomForest`, and `gbm` packages for these examples. Make sure these packages are installed before running the code.
+Let's apply bagging, random forest, and boosting to the same personality dataset, following the same clear, step-by-step approach as before.
+
+```{r setup-ensemble}
+#| label: setup-ensemble
+
+# Load additional libraries for ensemble methods
+library(ipred)      # for bagging
+library(randomForest) # for random forest
+library(gbm)        # for gradient boosting
+```
 
 ### 1. Bagging (Bootstrap Aggregating)
 
-```{r}
-#| warning: false
-#| message: false
-library(ipred) # for bagging
+```{r bagging}
+#| label: bagging
+#| cache: true
 
 # Bagging model
 bag_model <- bagging(personality ~ ., data = train_data, coob = TRUE)
 
 # Predict on test data
 bag_pred <- predict(bag_model, test_data, type = "class")
-confusionMatrix(bag_pred, test_data$personality)
+cm_bag <- confusionMatrix(bag_pred, test_data$personality)
+print(cm_bag)
 ```
 
 *Bagging builds multiple trees on bootstrapped samples and aggregates their predictions. The confusion matrix shows the accuracy and class-wise performance of the bagged ensemble.*
 
 ### 2. Random Forest
 
-```{r}
-#| warning: false
-#| message: false
-library(randomForest)
+```{r random-forest}
+#| label: random-forest
+#| fig-cap: "Variable importance plot from Random Forest model"
+#| cache: true
 
 # Random forest model
-rf_model <- randomForest(personality ~ ., data = train_data, ntree = 100, importance = TRUE)
+rf_model <- randomForest(personality ~ ., data = train_data, 
+                        ntree = 100, importance = TRUE)
 
 # Predict on test data
 rf_pred <- predict(rf_model, test_data)
-confusionMatrix(rf_pred, test_data$personality)
+cm_rf <- confusionMatrix(rf_pred, test_data$personality)
+print(cm_rf)
 
 # Feature importance plot
-varImpPlot(rf_model)
+varImpPlot(rf_model, main = "Variable Importance in Random Forest")
+
+# Get importance scores
+importance_scores <- importance(rf_model)
+importance_df <- data.frame(
+  Variable = rownames(importance_scores),
+  MeanDecreaseAccuracy = importance_scores[, "MeanDecreaseAccuracy"],
+  MeanDecreaseGini = importance_scores[, "MeanDecreaseGini"]
+) |> 
+  arrange(desc(MeanDecreaseAccuracy))
+
+kable(importance_df, caption = "Feature Importance Rankings", digits = 3)
 ```
 
 *Random forest builds many trees, each considering a random subset of features at each split. The confusion matrix shows the model's performance, and the variable importance plot highlights which features are most influential.*
 
 ### 3. Boosting (Gradient Boosting Machine)
 
-```{r}
-#| warning: false
-#| message: false
-library(gbm)
+```{r boosting-gbm}
+#| label: boosting-gbm
+#| fig-cap: "Variable importance plot from Gradient Boosting model"
+#| cache: true
 
 # For gbm, all predictors must be numeric, ordered, or factor.
 # Convert character columns to factors in train and test data
@@ -363,25 +452,94 @@ train_data_gbm$personality_num <- ifelse(train_data_gbm$personality == "Introver
 test_data_gbm$personality_num <- ifelse(test_data_gbm$personality == "Introvert", 0, 1)
 
 # Fit GBM model (distribution = "bernoulli" for binary classification)
-gbm_model <- gbm(personality_num ~ . -personality, data = train_data_gbm, distribution = "bernoulli", n.trees = 100, interaction.depth = 3, shrinkage = 0.05, n.minobsinnode = 10, verbose = FALSE)
+gbm_model <- gbm(personality_num ~ . -personality, data = train_data_gbm, 
+                distribution = "bernoulli", 
+                n.trees = 100, 
+                interaction.depth = 3, 
+                shrinkage = 0.05, 
+                n.minobsinnode = 10, 
+                verbose = FALSE)
 
 # Predict probabilities and convert to class
 gbm_probs <- predict(gbm_model, test_data_gbm, n.trees = 100, type = "response")
 gbm_pred <- ifelse(gbm_probs > 0.5, "Extrovert", "Introvert")
 gbm_pred <- factor(gbm_pred, levels = levels(test_data$personality))
-confusionMatrix(gbm_pred, test_data$personality)
+
+cm_gbm <- confusionMatrix(gbm_pred, test_data$personality)
+print(cm_gbm)
+
+# Variable importance plot
+gbm_summary <- summary(gbm_model, plotit = TRUE, 
+                      main = "Relative Influence in Gradient Boosting")
+
+# Create importance table
+importance_table <- data.frame(
+  Variable = gbm_summary$var,
+  RelativeInfluence = round(gbm_summary$rel.inf, 2)
+) |>
+  arrange(desc(RelativeInfluence)) |>
+  slice_head(n = 10)  # Top 10 most important variables
+
+kable(importance_table, 
+      caption = "Top 10 Most Important Variables in GBM Model",
+      col.names = c("Variable", "Relative Influence (%)"))
+```
 
 ```
 
-*Boosting builds trees sequentially, each focusing on correcting the errors of the previous ones. The confusion matrix shows the boosted model's performance. You can tune parameters like `n.trees` and `shrinkage` for better results.*
+::: {.callout-note}
+## Key Insight
+Boosting builds trees sequentially, with each tree focusing on correcting the errors of the previous ones. This iterative approach often leads to high accuracy but requires careful tuning to avoid overfitting.
+:::
+
+## Model Comparison
+
+```{r model-comparison}
+#| label: model-comparison
+#| tbl-cap: "Performance comparison of tree-based models"
+
+# Extract performance metrics
+models_performance <- data.frame(
+  Model = c("Single Decision Tree", "Bagging", "Random Forest", "Gradient Boosting"),
+  Accuracy = c(
+    round(cm_tree$overall["Accuracy"], 3),
+    round(cm_bag$overall["Accuracy"], 3),
+    round(cm_rf$overall["Accuracy"], 3),
+    round(cm_gbm$overall["Accuracy"], 3)
+  ),
+  Sensitivity = c(
+    round(cm_tree$byClass["Sensitivity"], 3),
+    round(cm_bag$byClass["Sensitivity"], 3),
+    round(cm_rf$byClass["Sensitivity"], 3),
+    round(cm_gbm$byClass["Sensitivity"], 3)
+  ),
+  Specificity = c(
+    round(cm_tree$byClass["Specificity"], 3),
+    round(cm_bag$byClass["Specificity"], 3),
+    round(cm_rf$byClass["Specificity"], 3),
+    round(cm_gbm$byClass["Specificity"], 3)
+  )
+)
+
+kable(models_performance, 
+      caption = "Model Performance Comparison",
+      align = "lccc")
+```
 
 ---
 
-**Summary:**
+## Summary
 
-* We applied bagging, random forest, and boosting to the same dataset.
-* Each method was evaluated using a confusion matrix for easy comparison.
-* Random forest also provides a feature importance plot to interpret which variables matter most.
+::: {.callout-tip}
+## Key Takeaways
 
-This hands-on approach helps you see the practical differences between these advanced tree ensemble methods and how to implement them in R.
+- **Single Decision Trees**: Easy to interpret but prone to overfitting
+- **Bagging**: Reduces overfitting through bootstrap aggregation
+- **Random Forest**: Adds feature randomness to bagging for better generalization
+- **Gradient Boosting**: Sequential learning that often achieves highest accuracy
+
+Each method has its strengths and the choice depends on your specific needs for interpretability vs. accuracy.
+:::
+
+This comprehensive guide demonstrated how decision trees evolve from simple interpretable models to powerful ensemble methods. The hands-on R examples show the practical implementation differences and help you choose the right approach for your machine learning projects.
 

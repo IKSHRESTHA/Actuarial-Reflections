@@ -8,6 +8,7 @@
 
 <meta name="author" content="Krishna Kumar Shrestha">
 <meta name="dcterms.date" content="2025-07-12">
+<meta name="description" content="A comprehensive guide to decision trees, from basic concepts to advanced ensemble methods like bagging, random forest, and boosting, with practical R examples.">
 
 <title>Decision Trees: A Complete Guide for Beginners – Actuarial-Reflections</title>
 <style>
@@ -112,6 +113,10 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 </script>
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -209,6 +214,7 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
   <li><a href="#random-forest-1" id="toc-random-forest-1" class="nav-link" data-scroll-target="#random-forest-1">2. Random Forest</a></li>
   <li><a href="#boosting-gradient-boosting-machine" id="toc-boosting-gradient-boosting-machine" class="nav-link" data-scroll-target="#boosting-gradient-boosting-machine">3. Boosting (Gradient Boosting Machine)</a></li>
   </ul></li>
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1">Summary</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -218,7 +224,7 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Decision Trees: A Complete Guide for Beginners</h1>
+<div class="quarto-title-block"><div><h1 class="title">Decision Trees: A Complete Guide for Beginners</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
   <div class="quarto-categories">
     <div class="quarto-category">machine learning</div>
     <div class="quarto-category">decision trees</div>
@@ -227,6 +233,11 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
   </div>
   </div>
 
+<div>
+  <div class="description">
+    A comprehensive guide to decision trees, from basic concepts to advanced ensemble methods like bagging, random forest, and boosting, with practical R examples.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -255,6 +266,25 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 
 <section id="decision-trees-a-complete-guide-for-beginners" class="level1">
 <h1>Decision Trees: A Complete Guide for Beginners</h1>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What You’ll Learn
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This comprehensive guide covers everything you need to know about decision trees:</p>
+<ul>
+<li><strong>Fundamentals:</strong> Core concepts, terminology, and how trees work</li>
+<li><strong>Implementation:</strong> Step-by-step R examples with real data</li>
+<li><strong>Advanced Methods:</strong> Bagging, Random Forest, and Boosting</li>
+<li><strong>Best Practices:</strong> Model evaluation, tuning, and interpretation</li>
+</ul>
+</div>
+</div>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Decision trees are one of the most intuitive and powerful tools in machine learning and data science. They mimic the way humans make decisions: by asking a series of questions and following the answers down different paths. In this article, we’ll break down what decision trees are, define the most important terms, explore the different types of decision trees based on the kind of output they produce, and explain the key metrics used to evaluate them. By the end, you’ll have a clear understanding of how decision trees work and how to use them for both classification and regression problems.</p>
@@ -332,21 +362,27 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 <p>Let’s walk through a practical example using R, where we predict whether a person is an introvert or extrovert using a decision tree. We’ll cover every step: reading the data, cleaning it, splitting into training and test sets, building the tree, evaluating it, and pruning for better performance.</p>
 <section id="reading-and-inspecting-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="reading-and-inspecting-the-data">1. Reading and Inspecting the Data</h3>
-<p>First, we load the necessary libraries and read the dataset directly from the provided URL. We’ll use Quarto chunk options to suppress warnings and messages for a cleaner output.</p>
+<p>First, we load the necessary libraries and read the dataset directly from the provided URL.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret) <span class="co"># for train/test split</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/IKSHRESTHA/Actuarial-Reflections/refs/heads/main/data/06272925/personality_datasert.csv"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the data</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set global options</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/IKSHRESTHA/Actuarial-Reflections/refs/heads/main/data/06272925/personality_datasert.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the data</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>spc_tbl_ [2,900 × 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
  $ time_spent_alone         : num [1:2900] 4 9 9 0 3 1 4 2 10 0 ...
@@ -370,22 +406,22 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
   .. )
  - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> time_spent_alone  stage_fear        social_event_attendance going_outside
- Min.   : 0.000   Length:2900        Min.   : 0.000          Min.   :0    
- 1st Qu.: 2.000   Class :character   1st Qu.: 2.000          1st Qu.:1    
- Median : 4.000   Mode  :character   Median : 3.963          Median :3    
- Mean   : 4.506                      Mean   : 3.963          Mean   :3    
- 3rd Qu.: 7.000                      3rd Qu.: 6.000          3rd Qu.:5    
- Max.   :11.000                      Max.   :10.000          Max.   :7    
- drained_after_socializing friends_circle_size post_frequency  
- Length:2900               Min.   : 0.000      Min.   : 0.000  
- Class :character          1st Qu.: 3.000      1st Qu.: 1.000  
- Mode  :character          Median : 5.000      Median : 3.000  
-                           Mean   : 6.269      Mean   : 3.565  
-                           3rd Qu.:10.000      3rd Qu.: 6.000  
-                           Max.   :15.000      Max.   :10.000  
+ Min.   : 0.00    Length:2900        Min.   : 0.00           Min.   :0    
+ 1st Qu.: 2.00    Class :character   1st Qu.: 2.00           1st Qu.:1    
+ Median : 4.00    Mode  :character   Median : 3.96           Median :3    
+ Mean   : 4.51                       Mean   : 3.96           Mean   :3    
+ 3rd Qu.: 7.00                       3rd Qu.: 6.00           3rd Qu.:5    
+ Max.   :11.00                       Max.   :10.00           Max.   :7    
+ drained_after_socializing friends_circle_size post_frequency 
+ Length:2900               Min.   : 0.00       Min.   : 0.00  
+ Class :character          1st Qu.: 3.00       1st Qu.: 1.00  
+ Mode  :character          Median : 5.00       Median : 3.00  
+                           Mean   : 6.27       Mean   : 3.56  
+                           3rd Qu.:10.00       3rd Qu.: 6.00  
+                           Max.   :15.00       Max.   :10.00  
  personality       
  Length:2900       
  Class :character  
@@ -399,20 +435,69 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 </section>
 <section id="preparing-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="preparing-the-data">2. Preparing the Data</h3>
-<p>We’ll make sure the target variable (<code>personality</code>) is a factor, and check for missing values. We’ll also suppress warnings and messages in this chunk.</p>
+<p>We’ll make sure the target variable (<code>personality</code>) is a factor, and check for missing values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert target to factor</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>personality <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>personality)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing values</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         time_spent_alone                stage_fear   social_event_attendance 
-                        0                         0                         0 
-            going_outside drained_after_socializing       friends_circle_size 
-                        0                         0                         0 
-           post_frequency               personality 
-                        0                         0 </code></pre>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert target to factor</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>personality <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>personality)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing values</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>missing_summary <span class="ot">&lt;-</span> <span class="fu">colSums</span>(<span class="fu">is.na</span>(df))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">data.frame</span>(<span class="at">Variable =</span> <span class="fu">names</span>(missing_summary), </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">Missing_Count =</span> missing_summary), </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Missing Values Summary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Missing Values Summary</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: right;">Missing_Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">time_spent_alone</td>
+<td style="text-align: left;">time_spent_alone</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stage_fear</td>
+<td style="text-align: left;">stage_fear</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">social_event_attendance</td>
+<td style="text-align: left;">social_event_attendance</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">going_outside</td>
+<td style="text-align: left;">going_outside</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">drained_after_socializing</td>
+<td style="text-align: left;">drained_after_socializing</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">friends_circle_size</td>
+<td style="text-align: left;">friends_circle_size</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">post_frequency</td>
+<td style="text-align: left;">post_frequency</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">personality</td>
+<td style="text-align: left;">personality</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <p><em>The output will show the number of missing values in each column. If all values are zero, there are no missing data to worry about. If not, you may need to handle them before modeling.</em></p>
@@ -424,7 +509,27 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>train_index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(df<span class="sc">$</span>personality, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> df[train_index, ]</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> df[<span class="sc">-</span>train_index, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> df[<span class="sc">-</span>train_index, ]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Display split summary</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Training set size:"</span>, <span class="fu">nrow</span>(train_data), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Training set size: 2031 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Test set size:"</span>, <span class="fu">nrow</span>(test_data), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test set size: 869 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Class distribution in training set:</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Class distribution in training set:</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(train_data<span class="sc">$</span>personality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Extrovert Introvert 
+     1044       987 </code></pre>
+</div>
 </div>
 <p><em>This step ensures that our model is trained on one portion of the data and tested on another, helping us assess how well it generalizes to new cases.</em></p>
 </section>
@@ -432,14 +537,16 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 <h3 class="anchored" data-anchor-id="building-the-decision-tree">4. Building the Decision Tree</h3>
 <p>Now, we’ll build a classification tree to predict <code>personality</code> using all other variables.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tree_model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(personality <span class="sc">~</span> ., <span class="at">data =</span> train_data, <span class="at">method =</span> <span class="st">"class"</span>, <span class="at">cp =</span> <span class="fl">0.01</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the tree</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tree_model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(personality <span class="sc">~</span> ., <span class="at">data =</span> train_data, <span class="at">method =</span> <span class="st">"class"</span>, <span class="at">cp =</span> <span class="fl">0.01</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the tree</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree_model, <span class="at">extra =</span> <span class="dv">106</span>, <span class="at">under =</span> <span class="cn">TRUE</span>, <span class="at">cex =</span> <span class="fl">0.8</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">main =</span> <span class="st">"Decision Tree: Introvert vs Extrovert"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ml-Decoding-Personality_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ml-Decoding-Personality_files/figure-html/build-tree-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Decision tree structure for personality prediction</figcaption>
 </figure>
 </div>
 </div>
@@ -450,8 +557,9 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 <h3 class="anchored" data-anchor-id="evaluating-the-model">5. Evaluating the Model</h3>
 <p>We’ll use the test set to see how well our tree predicts introverts vs.&nbsp;extroverts.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree_model, test_data, <span class="at">type =</span> <span class="st">"class"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(pred, test_data<span class="sc">$</span>personality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree_model, test_data, <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cm_tree <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(pred, test_data<span class="sc">$</span>personality)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cm_tree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion Matrix and Statistics
 
@@ -459,27 +567,64 @@ gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
 Prediction  Extrovert Introvert
   Extrovert       412        29
   Introvert        35       393
-                                          
-               Accuracy : 0.9264          
-                 95% CI : (0.9069, 0.9428)
-    No Information Rate : 0.5144          
-    P-Value [Acc &gt; NIR] : &lt;2e-16          
-                                          
-                  Kappa : 0.8526          
-                                          
- Mcnemar's Test P-Value : 0.532           
-                                          
-            Sensitivity : 0.9217          
-            Specificity : 0.9313          
-         Pos Pred Value : 0.9342          
-         Neg Pred Value : 0.9182          
-             Prevalence : 0.5144          
-         Detection Rate : 0.4741          
-   Detection Prevalence : 0.5075          
-      Balanced Accuracy : 0.9265          
-                                          
-       'Positive' Class : Extrovert       
-                                          </code></pre>
+                                        
+               Accuracy : 0.926         
+                 95% CI : (0.907, 0.943)
+    No Information Rate : 0.514         
+    P-Value [Acc &gt; NIR] : &lt;2e-16        
+                                        
+                  Kappa : 0.853         
+                                        
+ Mcnemar's Test P-Value : 0.532         
+                                        
+            Sensitivity : 0.922         
+            Specificity : 0.931         
+         Pos Pred Value : 0.934         
+         Neg Pred Value : 0.918         
+             Prevalence : 0.514         
+         Detection Rate : 0.474         
+   Detection Prevalence : 0.507         
+      Balanced Accuracy : 0.926         
+                                        
+       'Positive' Class : Extrovert     
+                                        </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a summary table</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>results_tree <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Metric =</span> <span class="fu">c</span>(<span class="st">"Accuracy"</span>, <span class="st">"Sensitivity"</span>, <span class="st">"Specificity"</span>),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Value =</span> <span class="fu">c</span>(cm_tree<span class="sc">$</span>overall[<span class="st">'Accuracy'</span>], </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>            cm_tree<span class="sc">$</span>byClass[<span class="st">'Sensitivity'</span>], </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>            cm_tree<span class="sc">$</span>byClass[<span class="st">'Specificity'</span>])</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(results_tree, <span class="at">caption =</span> <span class="st">"Decision Tree Performance Metrics"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Decision Tree Performance Metrics</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Metric</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Accuracy</td>
+<td style="text-align: left;">Accuracy</td>
+<td style="text-align: right;">0.926</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sensitivity</td>
+<td style="text-align: left;">Sensitivity</td>
+<td style="text-align: right;">0.922</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Specificity</td>
+<td style="text-align: left;">Specificity</td>
+<td style="text-align: right;">0.931</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <p><em>The confusion matrix output will display the number of correct and incorrect predictions for each class. Accuracy, sensitivity, and specificity are also shown, helping you judge the model’s performance.</em></p>
@@ -488,8 +633,8 @@ Prediction  Extrovert Introvert
 <h3 class="anchored" data-anchor-id="pruning-the-tree">6. Pruning the Tree</h3>
 <p>Decision trees can overfit, so pruning helps simplify the tree and improve generalization. We’ll use the complexity parameter (cp) to prune.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find optimal cp value</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">printcp</span>(tree_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find optimal cp value</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">printcp</span>(tree_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Classification tree:
@@ -499,61 +644,74 @@ rpart(formula = personality ~ ., data = train_data, method = "class",
 Variables actually used in tree construction:
 [1] drained_after_socializing stage_fear               
 
-Root node error: 987/2031 = 0.48597
+Root node error: 987/2031 = 0.5
 
 n= 2031 
 
-        CP nsplit rel error  xerror     xstd
-1 0.855117      0   1.00000 1.00000 0.022821
-2 0.016211      1   0.14488 0.14488 0.011681
-3 0.010000      2   0.12867 0.12969 0.011096</code></pre>
+    CP nsplit rel error xerror xstd
+1 0.86      0       1.0    1.0 0.02
+2 0.02      1       0.1    0.1 0.01
+3 0.01      2       0.1    0.1 0.01</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose the cp with lowest cross-validated error</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>best_cp <span class="ot">&lt;-</span> tree_model<span class="sc">$</span>cptable[<span class="fu">which.min</span>(tree_model<span class="sc">$</span>cptable[,<span class="st">"xerror"</span>]), <span class="st">"CP"</span>]</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Prune the tree</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>pruned_tree <span class="ot">&lt;-</span> <span class="fu">prune</span>(tree_model, <span class="at">cp =</span> best_cp)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize pruned tree</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(pruned_tree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose the cp with lowest cross-validated error</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>best_cp <span class="ot">&lt;-</span> tree_model<span class="sc">$</span>cptable[<span class="fu">which.min</span>(tree_model<span class="sc">$</span>cptable[,<span class="st">"xerror"</span>]), <span class="st">"CP"</span>]</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Optimal CP value:"</span>, best_cp, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Optimal CP value: 0.01 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prune the tree</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>pruned_tree <span class="ot">&lt;-</span> <span class="fu">prune</span>(tree_model, <span class="at">cp =</span> best_cp)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize pruned tree</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(pruned_tree, <span class="at">extra =</span> <span class="dv">106</span>, <span class="at">under =</span> <span class="cn">TRUE</span>, <span class="at">cex =</span> <span class="fl">0.8</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">main =</span> <span class="st">"Pruned Decision Tree: Introvert vs Extrovert"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ml-Decoding-Personality_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ml-Decoding-Personality_files/figure-html/prune-tree-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Pruned decision tree with optimal complexity parameter</figcaption>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate pruned tree</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pruned_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(pruned_tree, test_data, <span class="at">type =</span> <span class="st">"class"</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(pruned_pred, test_data<span class="sc">$</span>personality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Confusion Matrix and Statistics
-
-           Reference
-Prediction  Extrovert Introvert
-  Extrovert       412        29
-  Introvert        35       393
-                                          
-               Accuracy : 0.9264          
-                 95% CI : (0.9069, 0.9428)
-    No Information Rate : 0.5144          
-    P-Value [Acc &gt; NIR] : &lt;2e-16          
-                                          
-                  Kappa : 0.8526          
-                                          
- Mcnemar's Test P-Value : 0.532           
-                                          
-            Sensitivity : 0.9217          
-            Specificity : 0.9313          
-         Pos Pred Value : 0.9342          
-         Neg Pred Value : 0.9182          
-             Prevalence : 0.5144          
-         Detection Rate : 0.4741          
-   Detection Prevalence : 0.5075          
-      Balanced Accuracy : 0.9265          
-                                          
-       'Positive' Class : Extrovert       
-                                          </code></pre>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate pruned tree</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>pruned_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(pruned_tree, test_data, <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>cm_pruned <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(pruned_pred, test_data<span class="sc">$</span>personality)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare original vs pruned</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> <span class="fu">c</span>(<span class="st">"Original Tree"</span>, <span class="st">"Pruned Tree"</span>),</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Accuracy =</span> <span class="fu">c</span>(cm_tree<span class="sc">$</span>overall[<span class="st">'Accuracy'</span>], cm_pruned<span class="sc">$</span>overall[<span class="st">'Accuracy'</span>]),</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Sensitivity =</span> <span class="fu">c</span>(cm_tree<span class="sc">$</span>byClass[<span class="st">'Sensitivity'</span>], cm_pruned<span class="sc">$</span>byClass[<span class="st">'Sensitivity'</span>]),</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Specificity =</span> <span class="fu">c</span>(cm_tree<span class="sc">$</span>byClass[<span class="st">'Specificity'</span>], cm_pruned<span class="sc">$</span>byClass[<span class="st">'Specificity'</span>])</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(comparison, <span class="at">caption =</span> <span class="st">"Model Comparison: Original vs Pruned Tree"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Model Comparison: Original vs Pruned Tree</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: right;">Accuracy</th>
+<th style="text-align: right;">Sensitivity</th>
+<th style="text-align: right;">Specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Original Tree</td>
+<td style="text-align: right;">0.926</td>
+<td style="text-align: right;">0.922</td>
+<td style="text-align: right;">0.931</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pruned Tree</td>
+<td style="text-align: right;">0.926</td>
+<td style="text-align: right;">0.922</td>
+<td style="text-align: right;">0.931</td>
+</tr>
+</tbody>
+</table>
+<p>Pruned decision tree with optimal complexity parameter</p>
 </div>
 </div>
 <p><em>After pruning, the tree is simpler and less likely to overfit. The new confusion matrix shows how well the pruned tree performs on the test data. Compare this to the previous results to see if pruning improved generalization.</em></p>
@@ -703,18 +861,23 @@ Prediction  Extrovert Introvert
 </section>
 <section id="step-by-step-bagging-random-forest-and-boosting-with-r" class="level2">
 <h2 class="anchored" data-anchor-id="step-by-step-bagging-random-forest-and-boosting-with-r">Step-by-Step: Bagging, Random Forest, and Boosting with R</h2>
-<p>Let’s apply bagging, random forest, and boosting to the same personality dataset, following the same clear, step-by-step approach as before. We’ll use the <code>caret</code>, <code>randomForest</code>, and <code>gbm</code> packages for these examples. Make sure these packages are installed before running the code.</p>
+<p>Let’s apply bagging, random forest, and boosting to the same personality dataset, following the same clear, step-by-step approach as before.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load additional libraries for ensemble methods</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ipred)      <span class="co"># for bagging</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest) <span class="co"># for random forest</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gbm)        <span class="co"># for gradient boosting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <section id="bagging-bootstrap-aggregating-1" class="level3">
 <h3 class="anchored" data-anchor-id="bagging-bootstrap-aggregating-1">1. Bagging (Bootstrap Aggregating)</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ipred) <span class="co"># for bagging</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Bagging model</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>bag_model <span class="ot">&lt;-</span> <span class="fu">bagging</span>(personality <span class="sc">~</span> ., <span class="at">data =</span> train_data, <span class="at">coob =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on test data</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>bag_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(bag_model, test_data, <span class="at">type =</span> <span class="st">"class"</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(bag_pred, test_data<span class="sc">$</span>personality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bagging model</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>bag_model <span class="ot">&lt;-</span> <span class="fu">bagging</span>(personality <span class="sc">~</span> ., <span class="at">data =</span> train_data, <span class="at">coob =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on test data</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>bag_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(bag_model, test_data, <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>cm_bag <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(bag_pred, test_data<span class="sc">$</span>personality)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cm_bag)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion Matrix and Statistics
 
@@ -722,27 +885,27 @@ Prediction  Extrovert Introvert
 Prediction  Extrovert Introvert
   Extrovert       407        39
   Introvert        40       383
-                                         
-               Accuracy : 0.9091         
-                 95% CI : (0.888, 0.9274)
-    No Information Rate : 0.5144         
-    P-Value [Acc &gt; NIR] : &lt;2e-16         
-                                         
-                  Kappa : 0.818          
-                                         
- Mcnemar's Test P-Value : 1              
-                                         
-            Sensitivity : 0.9105         
-            Specificity : 0.9076         
-         Pos Pred Value : 0.9126         
-         Neg Pred Value : 0.9054         
-             Prevalence : 0.5144         
-         Detection Rate : 0.4684         
-   Detection Prevalence : 0.5132         
-      Balanced Accuracy : 0.9090         
-                                         
-       'Positive' Class : Extrovert      
-                                         </code></pre>
+                                        
+               Accuracy : 0.909         
+                 95% CI : (0.888, 0.927)
+    No Information Rate : 0.514         
+    P-Value [Acc &gt; NIR] : &lt;2e-16        
+                                        
+                  Kappa : 0.818         
+                                        
+ Mcnemar's Test P-Value : 1             
+                                        
+            Sensitivity : 0.911         
+            Specificity : 0.908         
+         Pos Pred Value : 0.913         
+         Neg Pred Value : 0.905         
+             Prevalence : 0.514         
+         Detection Rate : 0.468         
+   Detection Prevalence : 0.513         
+      Balanced Accuracy : 0.909         
+                                        
+       'Positive' Class : Extrovert     
+                                        </code></pre>
 </div>
 </div>
 <p><em>Bagging builds multiple trees on bootstrapped samples and aggregates their predictions. The confusion matrix shows the accuracy and class-wise performance of the bagged ensemble.</em></p>
@@ -750,14 +913,14 @@ Prediction  Extrovert Introvert
 <section id="random-forest-1" class="level3">
 <h3 class="anchored" data-anchor-id="random-forest-1">2. Random Forest</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Random forest model</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>rf_model <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(personality <span class="sc">~</span> ., <span class="at">data =</span> train_data, <span class="at">ntree =</span> <span class="dv">100</span>, <span class="at">importance =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on test data</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>rf_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf_model, test_data)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(rf_pred, test_data<span class="sc">$</span>personality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Random forest model</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>rf_model <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(personality <span class="sc">~</span> ., <span class="at">data =</span> train_data, </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">ntree =</span> <span class="dv">100</span>, <span class="at">importance =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on test data</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>rf_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf_model, test_data)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>cm_rf <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(rf_pred, test_data<span class="sc">$</span>personality)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cm_rf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion Matrix and Statistics
 
@@ -765,36 +928,111 @@ Prediction  Extrovert Introvert
 Prediction  Extrovert Introvert
   Extrovert       412        28
   Introvert        35       394
-                                          
-               Accuracy : 0.9275          
-                 95% CI : (0.9082, 0.9438)
-    No Information Rate : 0.5144          
-    P-Value [Acc &gt; NIR] : &lt;2e-16          
-                                          
-                  Kappa : 0.855           
-                                          
- Mcnemar's Test P-Value : 0.4497          
-                                          
-            Sensitivity : 0.9217          
-            Specificity : 0.9336          
-         Pos Pred Value : 0.9364          
-         Neg Pred Value : 0.9184          
-             Prevalence : 0.5144          
-         Detection Rate : 0.4741          
-   Detection Prevalence : 0.5063          
-      Balanced Accuracy : 0.9277          
-                                          
-       'Positive' Class : Extrovert       
-                                          </code></pre>
+                                        
+               Accuracy : 0.928         
+                 95% CI : (0.908, 0.944)
+    No Information Rate : 0.514         
+    P-Value [Acc &gt; NIR] : &lt;2e-16        
+                                        
+                  Kappa : 0.855         
+                                        
+ Mcnemar's Test P-Value : 0.45          
+                                        
+            Sensitivity : 0.922         
+            Specificity : 0.934         
+         Pos Pred Value : 0.936         
+         Neg Pred Value : 0.918         
+             Prevalence : 0.514         
+         Detection Rate : 0.474         
+   Detection Prevalence : 0.506         
+      Balanced Accuracy : 0.928         
+                                        
+       'Positive' Class : Extrovert     
+                                        </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature importance plot</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature importance plot</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf_model, <span class="at">main =</span> <span class="st">"Variable Importance in Random Forest"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ml-Decoding-Personality_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ml-Decoding-Personality_files/figure-html/random-forest-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Variable importance plot from Random Forest model</figcaption>
 </figure>
 </div>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get importance scores</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>importance_scores <span class="ot">&lt;-</span> <span class="fu">importance</span>(rf_model)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>importance_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Variable =</span> <span class="fu">rownames</span>(importance_scores),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">MeanDecreaseAccuracy =</span> importance_scores[, <span class="st">"MeanDecreaseAccuracy"</span>],</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">MeanDecreaseGini =</span> importance_scores[, <span class="st">"MeanDecreaseGini"</span>]</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(MeanDecreaseAccuracy))</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(importance_df, <span class="at">caption =</span> <span class="st">"Feature Importance Rankings"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Feature Importance Rankings</caption>
+<colgroup>
+<col style="width: 28%">
+<col style="width: 28%">
+<col style="width: 23%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: right;">MeanDecreaseAccuracy</th>
+<th style="text-align: right;">MeanDecreaseGini</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">drained_after_socializing</td>
+<td style="text-align: left;">drained_after_socializing</td>
+<td style="text-align: right;">9.28</td>
+<td style="text-align: right;">239.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">stage_fear</td>
+<td style="text-align: left;">stage_fear</td>
+<td style="text-align: right;">8.21</td>
+<td style="text-align: right;">167.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">post_frequency</td>
+<td style="text-align: left;">post_frequency</td>
+<td style="text-align: right;">7.65</td>
+<td style="text-align: right;">89.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">time_spent_alone</td>
+<td style="text-align: left;">time_spent_alone</td>
+<td style="text-align: right;">6.74</td>
+<td style="text-align: right;">100.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">social_event_attendance</td>
+<td style="text-align: left;">social_event_attendance</td>
+<td style="text-align: right;">6.17</td>
+<td style="text-align: right;">175.1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">going_outside</td>
+<td style="text-align: left;">going_outside</td>
+<td style="text-align: right;">5.61</td>
+<td style="text-align: right;">70.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">friends_circle_size</td>
+<td style="text-align: left;">friends_circle_size</td>
+<td style="text-align: right;">1.99</td>
+<td style="text-align: right;">26.4</td>
+</tr>
+</tbody>
+</table>
+<p>Variable importance plot from Random Forest model</p>
 </div>
 </div>
 <p><em>Random forest builds many trees, each considering a random subset of features at each split. The confusion matrix shows the model’s performance, and the variable importance plot highlights which features are most influential.</em></p>
@@ -802,35 +1040,41 @@ Prediction  Extrovert Introvert
 <section id="boosting-gradient-boosting-machine" class="level3">
 <h3 class="anchored" data-anchor-id="boosting-gradient-boosting-machine">3. Boosting (Gradient Boosting Machine)</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># For gbm, all predictors must be numeric, ordered, or factor.</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert character columns to factors in train and test data</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>train_data_gbm <span class="ot">&lt;-</span> train_data</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (col <span class="cf">in</span> <span class="fu">names</span>(train_data_gbm)) {</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.character</span>(train_data_gbm[[col]])) {</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    train_data_gbm[[col]] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(train_data_gbm[[col]])</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>test_data_gbm <span class="ot">&lt;-</span> test_data</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (col <span class="cf">in</span> <span class="fu">names</span>(test_data_gbm)) {</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.character</span>(test_data_gbm[[col]])) {</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    test_data_gbm[[col]] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(test_data_gbm[[col]])</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Encode personality as 0/1 for gbm</span></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>train_data_gbm<span class="sc">$</span>personality_num <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(train_data_gbm<span class="sc">$</span>personality <span class="sc">==</span> <span class="st">"Introvert"</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>test_data_gbm<span class="sc">$</span>personality_num <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(test_data_gbm<span class="sc">$</span>personality <span class="sc">==</span> <span class="st">"Introvert"</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit GBM model (distribution = "bernoulli" for binary classification)</span></span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>gbm_model <span class="ot">&lt;-</span> <span class="fu">gbm</span>(personality_num <span class="sc">~</span> . <span class="sc">-</span>personality, <span class="at">data =</span> train_data_gbm, <span class="at">distribution =</span> <span class="st">"bernoulli"</span>, <span class="at">n.trees =</span> <span class="dv">100</span>, <span class="at">interaction.depth =</span> <span class="dv">3</span>, <span class="at">shrinkage =</span> <span class="fl">0.05</span>, <span class="at">n.minobsinnode =</span> <span class="dv">10</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict probabilities and convert to class</span></span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>gbm_probs <span class="ot">&lt;-</span> <span class="fu">predict</span>(gbm_model, test_data_gbm, <span class="at">n.trees =</span> <span class="dv">100</span>, <span class="at">type =</span> <span class="st">"response"</span>)</span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>gbm_pred <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(gbm_probs <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="st">"Extrovert"</span>, <span class="st">"Introvert"</span>)</span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>gbm_pred <span class="ot">&lt;-</span> <span class="fu">factor</span>(gbm_pred, <span class="at">levels =</span> <span class="fu">levels</span>(test_data<span class="sc">$</span>personality))</span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="fu">confusionMatrix</span>(gbm_pred, test_data<span class="sc">$</span>personality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For gbm, all predictors must be numeric, ordered, or factor.</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert character columns to factors in train and test data</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>train_data_gbm <span class="ot">&lt;-</span> train_data</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (col <span class="cf">in</span> <span class="fu">names</span>(train_data_gbm)) {</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.character</span>(train_data_gbm[[col]])) {</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    train_data_gbm[[col]] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(train_data_gbm[[col]])</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>test_data_gbm <span class="ot">&lt;-</span> test_data</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (col <span class="cf">in</span> <span class="fu">names</span>(test_data_gbm)) {</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.character</span>(test_data_gbm[[col]])) {</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    test_data_gbm[[col]] <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(test_data_gbm[[col]])</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Encode personality as 0/1 for gbm</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>train_data_gbm<span class="sc">$</span>personality_num <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(train_data_gbm<span class="sc">$</span>personality <span class="sc">==</span> <span class="st">"Introvert"</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>test_data_gbm<span class="sc">$</span>personality_num <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(test_data_gbm<span class="sc">$</span>personality <span class="sc">==</span> <span class="st">"Introvert"</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit GBM model (distribution = "bernoulli" for binary classification)</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>gbm_model <span class="ot">&lt;-</span> <span class="fu">gbm</span>(personality_num <span class="sc">~</span> . <span class="sc">-</span>personality, <span class="at">data =</span> train_data_gbm, </span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>                <span class="at">distribution =</span> <span class="st">"bernoulli"</span>, </span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>                <span class="at">n.trees =</span> <span class="dv">100</span>, </span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>                <span class="at">interaction.depth =</span> <span class="dv">3</span>, </span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>                <span class="at">shrinkage =</span> <span class="fl">0.05</span>, </span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>                <span class="at">n.minobsinnode =</span> <span class="dv">10</span>, </span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict probabilities and convert to class</span></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>gbm_probs <span class="ot">&lt;-</span> <span class="fu">predict</span>(gbm_model, test_data_gbm, <span class="at">n.trees =</span> <span class="dv">100</span>, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>gbm_pred <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(gbm_probs <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="st">"Extrovert"</span>, <span class="st">"Introvert"</span>)</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>gbm_pred <span class="ot">&lt;-</span> <span class="fu">factor</span>(gbm_pred, <span class="at">levels =</span> <span class="fu">levels</span>(test_data<span class="sc">$</span>personality))</span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>cm_gbm <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(gbm_pred, test_data<span class="sc">$</span>personality)</span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cm_gbm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Confusion Matrix and Statistics
 
@@ -838,41 +1082,199 @@ Prediction  Extrovert Introvert
 Prediction  Extrovert Introvert
   Extrovert       412        28
   Introvert        35       394
-                                          
-               Accuracy : 0.9275          
-                 95% CI : (0.9082, 0.9438)
-    No Information Rate : 0.5144          
-    P-Value [Acc &gt; NIR] : &lt;2e-16          
-                                          
-                  Kappa : 0.855           
-                                          
- Mcnemar's Test P-Value : 0.4497          
-                                          
-            Sensitivity : 0.9217          
-            Specificity : 0.9336          
-         Pos Pred Value : 0.9364          
-         Neg Pred Value : 0.9184          
-             Prevalence : 0.5144          
-         Detection Rate : 0.4741          
-   Detection Prevalence : 0.5063          
-      Balanced Accuracy : 0.9277          
-                                          
-       'Positive' Class : Extrovert       
-                                          </code></pre>
+                                        
+               Accuracy : 0.928         
+                 95% CI : (0.908, 0.944)
+    No Information Rate : 0.514         
+    P-Value [Acc &gt; NIR] : &lt;2e-16        
+                                        
+                  Kappa : 0.855         
+                                        
+ Mcnemar's Test P-Value : 0.45          
+                                        
+            Sensitivity : 0.922         
+            Specificity : 0.934         
+         Pos Pred Value : 0.936         
+         Neg Pred Value : 0.918         
+             Prevalence : 0.514         
+         Detection Rate : 0.474         
+   Detection Prevalence : 0.506         
+      Balanced Accuracy : 0.928         
+                                        
+       'Positive' Class : Extrovert     
+                                        </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable importance plot</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>gbm_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(gbm_model, <span class="at">plotit =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">main =</span> <span class="st">"Relative Influence in Gradient Boosting"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ml-Decoding-Personality_files/figure-html/boosting-gbm-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Variable importance plot from Gradient Boosting model</figcaption>
+</figure>
 </div>
 </div>
-<p><em>Boosting builds trees sequentially, each focusing on correcting the errors of the previous ones. The confusion matrix shows the boosted model’s performance. You can tune parameters like <code>n.trees</code> and <code>shrinkage</code> for better results.</em></p>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create importance table</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>importance_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Variable =</span> gbm_summary<span class="sc">$</span>var,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">RelativeInfluence =</span> <span class="fu">round</span>(gbm_summary<span class="sc">$</span>rel.inf, <span class="dv">2</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(RelativeInfluence)) <span class="sc">|&gt;</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)  <span class="co"># Top 10 most important variables</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(importance_table, </span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Top 10 Most Important Variables in GBM Model"</span>,</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"Relative Influence (%)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Top 10 Most Important Variables in GBM Model</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: right;">Relative Influence (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">stage_fear</td>
+<td style="text-align: right;">47.44</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">social_event_attendance</td>
+<td style="text-align: right;">22.27</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">drained_after_socializing</td>
+<td style="text-align: right;">20.93</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">going_outside</td>
+<td style="text-align: right;">3.03</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">time_spent_alone</td>
+<td style="text-align: right;">2.86</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">post_frequency</td>
+<td style="text-align: right;">1.82</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">friends_circle_size</td>
+<td style="text-align: right;">1.65</td>
+</tr>
+</tbody>
+</table>
+<p>Variable importance plot from Gradient Boosting model</p>
+</div>
+</div>
+<pre><code>
+::: {.callout-note}
+## Key Insight
+Boosting builds trees sequentially, with each tree focusing on correcting the errors of the previous ones. This iterative approach often leads to high accuracy but requires careful tuning to avoid overfitting.
+:::
+
+## Model Comparison
+
+::: {.cell tbl-cap='Performance comparison of tree-based models'}
+
+```{.r .cell-code}
+# Extract performance metrics
+models_performance &lt;- data.frame(
+  Model = c("Single Decision Tree", "Bagging", "Random Forest", "Gradient Boosting"),
+  Accuracy = c(
+    round(cm_tree$overall["Accuracy"], 3),
+    round(cm_bag$overall["Accuracy"], 3),
+    round(cm_rf$overall["Accuracy"], 3),
+    round(cm_gbm$overall["Accuracy"], 3)
+  ),
+  Sensitivity = c(
+    round(cm_tree$byClass["Sensitivity"], 3),
+    round(cm_bag$byClass["Sensitivity"], 3),
+    round(cm_rf$byClass["Sensitivity"], 3),
+    round(cm_gbm$byClass["Sensitivity"], 3)
+  ),
+  Specificity = c(
+    round(cm_tree$byClass["Specificity"], 3),
+    round(cm_bag$byClass["Specificity"], 3),
+    round(cm_rf$byClass["Specificity"], 3),
+    round(cm_gbm$byClass["Specificity"], 3)
+  )
+)
+
+kable(models_performance, 
+      caption = "Model Performance Comparison",
+      align = "lccc")</code></pre>
+<div class="cell-output-display">
+<table class="caption-top table">
+<caption>Model Performance Comparison</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: center;">Accuracy</th>
+<th style="text-align: center;">Sensitivity</th>
+<th style="text-align: center;">Specificity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Single Decision Tree</td>
+<td style="text-align: center;">0.926</td>
+<td style="text-align: center;">0.922</td>
+<td style="text-align: center;">0.931</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bagging</td>
+<td style="text-align: center;">0.909</td>
+<td style="text-align: center;">0.911</td>
+<td style="text-align: center;">0.908</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Random Forest</td>
+<td style="text-align: center;">0.928</td>
+<td style="text-align: center;">0.922</td>
+<td style="text-align: center;">0.934</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gradient Boosting</td>
+<td style="text-align: center;">0.928</td>
+<td style="text-align: center;">0.922</td>
+<td style="text-align: center;">0.934</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>:::</p>
 <hr>
-<p><strong>Summary:</strong></p>
-<ul>
-<li>We applied bagging, random forest, and boosting to the same dataset.</li>
-<li>Each method was evaluated using a confusion matrix for easy comparison.</li>
-<li>Random forest also provides a feature importance plot to interpret which variables matter most.</li>
-</ul>
-<p>This hands-on approach helps you see the practical differences between these advanced tree ensemble methods and how to implement them in R.</p>
-
-
 </section>
+</section>
+<section id="summary-1" class="level2">
+<h2 class="anchored" data-anchor-id="summary-1">Summary</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key Takeaways
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Single Decision Trees</strong>: Easy to interpret but prone to overfitting</li>
+<li><strong>Bagging</strong>: Reduces overfitting through bootstrap aggregation</li>
+<li><strong>Random Forest</strong>: Adds feature randomness to bagging for better generalization</li>
+<li><strong>Gradient Boosting</strong>: Sequential learning that often achieves highest accuracy</li>
+</ul>
+<p>Each method has its strengths and the choice depends on your specific needs for interpretability vs.&nbsp;accuracy.</p>
+</div>
+</div>
+<p>This comprehensive guide demonstrated how decision trees evolve from simple interpretable models to powerful ensemble methods. The hands-on R examples show the practical implementation differences and help you choose the right approach for your machine learning projects.</p>
+
+
+<!-- -->
+
 </section>
 </section>
 
@@ -966,6 +1368,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
     clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
@@ -1296,7 +1749,552 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb37" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Decision Trees: A Complete Guide for Beginners"</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Krishna Kumar Shrestha"</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-07-12"</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [machine learning, decision trees, classification, regression]</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "A comprehensive guide to decision trees, from basic concepts to advanced ensemble methods like bagging, random forest, and boosting, with practical R examples."</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 3</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: false</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co">    df-print: paged</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: true</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="fu"># Decision Trees: A Complete Guide for Beginners</span></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## What You'll Learn</span></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>This comprehensive guide covers everything you need to know about decision trees:</span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Fundamentals:** Core concepts, terminology, and how trees work</span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Implementation:** Step-by-step R examples with real data</span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Advanced Methods:** Bagging, Random Forest, and Boosting</span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Best Practices:** Model evaluation, tuning, and interpretation</span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a>Decision trees are one of the most intuitive and powerful tools in machine learning and data science. They mimic the way humans make decisions: by asking a series of questions and following the answers down different paths. In this article, we’ll break down what decision trees are, define the most important terms, explore the different types of decision trees based on the kind of output they produce, and explain the key metrics used to evaluate them. By the end, you’ll have a clear understanding of how decision trees work and how to use them for both classification and regression problems.</span>
+<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## What is a Decision Tree?</span></span>
+<span id="cb37-38"><a href="#cb37-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-39"><a href="#cb37-39" aria-hidden="true" tabindex="-1"></a>A decision tree is a flowchart-like structure used to make decisions or predictions. Each internal node of the tree represents a test or question about a feature (for example, “Is age &gt; 30?”), each branch represents the outcome of the test, and each leaf node represents a final decision or prediction. Decision trees can be used for both classification (predicting categories) and regression (predicting numbers).</span>
+<span id="cb37-40"><a href="#cb37-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-41"><a href="#cb37-41" aria-hidden="true" tabindex="-1"></a>Imagine you want to decide whether to play tennis based on the weather. A decision tree might first ask, “Is it sunny?” If yes, it might then ask, “Is the humidity high?” and so on, until it reaches a decision like “Play” or “Don’t play.”</span>
+<span id="cb37-42"><a href="#cb37-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-43"><a href="#cb37-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## Key Terms in Decision Trees</span></span>
+<span id="cb37-44"><a href="#cb37-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-45"><a href="#cb37-45" aria-hidden="true" tabindex="-1"></a>Before we dive deeper, let’s define some important terms:</span>
+<span id="cb37-46"><a href="#cb37-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-47"><a href="#cb37-47" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Root Node:** The top node of the tree, where the first split or question is made.</span>
+<span id="cb37-48"><a href="#cb37-48" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Internal Node:** Any node that splits into further branches (not a leaf).</span>
+<span id="cb37-49"><a href="#cb37-49" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Leaf Node (Terminal Node):** The end node that gives the final output (class or value).</span>
+<span id="cb37-50"><a href="#cb37-50" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Branch:** A path from one node to another, representing the outcome of a test.</span>
+<span id="cb37-51"><a href="#cb37-51" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Split:** The process of dividing a node into two or more sub-nodes based on a feature.</span>
+<span id="cb37-52"><a href="#cb37-52" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Feature (Attribute):** A variable or column in your dataset used to split the data.</span>
+<span id="cb37-53"><a href="#cb37-53" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Depth:** The number of levels in the tree from the root to the deepest leaf.</span>
+<span id="cb37-54"><a href="#cb37-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-55"><a href="#cb37-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## Types of Decision Trees: Classification vs. Regression</span></span>
+<span id="cb37-56"><a href="#cb37-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-57"><a href="#cb37-57" aria-hidden="true" tabindex="-1"></a>Decision trees are divided into two main types, depending on the nature of the output variable:</span>
+<span id="cb37-58"><a href="#cb37-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-59"><a href="#cb37-59" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. Classification Trees (Categorical Output)</span></span>
+<span id="cb37-60"><a href="#cb37-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-61"><a href="#cb37-61" aria-hidden="true" tabindex="-1"></a>Classification trees are used when the target variable is categorical—that is, when you want to predict a class or label (such as “spam” vs. “not spam,” or “disease” vs. “no disease”). At each node, the tree asks a question that splits the data into groups that are more homogeneous with respect to the target class.</span>
+<span id="cb37-62"><a href="#cb37-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-63"><a href="#cb37-63" aria-hidden="true" tabindex="-1"></a>**Example:**</span>
+<span id="cb37-64"><a href="#cb37-64" aria-hidden="true" tabindex="-1"></a>Suppose you want to predict whether a loan applicant will default (“Yes” or “No”). The tree might split on features like income, credit score, or employment status, eventually leading to a prediction at the leaf node.</span>
+<span id="cb37-65"><a href="#cb37-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-66"><a href="#cb37-66" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Key Metrics for Classification Trees</span></span>
+<span id="cb37-67"><a href="#cb37-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-68"><a href="#cb37-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-69"><a href="#cb37-69" aria-hidden="true" tabindex="-1"></a>To decide the best way to split the data at each node, classification trees use metrics that measure how “pure” or homogeneous the resulting groups are. The most common metrics are:</span>
+<span id="cb37-70"><a href="#cb37-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-71"><a href="#cb37-71" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Gini Impurity:** Measures how often a randomly chosen element would be incorrectly labeled if it was randomly labeled according to the distribution of labels in the node. Lower Gini means purer nodes.</span>
+<span id="cb37-72"><a href="#cb37-72" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Entropy (Information Gain):** Measures the amount of disorder or uncertainty. Splits that reduce entropy the most are preferred.</span>
+<span id="cb37-73"><a href="#cb37-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-74"><a href="#cb37-74" aria-hidden="true" tabindex="-1"></a>**How to choose splits:**</span>
+<span id="cb37-75"><a href="#cb37-75" aria-hidden="true" tabindex="-1"></a>At each node, the algorithm tries all possible splits and chooses the one that results in the greatest reduction in impurity (Gini or Entropy).</span>
+<span id="cb37-76"><a href="#cb37-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-77"><a href="#cb37-77" aria-hidden="true" tabindex="-1"></a>**Evaluation Metrics:**</span>
+<span id="cb37-78"><a href="#cb37-78" aria-hidden="true" tabindex="-1"></a>After building the tree, we evaluate its performance using metrics such as:</span>
+<span id="cb37-79"><a href="#cb37-79" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Accuracy:** The proportion of correct predictions.</span>
+<span id="cb37-80"><a href="#cb37-80" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Precision, Recall, F1 Score:** Useful for imbalanced datasets.</span>
+<span id="cb37-81"><a href="#cb37-81" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Confusion Matrix:** Shows the counts of true positives, false positives, etc.</span>
+<span id="cb37-82"><a href="#cb37-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-83"><a href="#cb37-83" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. Regression Trees (Quantitative Output)</span></span>
+<span id="cb37-84"><a href="#cb37-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-85"><a href="#cb37-85" aria-hidden="true" tabindex="-1"></a>Regression trees are used when the target variable is continuous or numerical (such as predicting house prices or temperatures). Instead of predicting a class, the tree predicts a number.</span>
+<span id="cb37-86"><a href="#cb37-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-87"><a href="#cb37-87" aria-hidden="true" tabindex="-1"></a>**Example:**</span>
+<span id="cb37-88"><a href="#cb37-88" aria-hidden="true" tabindex="-1"></a>Suppose you want to predict the price of a house based on features like size, location, and number of bedrooms. The regression tree splits the data at each node to minimize the difference between the predicted and actual values.</span>
+<span id="cb37-89"><a href="#cb37-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-90"><a href="#cb37-90" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Key Metrics for Regression Trees</span></span>
+<span id="cb37-91"><a href="#cb37-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-92"><a href="#cb37-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-93"><a href="#cb37-93" aria-hidden="true" tabindex="-1"></a>To choose the best splits, regression trees use metrics that measure how well the split reduces the variability of the target variable. The most common metrics are:</span>
+<span id="cb37-94"><a href="#cb37-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-95"><a href="#cb37-95" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Mean Squared Error (MSE):** The average of the squared differences between predicted and actual values.</span>
+<span id="cb37-96"><a href="#cb37-96" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Mean Absolute Error (MAE):** The average of the absolute differences between predicted and actual values.</span>
+<span id="cb37-97"><a href="#cb37-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-98"><a href="#cb37-98" aria-hidden="true" tabindex="-1"></a>**How to choose splits:**</span>
+<span id="cb37-99"><a href="#cb37-99" aria-hidden="true" tabindex="-1"></a>At each node, the algorithm tries all possible splits and chooses the one that results in the greatest reduction in error (MSE or MAE).</span>
+<span id="cb37-100"><a href="#cb37-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-101"><a href="#cb37-101" aria-hidden="true" tabindex="-1"></a>**Evaluation Metrics:**</span>
+<span id="cb37-102"><a href="#cb37-102" aria-hidden="true" tabindex="-1"></a>After building the tree, we evaluate its performance using metrics such as:</span>
+<span id="cb37-103"><a href="#cb37-103" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**R-squared (R²):** Measures how well the model explains the variability of the target.</span>
+<span id="cb37-104"><a href="#cb37-104" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Root Mean Squared Error (RMSE):** The square root of MSE, in the same units as the target.</span>
+<span id="cb37-105"><a href="#cb37-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-106"><a href="#cb37-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-107"><a href="#cb37-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-108"><a href="#cb37-108" aria-hidden="true" tabindex="-1"></a><span class="fu">## Advantages and Limitations of Decision Trees</span></span>
+<span id="cb37-109"><a href="#cb37-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-110"><a href="#cb37-110" aria-hidden="true" tabindex="-1"></a>**Advantages:**</span>
+<span id="cb37-111"><a href="#cb37-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-112"><a href="#cb37-112" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Easy to understand and interpret.</span>
+<span id="cb37-113"><a href="#cb37-113" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Can handle both numerical and categorical data.</span>
+<span id="cb37-114"><a href="#cb37-114" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Require little data preparation.</span>
+<span id="cb37-115"><a href="#cb37-115" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Can model non-linear relationships.</span>
+<span id="cb37-116"><a href="#cb37-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-117"><a href="#cb37-117" aria-hidden="true" tabindex="-1"></a>**Limitations:**</span>
+<span id="cb37-118"><a href="#cb37-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-119"><a href="#cb37-119" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Prone to overfitting (creating trees that are too complex and fit the training data too closely).</span>
+<span id="cb37-120"><a href="#cb37-120" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Can be unstable—small changes in data can lead to different trees.</span>
+<span id="cb37-121"><a href="#cb37-121" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Less accurate than some other algorithms (like random forests or boosting) on complex problems.</span>
+<span id="cb37-122"><a href="#cb37-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-123"><a href="#cb37-123" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step-by-Step Example: Building a Decision Tree to Predict Personality Type</span></span>
+<span id="cb37-124"><a href="#cb37-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-125"><a href="#cb37-125" aria-hidden="true" tabindex="-1"></a>Let's walk through a practical example using R, where we predict whether a person is an introvert or extrovert using a decision tree. We'll cover every step: reading the data, cleaning it, splitting into training and test sets, building the tree, evaluating it, and pruning for better performance.</span>
+<span id="cb37-126"><a href="#cb37-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-127"><a href="#cb37-127" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. Reading and Inspecting the Data</span></span>
+<span id="cb37-128"><a href="#cb37-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-129"><a href="#cb37-129" aria-hidden="true" tabindex="-1"></a>First, we load the necessary libraries and read the dataset directly from the provided URL.</span>
+<span id="cb37-130"><a href="#cb37-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-131"><a href="#cb37-131" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
+<span id="cb37-132"><a href="#cb37-132" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: setup</span></span>
+<span id="cb37-133"><a href="#cb37-133" aria-hidden="true" tabindex="-1"></a><span class="in">#| include: true</span></span>
+<span id="cb37-134"><a href="#cb37-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-135"><a href="#cb37-135" aria-hidden="true" tabindex="-1"></a><span class="in"># Load required libraries</span></span>
+<span id="cb37-136"><a href="#cb37-136" aria-hidden="true" tabindex="-1"></a><span class="in">library(readr)</span></span>
+<span id="cb37-137"><a href="#cb37-137" aria-hidden="true" tabindex="-1"></a><span class="in">library(janitor)</span></span>
+<span id="cb37-138"><a href="#cb37-138" aria-hidden="true" tabindex="-1"></a><span class="in">library(dplyr)</span></span>
+<span id="cb37-139"><a href="#cb37-139" aria-hidden="true" tabindex="-1"></a><span class="in">library(rpart)</span></span>
+<span id="cb37-140"><a href="#cb37-140" aria-hidden="true" tabindex="-1"></a><span class="in">library(rpart.plot)</span></span>
+<span id="cb37-141"><a href="#cb37-141" aria-hidden="true" tabindex="-1"></a><span class="in">library(caret)</span></span>
+<span id="cb37-142"><a href="#cb37-142" aria-hidden="true" tabindex="-1"></a><span class="in">library(knitr)</span></span>
+<span id="cb37-143"><a href="#cb37-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-144"><a href="#cb37-144" aria-hidden="true" tabindex="-1"></a><span class="in"># Set global options</span></span>
+<span id="cb37-145"><a href="#cb37-145" aria-hidden="true" tabindex="-1"></a><span class="in">options(digits = 3)</span></span>
+<span id="cb37-146"><a href="#cb37-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-147"><a href="#cb37-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-148"><a href="#cb37-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r load-data}</span></span>
+<span id="cb37-149"><a href="#cb37-149" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: load-data</span></span>
+<span id="cb37-150"><a href="#cb37-150" aria-hidden="true" tabindex="-1"></a><span class="in">#| cache: true</span></span>
+<span id="cb37-151"><a href="#cb37-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-152"><a href="#cb37-152" aria-hidden="true" tabindex="-1"></a><span class="in"># Read the data</span></span>
+<span id="cb37-153"><a href="#cb37-153" aria-hidden="true" tabindex="-1"></a><span class="in">df &lt;- read_csv("https://raw.githubusercontent.com/IKSHRESTHA/Actuarial-Reflections/refs/heads/main/data/06272925/personality_datasert.csv") |&gt; </span></span>
+<span id="cb37-154"><a href="#cb37-154" aria-hidden="true" tabindex="-1"></a><span class="in">  janitor::clean_names()</span></span>
+<span id="cb37-155"><a href="#cb37-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-156"><a href="#cb37-156" aria-hidden="true" tabindex="-1"></a><span class="in"># Inspect the data</span></span>
+<span id="cb37-157"><a href="#cb37-157" aria-hidden="true" tabindex="-1"></a><span class="in">str(df)</span></span>
+<span id="cb37-158"><a href="#cb37-158" aria-hidden="true" tabindex="-1"></a><span class="in">summary(df)</span></span>
+<span id="cb37-159"><a href="#cb37-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-160"><a href="#cb37-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-161"><a href="#cb37-161" aria-hidden="true" tabindex="-1"></a>*The output above shows the structure and summary statistics of the dataset. You can see the variable types, ranges, and a quick overview of the data. This helps us understand what features are available and if there are any obvious data quality issues.*</span>
+<span id="cb37-162"><a href="#cb37-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-163"><a href="#cb37-163" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. Preparing the Data</span></span>
+<span id="cb37-164"><a href="#cb37-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-165"><a href="#cb37-165" aria-hidden="true" tabindex="-1"></a>We'll make sure the target variable (<span class="in">`personality`</span>) is a factor, and check for missing values.</span>
+<span id="cb37-166"><a href="#cb37-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-167"><a href="#cb37-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r prepare-data}</span></span>
+<span id="cb37-168"><a href="#cb37-168" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: prepare-data</span></span>
+<span id="cb37-169"><a href="#cb37-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-170"><a href="#cb37-170" aria-hidden="true" tabindex="-1"></a><span class="in"># Convert target to factor</span></span>
+<span id="cb37-171"><a href="#cb37-171" aria-hidden="true" tabindex="-1"></a><span class="in">df$personality &lt;- as.factor(df$personality)</span></span>
+<span id="cb37-172"><a href="#cb37-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-173"><a href="#cb37-173" aria-hidden="true" tabindex="-1"></a><span class="in"># Check for missing values</span></span>
+<span id="cb37-174"><a href="#cb37-174" aria-hidden="true" tabindex="-1"></a><span class="in">missing_summary &lt;- colSums(is.na(df))</span></span>
+<span id="cb37-175"><a href="#cb37-175" aria-hidden="true" tabindex="-1"></a><span class="in">kable(data.frame(Variable = names(missing_summary), </span></span>
+<span id="cb37-176"><a href="#cb37-176" aria-hidden="true" tabindex="-1"></a><span class="in">                Missing_Count = missing_summary), </span></span>
+<span id="cb37-177"><a href="#cb37-177" aria-hidden="true" tabindex="-1"></a><span class="in">      caption = "Missing Values Summary")</span></span>
+<span id="cb37-178"><a href="#cb37-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-179"><a href="#cb37-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-180"><a href="#cb37-180" aria-hidden="true" tabindex="-1"></a>*The output will show the number of missing values in each column. If all values are zero, there are no missing data to worry about. If not, you may need to handle them before modeling.*</span>
+<span id="cb37-181"><a href="#cb37-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-182"><a href="#cb37-182" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. Splitting the Data: Train/Test Split</span></span>
+<span id="cb37-183"><a href="#cb37-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-184"><a href="#cb37-184" aria-hidden="true" tabindex="-1"></a>We'll split the data into 70% training and 30% testing sets to evaluate our model's performance on unseen data.</span>
+<span id="cb37-185"><a href="#cb37-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-186"><a href="#cb37-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r split-data}</span></span>
+<span id="cb37-187"><a href="#cb37-187" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: split-data</span></span>
+<span id="cb37-188"><a href="#cb37-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-189"><a href="#cb37-189" aria-hidden="true" tabindex="-1"></a><span class="in">set.seed(123) # for reproducibility</span></span>
+<span id="cb37-190"><a href="#cb37-190" aria-hidden="true" tabindex="-1"></a><span class="in">train_index &lt;- createDataPartition(df$personality, p = 0.7, list = FALSE)</span></span>
+<span id="cb37-191"><a href="#cb37-191" aria-hidden="true" tabindex="-1"></a><span class="in">train_data &lt;- df[train_index, ]</span></span>
+<span id="cb37-192"><a href="#cb37-192" aria-hidden="true" tabindex="-1"></a><span class="in">test_data &lt;- df[-train_index, ]</span></span>
+<span id="cb37-193"><a href="#cb37-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-194"><a href="#cb37-194" aria-hidden="true" tabindex="-1"></a><span class="in"># Display split summary</span></span>
+<span id="cb37-195"><a href="#cb37-195" aria-hidden="true" tabindex="-1"></a><span class="in">cat("Training set size:", nrow(train_data), "\n")</span></span>
+<span id="cb37-196"><a href="#cb37-196" aria-hidden="true" tabindex="-1"></a><span class="in">cat("Test set size:", nrow(test_data), "\n")</span></span>
+<span id="cb37-197"><a href="#cb37-197" aria-hidden="true" tabindex="-1"></a><span class="in">cat("Class distribution in training set:\n")</span></span>
+<span id="cb37-198"><a href="#cb37-198" aria-hidden="true" tabindex="-1"></a><span class="in">table(train_data$personality)</span></span>
+<span id="cb37-199"><a href="#cb37-199" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-200"><a href="#cb37-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-201"><a href="#cb37-201" aria-hidden="true" tabindex="-1"></a>*This step ensures that our model is trained on one portion of the data and tested on another, helping us assess how well it generalizes to new cases.*</span>
+<span id="cb37-202"><a href="#cb37-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-203"><a href="#cb37-203" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. Building the Decision Tree</span></span>
+<span id="cb37-204"><a href="#cb37-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-205"><a href="#cb37-205" aria-hidden="true" tabindex="-1"></a>Now, we'll build a classification tree to predict <span class="in">`personality`</span> using all other variables.</span>
+<span id="cb37-206"><a href="#cb37-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-207"><a href="#cb37-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r build-tree}</span></span>
+<span id="cb37-208"><a href="#cb37-208" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: build-tree</span></span>
+<span id="cb37-209"><a href="#cb37-209" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: "Decision tree structure for personality prediction"</span></span>
+<span id="cb37-210"><a href="#cb37-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-211"><a href="#cb37-211" aria-hidden="true" tabindex="-1"></a><span class="in">tree_model &lt;- rpart(personality ~ ., data = train_data, method = "class", cp = 0.01)</span></span>
+<span id="cb37-212"><a href="#cb37-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-213"><a href="#cb37-213" aria-hidden="true" tabindex="-1"></a><span class="in"># Visualize the tree</span></span>
+<span id="cb37-214"><a href="#cb37-214" aria-hidden="true" tabindex="-1"></a><span class="in">rpart.plot(tree_model, extra = 106, under = TRUE, cex = 0.8,</span></span>
+<span id="cb37-215"><a href="#cb37-215" aria-hidden="true" tabindex="-1"></a><span class="in">           main = "Decision Tree: Introvert vs Extrovert")</span></span>
+<span id="cb37-216"><a href="#cb37-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-217"><a href="#cb37-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-218"><a href="#cb37-218" aria-hidden="true" tabindex="-1"></a>*The plot above shows the structure of the decision tree. Each node represents a split based on a feature, and the leaves show the predicted class (introvert or extrovert).*</span>
+<span id="cb37-219"><a href="#cb37-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-220"><a href="#cb37-220" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. Evaluating the Model</span></span>
+<span id="cb37-221"><a href="#cb37-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-222"><a href="#cb37-222" aria-hidden="true" tabindex="-1"></a>We'll use the test set to see how well our tree predicts introverts vs. extroverts.</span>
+<span id="cb37-223"><a href="#cb37-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-224"><a href="#cb37-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{r evaluate-tree}</span></span>
+<span id="cb37-225"><a href="#cb37-225" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: evaluate-tree</span></span>
+<span id="cb37-226"><a href="#cb37-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-227"><a href="#cb37-227" aria-hidden="true" tabindex="-1"></a><span class="in">pred &lt;- predict(tree_model, test_data, type = "class")</span></span>
+<span id="cb37-228"><a href="#cb37-228" aria-hidden="true" tabindex="-1"></a><span class="in">cm_tree &lt;- confusionMatrix(pred, test_data$personality)</span></span>
+<span id="cb37-229"><a href="#cb37-229" aria-hidden="true" tabindex="-1"></a><span class="in">print(cm_tree)</span></span>
+<span id="cb37-230"><a href="#cb37-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-231"><a href="#cb37-231" aria-hidden="true" tabindex="-1"></a><span class="in"># Create a summary table</span></span>
+<span id="cb37-232"><a href="#cb37-232" aria-hidden="true" tabindex="-1"></a><span class="in">results_tree &lt;- data.frame(</span></span>
+<span id="cb37-233"><a href="#cb37-233" aria-hidden="true" tabindex="-1"></a><span class="in">  Metric = c("Accuracy", "Sensitivity", "Specificity"),</span></span>
+<span id="cb37-234"><a href="#cb37-234" aria-hidden="true" tabindex="-1"></a><span class="in">  Value = c(cm_tree$overall['Accuracy'], </span></span>
+<span id="cb37-235"><a href="#cb37-235" aria-hidden="true" tabindex="-1"></a><span class="in">            cm_tree$byClass['Sensitivity'], </span></span>
+<span id="cb37-236"><a href="#cb37-236" aria-hidden="true" tabindex="-1"></a><span class="in">            cm_tree$byClass['Specificity'])</span></span>
+<span id="cb37-237"><a href="#cb37-237" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb37-238"><a href="#cb37-238" aria-hidden="true" tabindex="-1"></a><span class="in">kable(results_tree, caption = "Decision Tree Performance Metrics", digits = 3)</span></span>
+<span id="cb37-239"><a href="#cb37-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-240"><a href="#cb37-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-241"><a href="#cb37-241" aria-hidden="true" tabindex="-1"></a>*The confusion matrix output will display the number of correct and incorrect predictions for each class. Accuracy, sensitivity, and specificity are also shown, helping you judge the model's performance.*</span>
+<span id="cb37-242"><a href="#cb37-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-243"><a href="#cb37-243" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6. Pruning the Tree</span></span>
+<span id="cb37-244"><a href="#cb37-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-245"><a href="#cb37-245" aria-hidden="true" tabindex="-1"></a>Decision trees can overfit, so pruning helps simplify the tree and improve generalization. We'll use the complexity parameter (cp) to prune.</span>
+<span id="cb37-246"><a href="#cb37-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-247"><a href="#cb37-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r prune-tree}</span></span>
+<span id="cb37-248"><a href="#cb37-248" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: prune-tree</span></span>
+<span id="cb37-249"><a href="#cb37-249" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: "Pruned decision tree with optimal complexity parameter"</span></span>
+<span id="cb37-250"><a href="#cb37-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-251"><a href="#cb37-251" aria-hidden="true" tabindex="-1"></a><span class="in"># Find optimal cp value</span></span>
+<span id="cb37-252"><a href="#cb37-252" aria-hidden="true" tabindex="-1"></a><span class="in">printcp(tree_model)</span></span>
+<span id="cb37-253"><a href="#cb37-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-254"><a href="#cb37-254" aria-hidden="true" tabindex="-1"></a><span class="in"># Choose the cp with lowest cross-validated error</span></span>
+<span id="cb37-255"><a href="#cb37-255" aria-hidden="true" tabindex="-1"></a><span class="in">best_cp &lt;- tree_model$cptable[which.min(tree_model$cptable[,"xerror"]), "CP"]</span></span>
+<span id="cb37-256"><a href="#cb37-256" aria-hidden="true" tabindex="-1"></a><span class="in">cat("Optimal CP value:", best_cp, "\n")</span></span>
+<span id="cb37-257"><a href="#cb37-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-258"><a href="#cb37-258" aria-hidden="true" tabindex="-1"></a><span class="in"># Prune the tree</span></span>
+<span id="cb37-259"><a href="#cb37-259" aria-hidden="true" tabindex="-1"></a><span class="in">pruned_tree &lt;- prune(tree_model, cp = best_cp)</span></span>
+<span id="cb37-260"><a href="#cb37-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-261"><a href="#cb37-261" aria-hidden="true" tabindex="-1"></a><span class="in"># Visualize pruned tree</span></span>
+<span id="cb37-262"><a href="#cb37-262" aria-hidden="true" tabindex="-1"></a><span class="in">rpart.plot(pruned_tree, extra = 106, under = TRUE, cex = 0.8,</span></span>
+<span id="cb37-263"><a href="#cb37-263" aria-hidden="true" tabindex="-1"></a><span class="in">           main = "Pruned Decision Tree: Introvert vs Extrovert")</span></span>
+<span id="cb37-264"><a href="#cb37-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-265"><a href="#cb37-265" aria-hidden="true" tabindex="-1"></a><span class="in"># Evaluate pruned tree</span></span>
+<span id="cb37-266"><a href="#cb37-266" aria-hidden="true" tabindex="-1"></a><span class="in">pruned_pred &lt;- predict(pruned_tree, test_data, type = "class")</span></span>
+<span id="cb37-267"><a href="#cb37-267" aria-hidden="true" tabindex="-1"></a><span class="in">cm_pruned &lt;- confusionMatrix(pruned_pred, test_data$personality)</span></span>
+<span id="cb37-268"><a href="#cb37-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-269"><a href="#cb37-269" aria-hidden="true" tabindex="-1"></a><span class="in"># Compare original vs pruned</span></span>
+<span id="cb37-270"><a href="#cb37-270" aria-hidden="true" tabindex="-1"></a><span class="in">comparison &lt;- data.frame(</span></span>
+<span id="cb37-271"><a href="#cb37-271" aria-hidden="true" tabindex="-1"></a><span class="in">  Model = c("Original Tree", "Pruned Tree"),</span></span>
+<span id="cb37-272"><a href="#cb37-272" aria-hidden="true" tabindex="-1"></a><span class="in">  Accuracy = c(cm_tree$overall['Accuracy'], cm_pruned$overall['Accuracy']),</span></span>
+<span id="cb37-273"><a href="#cb37-273" aria-hidden="true" tabindex="-1"></a><span class="in">  Sensitivity = c(cm_tree$byClass['Sensitivity'], cm_pruned$byClass['Sensitivity']),</span></span>
+<span id="cb37-274"><a href="#cb37-274" aria-hidden="true" tabindex="-1"></a><span class="in">  Specificity = c(cm_tree$byClass['Specificity'], cm_pruned$byClass['Specificity'])</span></span>
+<span id="cb37-275"><a href="#cb37-275" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb37-276"><a href="#cb37-276" aria-hidden="true" tabindex="-1"></a><span class="in">kable(comparison, caption = "Model Comparison: Original vs Pruned Tree", digits = 3)</span></span>
+<span id="cb37-277"><a href="#cb37-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-278"><a href="#cb37-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-279"><a href="#cb37-279" aria-hidden="true" tabindex="-1"></a>*After pruning, the tree is simpler and less likely to overfit. The new confusion matrix shows how well the pruned tree performs on the test data. Compare this to the previous results to see if pruning improved generalization.*</span>
+<span id="cb37-280"><a href="#cb37-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-281"><a href="#cb37-281" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary</span></span>
+<span id="cb37-282"><a href="#cb37-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-283"><a href="#cb37-283" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>We loaded and cleaned the data (with warnings suppressed for clarity).</span>
+<span id="cb37-284"><a href="#cb37-284" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Split it into training and test sets.</span>
+<span id="cb37-285"><a href="#cb37-285" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Built and visualized a decision tree to predict personality type.</span>
+<span id="cb37-286"><a href="#cb37-286" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Evaluated its performance with a confusion matrix.</span>
+<span id="cb37-287"><a href="#cb37-287" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Pruned the tree and compared results.</span>
+<span id="cb37-288"><a href="#cb37-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-289"><a href="#cb37-289" aria-hidden="true" tabindex="-1"></a>This step-by-step approach helps you understand not just how to build a decision tree, but also how to interpret the output and ensure it performs well on new, unseen data.</span>
+<span id="cb37-290"><a href="#cb37-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-291"><a href="#cb37-291" aria-hidden="true" tabindex="-1"></a><span class="fu">## Advanced Tree Methods: Bagging, Random Forest, and Boosting</span></span>
+<span id="cb37-292"><a href="#cb37-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-293"><a href="#cb37-293" aria-hidden="true" tabindex="-1"></a>As powerful as decision trees are, they have some limitations—most notably, they can be unstable and prone to overfitting. To address these issues and achieve better predictive performance, data scientists use advanced ensemble methods that combine many trees. The three most popular are bagging, random forests, and boosting. Let’s explore each, their differences, and when to use them.</span>
+<span id="cb37-294"><a href="#cb37-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-295"><a href="#cb37-295" aria-hidden="true" tabindex="-1"></a><span class="fu">### Bagging (Bootstrap Aggregating)</span></span>
+<span id="cb37-296"><a href="#cb37-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-297"><a href="#cb37-297" aria-hidden="true" tabindex="-1"></a>Bagging is short for "bootstrap aggregating." The idea is simple: build many decision trees, each on a different random sample (with replacement) of the training data, and then average their predictions (for regression) or take a majority vote (for classification).</span>
+<span id="cb37-298"><a href="#cb37-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-299"><a href="#cb37-299" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**How it works:**</span>
+<span id="cb37-300"><a href="#cb37-300" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Draw multiple bootstrap samples from the training data.</span>
+<span id="cb37-301"><a href="#cb37-301" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Train a separate decision tree on each sample.</span>
+<span id="cb37-302"><a href="#cb37-302" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>For prediction, aggregate the results (average or majority vote).</span>
+<span id="cb37-303"><a href="#cb37-303" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Strengths:**</span>
+<span id="cb37-304"><a href="#cb37-304" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Reduces variance and helps prevent overfitting.</span>
+<span id="cb37-305"><a href="#cb37-305" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Each tree is independent, so the method is easy to parallelize.</span>
+<span id="cb37-306"><a href="#cb37-306" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Limitations:**</span>
+<span id="cb37-307"><a href="#cb37-307" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>All features are considered at each split, so trees can be highly correlated if some features are very strong predictors.</span>
+<span id="cb37-308"><a href="#cb37-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-309"><a href="#cb37-309" aria-hidden="true" tabindex="-1"></a>**Example:**</span>
+<span id="cb37-310"><a href="#cb37-310" aria-hidden="true" tabindex="-1"></a>Bagging is implemented in R with the <span class="in">`bagging()`</span> function from the <span class="in">`ipred`</span> package, or by setting <span class="in">`method = "treebag"`</span> in the <span class="in">`caret`</span> package.</span>
+<span id="cb37-311"><a href="#cb37-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-312"><a href="#cb37-312" aria-hidden="true" tabindex="-1"></a><span class="fu">### Random Forest</span></span>
+<span id="cb37-313"><a href="#cb37-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-314"><a href="#cb37-314" aria-hidden="true" tabindex="-1"></a>Random forest is an extension of bagging that adds an extra layer of randomness. In addition to using bootstrap samples, random forest also selects a random subset of features at each split in the tree. This decorrelates the trees, making the ensemble even more robust.</span>
+<span id="cb37-315"><a href="#cb37-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-316"><a href="#cb37-316" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**How it works:**</span>
+<span id="cb37-317"><a href="#cb37-317" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Like bagging, but at each split, only a random subset of features is considered.</span>
+<span id="cb37-318"><a href="#cb37-318" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>This means each tree is more different from the others, reducing correlation.</span>
+<span id="cb37-319"><a href="#cb37-319" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Strengths:**</span>
+<span id="cb37-320"><a href="#cb37-320" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Even lower variance and better generalization than bagging.</span>
+<span id="cb37-321"><a href="#cb37-321" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Handles large datasets and many features well.</span>
+<span id="cb37-322"><a href="#cb37-322" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Provides feature importance measures.</span>
+<span id="cb37-323"><a href="#cb37-323" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Limitations:**</span>
+<span id="cb37-324"><a href="#cb37-324" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Less interpretable than a single tree.</span>
+<span id="cb37-325"><a href="#cb37-325" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Can be slower to train and predict with very large forests.</span>
+<span id="cb37-326"><a href="#cb37-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-327"><a href="#cb37-327" aria-hidden="true" tabindex="-1"></a>**Example:**</span>
+<span id="cb37-328"><a href="#cb37-328" aria-hidden="true" tabindex="-1"></a>Random forest is implemented in R with the <span class="in">`randomForest`</span> package or by setting <span class="in">`method = "rf"`</span> in <span class="in">`caret`</span>.</span>
+<span id="cb37-329"><a href="#cb37-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-330"><a href="#cb37-330" aria-hidden="true" tabindex="-1"></a><span class="fu">### Boosting</span></span>
+<span id="cb37-331"><a href="#cb37-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-332"><a href="#cb37-332" aria-hidden="true" tabindex="-1"></a>Boosting is a different approach: instead of building trees independently, it builds them sequentially. Each new tree focuses on correcting the errors of the previous ones. The final prediction is a weighted combination of all trees.</span>
+<span id="cb37-333"><a href="#cb37-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-334"><a href="#cb37-334" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**How it works:**</span>
+<span id="cb37-335"><a href="#cb37-335" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Trees are built one after another.</span>
+<span id="cb37-336"><a href="#cb37-336" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Each tree tries to fix the mistakes of the previous trees by giving more weight to misclassified points.</span>
+<span id="cb37-337"><a href="#cb37-337" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Predictions are combined (often by weighted sum or vote).</span>
+<span id="cb37-338"><a href="#cb37-338" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Strengths:**</span>
+<span id="cb37-339"><a href="#cb37-339" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Can achieve very high accuracy.</span>
+<span id="cb37-340"><a href="#cb37-340" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Often outperforms bagging and random forest on complex problems.</span>
+<span id="cb37-341"><a href="#cb37-341" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Limitations:**</span>
+<span id="cb37-342"><a href="#cb37-342" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>More sensitive to noise and outliers.</span>
+<span id="cb37-343"><a href="#cb37-343" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Can overfit if not properly tuned.</span>
+<span id="cb37-344"><a href="#cb37-344" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Slower to train, as trees are built sequentially.</span>
+<span id="cb37-345"><a href="#cb37-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-346"><a href="#cb37-346" aria-hidden="true" tabindex="-1"></a>**Example:**</span>
+<span id="cb37-347"><a href="#cb37-347" aria-hidden="true" tabindex="-1"></a>Popular boosting algorithms include AdaBoost (<span class="in">`adabag`</span> package in R), Gradient Boosting Machines (<span class="in">`gbm`</span> package), and XGBoost (<span class="in">`xgboost`</span> package).</span>
+<span id="cb37-348"><a href="#cb37-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-349"><a href="#cb37-349" aria-hidden="true" tabindex="-1"></a><span class="fu">### Key Differences</span></span>
+<span id="cb37-350"><a href="#cb37-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-351"><a href="#cb37-351" aria-hidden="true" tabindex="-1"></a>| Method         | Trees Built | Feature Selection | Aggregation      | Strengths                | Limitations                |</span>
+<span id="cb37-352"><a href="#cb37-352" aria-hidden="true" tabindex="-1"></a>|--------------- |------------ |------------------|------------------|--------------------------|----------------------------|</span>
+<span id="cb37-353"><a href="#cb37-353" aria-hidden="true" tabindex="-1"></a>| Bagging        | Parallel    | All features      | Average/Vote     | Reduces variance         | Trees can be correlated    |</span>
+<span id="cb37-354"><a href="#cb37-354" aria-hidden="true" tabindex="-1"></a>| Random Forest  | Parallel    | Random subset     | Average/Vote     | Lower variance, robust   | Less interpretable         |</span>
+<span id="cb37-355"><a href="#cb37-355" aria-hidden="true" tabindex="-1"></a>| Boosting       | Sequential  | All or subset     | Weighted sum/vote| High accuracy, flexible  | Sensitive to noise, slower |</span>
+<span id="cb37-356"><a href="#cb37-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-357"><a href="#cb37-357" aria-hidden="true" tabindex="-1"></a><span class="fu">### When to Use Each Method</span></span>
+<span id="cb37-358"><a href="#cb37-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-359"><a href="#cb37-359" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Bagging:** When you want a simple way to reduce variance and your trees are overfitting.</span>
+<span id="cb37-360"><a href="#cb37-360" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Random Forest:** When you want strong performance out-of-the-box, especially with many features or large datasets.</span>
+<span id="cb37-361"><a href="#cb37-361" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Boosting:** When you need the highest possible accuracy and are willing to tune parameters and accept longer training times.</span>
+<span id="cb37-362"><a href="#cb37-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-363"><a href="#cb37-363" aria-hidden="true" tabindex="-1"></a>In practice, random forest is often the first ensemble method to try, as it balances accuracy, robustness, and ease of use. Boosting can deliver even better results, but requires more careful tuning.</span>
+<span id="cb37-364"><a href="#cb37-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-365"><a href="#cb37-365" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step-by-Step: Bagging, Random Forest, and Boosting with R</span></span>
+<span id="cb37-366"><a href="#cb37-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-367"><a href="#cb37-367" aria-hidden="true" tabindex="-1"></a>Let's apply bagging, random forest, and boosting to the same personality dataset, following the same clear, step-by-step approach as before.</span>
+<span id="cb37-368"><a href="#cb37-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-369"><a href="#cb37-369" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup-ensemble}</span></span>
+<span id="cb37-370"><a href="#cb37-370" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: setup-ensemble</span></span>
+<span id="cb37-371"><a href="#cb37-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-372"><a href="#cb37-372" aria-hidden="true" tabindex="-1"></a><span class="in"># Load additional libraries for ensemble methods</span></span>
+<span id="cb37-373"><a href="#cb37-373" aria-hidden="true" tabindex="-1"></a><span class="in">library(ipred)      # for bagging</span></span>
+<span id="cb37-374"><a href="#cb37-374" aria-hidden="true" tabindex="-1"></a><span class="in">library(randomForest) # for random forest</span></span>
+<span id="cb37-375"><a href="#cb37-375" aria-hidden="true" tabindex="-1"></a><span class="in">library(gbm)        # for gradient boosting</span></span>
+<span id="cb37-376"><a href="#cb37-376" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-377"><a href="#cb37-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-378"><a href="#cb37-378" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. Bagging (Bootstrap Aggregating)</span></span>
+<span id="cb37-379"><a href="#cb37-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-380"><a href="#cb37-380" aria-hidden="true" tabindex="-1"></a><span class="in">```{r bagging}</span></span>
+<span id="cb37-381"><a href="#cb37-381" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: bagging</span></span>
+<span id="cb37-382"><a href="#cb37-382" aria-hidden="true" tabindex="-1"></a><span class="in">#| cache: true</span></span>
+<span id="cb37-383"><a href="#cb37-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-384"><a href="#cb37-384" aria-hidden="true" tabindex="-1"></a><span class="in"># Bagging model</span></span>
+<span id="cb37-385"><a href="#cb37-385" aria-hidden="true" tabindex="-1"></a><span class="in">bag_model &lt;- bagging(personality ~ ., data = train_data, coob = TRUE)</span></span>
+<span id="cb37-386"><a href="#cb37-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-387"><a href="#cb37-387" aria-hidden="true" tabindex="-1"></a><span class="in"># Predict on test data</span></span>
+<span id="cb37-388"><a href="#cb37-388" aria-hidden="true" tabindex="-1"></a><span class="in">bag_pred &lt;- predict(bag_model, test_data, type = "class")</span></span>
+<span id="cb37-389"><a href="#cb37-389" aria-hidden="true" tabindex="-1"></a><span class="in">cm_bag &lt;- confusionMatrix(bag_pred, test_data$personality)</span></span>
+<span id="cb37-390"><a href="#cb37-390" aria-hidden="true" tabindex="-1"></a><span class="in">print(cm_bag)</span></span>
+<span id="cb37-391"><a href="#cb37-391" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-392"><a href="#cb37-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-393"><a href="#cb37-393" aria-hidden="true" tabindex="-1"></a>*Bagging builds multiple trees on bootstrapped samples and aggregates their predictions. The confusion matrix shows the accuracy and class-wise performance of the bagged ensemble.*</span>
+<span id="cb37-394"><a href="#cb37-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-395"><a href="#cb37-395" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. Random Forest</span></span>
+<span id="cb37-396"><a href="#cb37-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-397"><a href="#cb37-397" aria-hidden="true" tabindex="-1"></a><span class="in">```{r random-forest}</span></span>
+<span id="cb37-398"><a href="#cb37-398" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: random-forest</span></span>
+<span id="cb37-399"><a href="#cb37-399" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: "Variable importance plot from Random Forest model"</span></span>
+<span id="cb37-400"><a href="#cb37-400" aria-hidden="true" tabindex="-1"></a><span class="in">#| cache: true</span></span>
+<span id="cb37-401"><a href="#cb37-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-402"><a href="#cb37-402" aria-hidden="true" tabindex="-1"></a><span class="in"># Random forest model</span></span>
+<span id="cb37-403"><a href="#cb37-403" aria-hidden="true" tabindex="-1"></a><span class="in">rf_model &lt;- randomForest(personality ~ ., data = train_data, </span></span>
+<span id="cb37-404"><a href="#cb37-404" aria-hidden="true" tabindex="-1"></a><span class="in">                        ntree = 100, importance = TRUE)</span></span>
+<span id="cb37-405"><a href="#cb37-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-406"><a href="#cb37-406" aria-hidden="true" tabindex="-1"></a><span class="in"># Predict on test data</span></span>
+<span id="cb37-407"><a href="#cb37-407" aria-hidden="true" tabindex="-1"></a><span class="in">rf_pred &lt;- predict(rf_model, test_data)</span></span>
+<span id="cb37-408"><a href="#cb37-408" aria-hidden="true" tabindex="-1"></a><span class="in">cm_rf &lt;- confusionMatrix(rf_pred, test_data$personality)</span></span>
+<span id="cb37-409"><a href="#cb37-409" aria-hidden="true" tabindex="-1"></a><span class="in">print(cm_rf)</span></span>
+<span id="cb37-410"><a href="#cb37-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-411"><a href="#cb37-411" aria-hidden="true" tabindex="-1"></a><span class="in"># Feature importance plot</span></span>
+<span id="cb37-412"><a href="#cb37-412" aria-hidden="true" tabindex="-1"></a><span class="in">varImpPlot(rf_model, main = "Variable Importance in Random Forest")</span></span>
+<span id="cb37-413"><a href="#cb37-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-414"><a href="#cb37-414" aria-hidden="true" tabindex="-1"></a><span class="in"># Get importance scores</span></span>
+<span id="cb37-415"><a href="#cb37-415" aria-hidden="true" tabindex="-1"></a><span class="in">importance_scores &lt;- importance(rf_model)</span></span>
+<span id="cb37-416"><a href="#cb37-416" aria-hidden="true" tabindex="-1"></a><span class="in">importance_df &lt;- data.frame(</span></span>
+<span id="cb37-417"><a href="#cb37-417" aria-hidden="true" tabindex="-1"></a><span class="in">  Variable = rownames(importance_scores),</span></span>
+<span id="cb37-418"><a href="#cb37-418" aria-hidden="true" tabindex="-1"></a><span class="in">  MeanDecreaseAccuracy = importance_scores[, "MeanDecreaseAccuracy"],</span></span>
+<span id="cb37-419"><a href="#cb37-419" aria-hidden="true" tabindex="-1"></a><span class="in">  MeanDecreaseGini = importance_scores[, "MeanDecreaseGini"]</span></span>
+<span id="cb37-420"><a href="#cb37-420" aria-hidden="true" tabindex="-1"></a><span class="in">) |&gt; </span></span>
+<span id="cb37-421"><a href="#cb37-421" aria-hidden="true" tabindex="-1"></a><span class="in">  arrange(desc(MeanDecreaseAccuracy))</span></span>
+<span id="cb37-422"><a href="#cb37-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-423"><a href="#cb37-423" aria-hidden="true" tabindex="-1"></a><span class="in">kable(importance_df, caption = "Feature Importance Rankings", digits = 3)</span></span>
+<span id="cb37-424"><a href="#cb37-424" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-425"><a href="#cb37-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-426"><a href="#cb37-426" aria-hidden="true" tabindex="-1"></a>*Random forest builds many trees, each considering a random subset of features at each split. The confusion matrix shows the model's performance, and the variable importance plot highlights which features are most influential.*</span>
+<span id="cb37-427"><a href="#cb37-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-428"><a href="#cb37-428" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. Boosting (Gradient Boosting Machine)</span></span>
+<span id="cb37-429"><a href="#cb37-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-430"><a href="#cb37-430" aria-hidden="true" tabindex="-1"></a><span class="in">```{r boosting-gbm}</span></span>
+<span id="cb37-431"><a href="#cb37-431" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: boosting-gbm</span></span>
+<span id="cb37-432"><a href="#cb37-432" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: "Variable importance plot from Gradient Boosting model"</span></span>
+<span id="cb37-433"><a href="#cb37-433" aria-hidden="true" tabindex="-1"></a><span class="in">#| cache: true</span></span>
+<span id="cb37-434"><a href="#cb37-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-435"><a href="#cb37-435" aria-hidden="true" tabindex="-1"></a><span class="in"># For gbm, all predictors must be numeric, ordered, or factor.</span></span>
+<span id="cb37-436"><a href="#cb37-436" aria-hidden="true" tabindex="-1"></a><span class="in"># Convert character columns to factors in train and test data</span></span>
+<span id="cb37-437"><a href="#cb37-437" aria-hidden="true" tabindex="-1"></a><span class="in">train_data_gbm &lt;- train_data</span></span>
+<span id="cb37-438"><a href="#cb37-438" aria-hidden="true" tabindex="-1"></a><span class="in">for (col in names(train_data_gbm)) {</span></span>
+<span id="cb37-439"><a href="#cb37-439" aria-hidden="true" tabindex="-1"></a><span class="in">  if (is.character(train_data_gbm[[col]])) {</span></span>
+<span id="cb37-440"><a href="#cb37-440" aria-hidden="true" tabindex="-1"></a><span class="in">    train_data_gbm[[col]] &lt;- as.factor(train_data_gbm[[col]])</span></span>
+<span id="cb37-441"><a href="#cb37-441" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb37-442"><a href="#cb37-442" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb37-443"><a href="#cb37-443" aria-hidden="true" tabindex="-1"></a><span class="in">test_data_gbm &lt;- test_data</span></span>
+<span id="cb37-444"><a href="#cb37-444" aria-hidden="true" tabindex="-1"></a><span class="in">for (col in names(test_data_gbm)) {</span></span>
+<span id="cb37-445"><a href="#cb37-445" aria-hidden="true" tabindex="-1"></a><span class="in">  if (is.character(test_data_gbm[[col]])) {</span></span>
+<span id="cb37-446"><a href="#cb37-446" aria-hidden="true" tabindex="-1"></a><span class="in">    test_data_gbm[[col]] &lt;- as.factor(test_data_gbm[[col]])</span></span>
+<span id="cb37-447"><a href="#cb37-447" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb37-448"><a href="#cb37-448" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb37-449"><a href="#cb37-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-450"><a href="#cb37-450" aria-hidden="true" tabindex="-1"></a><span class="in"># Encode personality as 0/1 for gbm</span></span>
+<span id="cb37-451"><a href="#cb37-451" aria-hidden="true" tabindex="-1"></a><span class="in">train_data_gbm$personality_num &lt;- ifelse(train_data_gbm$personality == "Introvert", 0, 1)</span></span>
+<span id="cb37-452"><a href="#cb37-452" aria-hidden="true" tabindex="-1"></a><span class="in">test_data_gbm$personality_num &lt;- ifelse(test_data_gbm$personality == "Introvert", 0, 1)</span></span>
+<span id="cb37-453"><a href="#cb37-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-454"><a href="#cb37-454" aria-hidden="true" tabindex="-1"></a><span class="in"># Fit GBM model (distribution = "bernoulli" for binary classification)</span></span>
+<span id="cb37-455"><a href="#cb37-455" aria-hidden="true" tabindex="-1"></a><span class="in">gbm_model &lt;- gbm(personality_num ~ . -personality, data = train_data_gbm, </span></span>
+<span id="cb37-456"><a href="#cb37-456" aria-hidden="true" tabindex="-1"></a><span class="in">                distribution = "bernoulli", </span></span>
+<span id="cb37-457"><a href="#cb37-457" aria-hidden="true" tabindex="-1"></a><span class="in">                n.trees = 100, </span></span>
+<span id="cb37-458"><a href="#cb37-458" aria-hidden="true" tabindex="-1"></a><span class="in">                interaction.depth = 3, </span></span>
+<span id="cb37-459"><a href="#cb37-459" aria-hidden="true" tabindex="-1"></a><span class="in">                shrinkage = 0.05, </span></span>
+<span id="cb37-460"><a href="#cb37-460" aria-hidden="true" tabindex="-1"></a><span class="in">                n.minobsinnode = 10, </span></span>
+<span id="cb37-461"><a href="#cb37-461" aria-hidden="true" tabindex="-1"></a><span class="in">                verbose = FALSE)</span></span>
+<span id="cb37-462"><a href="#cb37-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-463"><a href="#cb37-463" aria-hidden="true" tabindex="-1"></a><span class="in"># Predict probabilities and convert to class</span></span>
+<span id="cb37-464"><a href="#cb37-464" aria-hidden="true" tabindex="-1"></a><span class="in">gbm_probs &lt;- predict(gbm_model, test_data_gbm, n.trees = 100, type = "response")</span></span>
+<span id="cb37-465"><a href="#cb37-465" aria-hidden="true" tabindex="-1"></a><span class="in">gbm_pred &lt;- ifelse(gbm_probs &gt; 0.5, "Extrovert", "Introvert")</span></span>
+<span id="cb37-466"><a href="#cb37-466" aria-hidden="true" tabindex="-1"></a><span class="in">gbm_pred &lt;- factor(gbm_pred, levels = levels(test_data$personality))</span></span>
+<span id="cb37-467"><a href="#cb37-467" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-468"><a href="#cb37-468" aria-hidden="true" tabindex="-1"></a><span class="in">cm_gbm &lt;- confusionMatrix(gbm_pred, test_data$personality)</span></span>
+<span id="cb37-469"><a href="#cb37-469" aria-hidden="true" tabindex="-1"></a><span class="in">print(cm_gbm)</span></span>
+<span id="cb37-470"><a href="#cb37-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-471"><a href="#cb37-471" aria-hidden="true" tabindex="-1"></a><span class="in"># Variable importance plot</span></span>
+<span id="cb37-472"><a href="#cb37-472" aria-hidden="true" tabindex="-1"></a><span class="in">gbm_summary &lt;- summary(gbm_model, plotit = TRUE, </span></span>
+<span id="cb37-473"><a href="#cb37-473" aria-hidden="true" tabindex="-1"></a><span class="in">                      main = "Relative Influence in Gradient Boosting")</span></span>
+<span id="cb37-474"><a href="#cb37-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-475"><a href="#cb37-475" aria-hidden="true" tabindex="-1"></a><span class="in"># Create importance table</span></span>
+<span id="cb37-476"><a href="#cb37-476" aria-hidden="true" tabindex="-1"></a><span class="in">importance_table &lt;- data.frame(</span></span>
+<span id="cb37-477"><a href="#cb37-477" aria-hidden="true" tabindex="-1"></a><span class="in">  Variable = gbm_summary$var,</span></span>
+<span id="cb37-478"><a href="#cb37-478" aria-hidden="true" tabindex="-1"></a><span class="in">  RelativeInfluence = round(gbm_summary$rel.inf, 2)</span></span>
+<span id="cb37-479"><a href="#cb37-479" aria-hidden="true" tabindex="-1"></a><span class="in">) |&gt;</span></span>
+<span id="cb37-480"><a href="#cb37-480" aria-hidden="true" tabindex="-1"></a><span class="in">  arrange(desc(RelativeInfluence)) |&gt;</span></span>
+<span id="cb37-481"><a href="#cb37-481" aria-hidden="true" tabindex="-1"></a><span class="in">  slice_head(n = 10)  # Top 10 most important variables</span></span>
+<span id="cb37-482"><a href="#cb37-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-483"><a href="#cb37-483" aria-hidden="true" tabindex="-1"></a><span class="in">kable(importance_table, </span></span>
+<span id="cb37-484"><a href="#cb37-484" aria-hidden="true" tabindex="-1"></a><span class="in">      caption = "Top 10 Most Important Variables in GBM Model",</span></span>
+<span id="cb37-485"><a href="#cb37-485" aria-hidden="true" tabindex="-1"></a><span class="in">      col.names = c("Variable", "Relative Influence (%)"))</span></span>
+<span id="cb37-486"><a href="#cb37-486" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-487"><a href="#cb37-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-488"><a href="#cb37-488" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-489"><a href="#cb37-489" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-490"><a href="#cb37-490" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.callout-note}</span></span>
+<span id="cb37-491"><a href="#cb37-491" aria-hidden="true" tabindex="-1"></a><span class="in">## Key Insight</span></span>
+<span id="cb37-492"><a href="#cb37-492" aria-hidden="true" tabindex="-1"></a><span class="in">Boosting builds trees sequentially, with each tree focusing on correcting the errors of the previous ones. This iterative approach often leads to high accuracy but requires careful tuning to avoid overfitting.</span></span>
+<span id="cb37-493"><a href="#cb37-493" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb37-494"><a href="#cb37-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-495"><a href="#cb37-495" aria-hidden="true" tabindex="-1"></a><span class="in">## Model Comparison</span></span>
+<span id="cb37-496"><a href="#cb37-496" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-497"><a href="#cb37-497" aria-hidden="true" tabindex="-1"></a><span class="in">```{r model-comparison}</span></span>
+<span id="cb37-498"><a href="#cb37-498" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: model-comparison</span></span>
+<span id="cb37-499"><a href="#cb37-499" aria-hidden="true" tabindex="-1"></a><span class="in">#| tbl-cap: "Performance comparison of tree-based models"</span></span>
+<span id="cb37-500"><a href="#cb37-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-501"><a href="#cb37-501" aria-hidden="true" tabindex="-1"></a><span class="in"># Extract performance metrics</span></span>
+<span id="cb37-502"><a href="#cb37-502" aria-hidden="true" tabindex="-1"></a><span class="in">models_performance &lt;- data.frame(</span></span>
+<span id="cb37-503"><a href="#cb37-503" aria-hidden="true" tabindex="-1"></a><span class="in">  Model = c("Single Decision Tree", "Bagging", "Random Forest", "Gradient Boosting"),</span></span>
+<span id="cb37-504"><a href="#cb37-504" aria-hidden="true" tabindex="-1"></a><span class="in">  Accuracy = c(</span></span>
+<span id="cb37-505"><a href="#cb37-505" aria-hidden="true" tabindex="-1"></a><span class="in">    round(cm_tree$overall["Accuracy"], 3),</span></span>
+<span id="cb37-506"><a href="#cb37-506" aria-hidden="true" tabindex="-1"></a><span class="in">    round(cm_bag$overall["Accuracy"], 3),</span></span>
+<span id="cb37-507"><a href="#cb37-507" aria-hidden="true" tabindex="-1"></a><span class="in">    round(cm_rf$overall["Accuracy"], 3),</span></span>
+<span id="cb37-508"><a href="#cb37-508" aria-hidden="true" tabindex="-1"></a><span class="in">    round(cm_gbm$overall["Accuracy"], 3)</span></span>
+<span id="cb37-509"><a href="#cb37-509" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb37-510"><a href="#cb37-510" aria-hidden="true" tabindex="-1"></a><span class="in">  Sensitivity = c(</span></span>
+<span id="cb37-511"><a href="#cb37-511" aria-hidden="true" tabindex="-1"></a><span class="in">    round(cm_tree$byClass["Sensitivity"], 3),</span></span>
+<span id="cb37-512"><a href="#cb37-512" aria-hidden="true" tabindex="-1"></a><span class="in">    round(cm_bag$byClass["Sensitivity"], 3),</span></span>
+<span id="cb37-513"><a href="#cb37-513" aria-hidden="true" tabindex="-1"></a><span class="in">    round(cm_rf$byClass["Sensitivity"], 3),</span></span>
+<span id="cb37-514"><a href="#cb37-514" aria-hidden="true" tabindex="-1"></a><span class="in">    round(cm_gbm$byClass["Sensitivity"], 3)</span></span>
+<span id="cb37-515"><a href="#cb37-515" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb37-516"><a href="#cb37-516" aria-hidden="true" tabindex="-1"></a><span class="in">  Specificity = c(</span></span>
+<span id="cb37-517"><a href="#cb37-517" aria-hidden="true" tabindex="-1"></a><span class="in">    round(cm_tree$byClass["Specificity"], 3),</span></span>
+<span id="cb37-518"><a href="#cb37-518" aria-hidden="true" tabindex="-1"></a><span class="in">    round(cm_bag$byClass["Specificity"], 3),</span></span>
+<span id="cb37-519"><a href="#cb37-519" aria-hidden="true" tabindex="-1"></a><span class="in">    round(cm_rf$byClass["Specificity"], 3),</span></span>
+<span id="cb37-520"><a href="#cb37-520" aria-hidden="true" tabindex="-1"></a><span class="in">    round(cm_gbm$byClass["Specificity"], 3)</span></span>
+<span id="cb37-521"><a href="#cb37-521" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb37-522"><a href="#cb37-522" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb37-523"><a href="#cb37-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-524"><a href="#cb37-524" aria-hidden="true" tabindex="-1"></a><span class="in">kable(models_performance, </span></span>
+<span id="cb37-525"><a href="#cb37-525" aria-hidden="true" tabindex="-1"></a><span class="in">      caption = "Model Performance Comparison",</span></span>
+<span id="cb37-526"><a href="#cb37-526" aria-hidden="true" tabindex="-1"></a><span class="in">      align = "lccc")</span></span>
+<span id="cb37-527"><a href="#cb37-527" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-528"><a href="#cb37-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-529"><a href="#cb37-529" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb37-530"><a href="#cb37-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-531"><a href="#cb37-531" aria-hidden="true" tabindex="-1"></a><span class="fu">## Summary</span></span>
+<span id="cb37-532"><a href="#cb37-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-533"><a href="#cb37-533" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb37-534"><a href="#cb37-534" aria-hidden="true" tabindex="-1"></a><span class="fu">## Key Takeaways</span></span>
+<span id="cb37-535"><a href="#cb37-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-536"><a href="#cb37-536" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Single Decision Trees**: Easy to interpret but prone to overfitting</span>
+<span id="cb37-537"><a href="#cb37-537" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Bagging**: Reduces overfitting through bootstrap aggregation</span>
+<span id="cb37-538"><a href="#cb37-538" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Random Forest**: Adds feature randomness to bagging for better generalization</span>
+<span id="cb37-539"><a href="#cb37-539" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Gradient Boosting**: Sequential learning that often achieves highest accuracy</span>
+<span id="cb37-540"><a href="#cb37-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-541"><a href="#cb37-541" aria-hidden="true" tabindex="-1"></a>Each method has its strengths and the choice depends on your specific needs for interpretability vs. accuracy.</span>
+<span id="cb37-542"><a href="#cb37-542" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb37-543"><a href="#cb37-543" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-544"><a href="#cb37-544" aria-hidden="true" tabindex="-1"></a>This comprehensive guide demonstrated how decision trees evolve from simple interpretable models to powerful ensemble methods. The hands-on R examples show the practical implementation differences and help you choose the right approach for your machine learning projects.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 

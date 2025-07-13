@@ -25,8 +25,8 @@ Consider a small business owner. She faces the risk that her products might not 
 
 When thinking about risk, always ask two questions:
 
-1. How likely is it to happen? (Probability)
-2. How bad would it be if it happens? (Impact)
+1.  How likely is it to happen? (Probability)
+2.  How bad would it be if it happens? (Impact)
 
 For example, the risk of a minor power outage in a city might be fairly high (it happens often), but the impact is usually small (a brief inconvenience). In contrast, the risk of a major earthquake is low (it rarely happens), but the impact can be catastrophic.
 
@@ -66,29 +66,29 @@ One of the most important questions in actuarial science and insurance is whethe
 
 For a risk to be insurable, it generally needs to meet several criteria:
 
-1. The risk must be definable and measurable. Insurers need to know what event they are covering and be able to estimate the probability and potential loss.
-2. The loss must be accidental and unintentional. Insurance is designed to cover unforeseen events, not losses that are certain or deliberate.
-3. The loss must be significant enough to cause financial hardship, but not so catastrophic that it would bankrupt the insurer.
-4. There must be a large number of similar exposure units. This allows insurers to pool risks and use the law of large numbers to predict losses.
-5. The probability of loss must be calculable. Insurers rely on data and statistics to set premiums and reserves.
-6. The premium must be affordable. If the cost of insurance is too high, few people will buy it.
+1.  The risk must be definable and measurable. Insurers need to know what event they are covering and be able to estimate the probability and potential loss.
+2.  The loss must be accidental and unintentional. Insurance is designed to cover unforeseen events, not losses that are certain or deliberate.
+3.  The loss must be significant enough to cause financial hardship, but not so catastrophic that it would bankrupt the insurer.
+4.  There must be a large number of similar exposure units. This allows insurers to pool risks and use the law of large numbers to predict losses.
+5.  The probability of loss must be calculable. Insurers rely on data and statistics to set premiums and reserves.
+6.  The premium must be affordable. If the cost of insurance is too high, few people will buy it.
 
 ### Examples of Insurable Risks
 
 Most common insurance policies cover risks that meet these criteria. For example:
 
-- Fire insurance covers the risk of accidental fire damaging a home or business. Fires are relatively rare, but the losses can be significant, and insurers have enough data to estimate the probability and cost.
-- Health insurance covers the risk of illness or injury. While everyone gets sick at some point, the timing and severity are unpredictable, and insurers can pool risks across many policyholders.
-- Auto insurance covers the risk of car accidents. Again, accidents are accidental, measurable, and there is enough data to set premiums.
+-   Fire insurance covers the risk of accidental fire damaging a home or business. Fires are relatively rare, but the losses can be significant, and insurers have enough data to estimate the probability and cost.
+-   Health insurance covers the risk of illness or injury. While everyone gets sick at some point, the timing and severity are unpredictable, and insurers can pool risks across many policyholders.
+-   Auto insurance covers the risk of car accidents. Again, accidents are accidental, measurable, and there is enough data to set premiums.
 
 ### Examples of Uninsurable Risks
 
 Some risks cannot be insured, either because they are too certain, too catastrophic, or impossible to measure. For example:
 
-- Wear and tear on a car or machine is not insurable, because it is certain to happen over time.
-- Losses from illegal activities or intentional acts are not covered, because insurance is not meant to reward bad behavior.
-- War and nuclear disasters are often excluded from insurance policies, because the potential losses are so large and unpredictable that no insurer could cover them.
-- Speculative risks, such as gambling losses or investment losses, are generally not insurable, because they involve the chance of gain as well as loss, and are not accidental.
+-   Wear and tear on a car or machine is not insurable, because it is certain to happen over time.
+-   Losses from illegal activities or intentional acts are not covered, because insurance is not meant to reward bad behavior.
+-   War and nuclear disasters are often excluded from insurance policies, because the potential losses are so large and unpredictable that no insurer could cover them.
+-   Speculative risks, such as gambling losses or investment losses, are generally not insurable, because they involve the chance of gain as well as loss, and are not accidental.
 
 ## Real-World Scenarios: Insurable and Uninsurable Risks
 
@@ -114,17 +114,17 @@ Good risk management means identifying your most important risks, understanding 
 
 ## Summary Table: Types of Risk and Management Strategies
 
-| Type of Risk              | Example                        | How to Manage                                 | Insurable?         |
-|-------------------------- |------------------------------- |-----------------------------------------------|--------------------|
-| Minor                     | Printer out of paper           | Accept, Monitor                               | No                 |
-| Rare but Serious          | Earthquake                     | Plan, Transfer (insurance), Monitor           | Sometimes (if data exists) |
-| Frequent, Low-Impact      | Small IT glitches              | Reduce, Monitor                               | No                 |
-| Critical                  | Cyberattack/data breach        | Act, Control, Respond, Monitor                | Yes (with limits)  |
-| Fire                      | Fire in a bakery               | Prevent, Insure, Respond                      | Yes                |
-| Business Failure          | Bakery not popular             | Business planning, Diversify                   | No                 |
-| Wear and Tear             | Car engine wears out           | Maintenance                                   | No                 |
-| War/Nuclear Disaster      | War damages property           | Government aid (rare), Not insurable          | No                 |
+| Type of Risk | Example | How to Manage | Insurable? |
+|----------------|----------------|-------------------------|----------------|
+| Minor | Printer out of paper | Accept, Monitor | No |
+| Rare but Serious | Earthquake | Plan, Transfer (insurance), Monitor | Sometimes (if data exists) |
+| Frequent, Low-Impact | Small IT glitches | Reduce, Monitor | No |
+| Critical | Cyberattack/data breach | Act, Control, Respond, Monitor | Yes (with limits) |
+| Fire | Fire in a bakery | Prevent, Insure, Respond | Yes |
+| Business Failure | Bakery not popular | Business planning, Diversify | No |
+| Wear and Tear | Car engine wears out | Maintenance | No |
+| War/Nuclear Disaster | War damages property | Government aid (rare), Not insurable | No |
 
----
+------------------------------------------------------------------------
 
 In conclusion, risk is a complex but manageable part of life. By understanding its elements, types, and insurability, you can make better decisions, protect yourself and your business, and focus your energy where it matters most. Actuaries and insurers play a vital role in helping society manage risk, but everyone benefits from a deeper understanding of how risk works and how to respond to it.
