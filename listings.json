@@ -1,7 +1,8 @@
 [
   {
-    "listing": "/all-blogs.html",
+    "listing": "/index.html",
     "items": [
+      "/posts/risk-treatment-strategies.html",
       "/posts/portfolio-optimization-mean-variance.html",
       "/posts/ml-Decoding Personality.html",
       "/posts/Understanding Experiance Study.html",
@@ -10,8 +11,9 @@
     ]
   },
   {
-    "listing": "/index.html",
+    "listing": "/all-blogs.html",
     "items": [
+      "/posts/risk-treatment-strategies.html",
       "/posts/portfolio-optimization-mean-variance.html",
       "/posts/ml-Decoding Personality.html",
       "/posts/Understanding Experiance Study.html",
