@@ -1,7 +1,8 @@
 [
   {
-    "listing": "/index.html",
+    "listing": "/all-blogs.html",
     "items": [
+      "/posts/portfolio-optimization-mean-variance.html",
       "/posts/ml-Decoding Personality.html",
       "/posts/Understanding Experiance Study.html",
       "/posts/actuary-in-nepal.html",
@@ -9,8 +10,9 @@
     ]
   },
   {
-    "listing": "/all-blogs.html",
+    "listing": "/index.html",
     "items": [
+      "/posts/portfolio-optimization-mean-variance.html",
       "/posts/ml-Decoding Personality.html",
       "/posts/Understanding Experiance Study.html",
       "/posts/actuary-in-nepal.html",
