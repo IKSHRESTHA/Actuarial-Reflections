@@ -1,0 +1,13 @@
+ggplot2
+dplyr
+viridisLite
+viridis
+RColorBrewer
+scales
+gridExtra
+ggtext
+sysfonts
+showtextdb
+showtext
+patchwork
+ggridges
