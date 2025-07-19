@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/data-pipeline-guide.html",
       "/posts/ggplot-visualization-guide.html",
       "/posts/risk-treatment-strategies.html",
       "/posts/portfolio-optimization-mean-variance.html",
@@ -14,6 +15,7 @@
   {
     "listing": "/all-blogs.html",
     "items": [
+      "/posts/data-pipeline-guide.html",
       "/posts/ggplot-visualization-guide.html",
       "/posts/risk-treatment-strategies.html",
       "/posts/portfolio-optimization-mean-variance.html",

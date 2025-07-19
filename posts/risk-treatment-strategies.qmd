@@ -90,7 +90,7 @@ The risk treatment process follows a systematic approach:
 
 <!-- -->
 
--    An insurance company declining to write policies in earthquake
+-   An insurance company declining to write policies in earthquake
 
 <!-- -->
 
@@ -98,19 +98,19 @@ The risk treatment process follows a systematic approach:
 
 **Manufacturing:**
 
--    A pharmaceutical company deciding not to develop a drug due to severe side effect risks
+-   A pharmaceutical company deciding not to develop a drug due to severe side effect risks
 
 -   An automotive manufacturer avoiding certain battery technologies with fire hazards
 
 **Technology:**
 
--    A software company avoiding certain data processing activities due to privacy regulation risks
+-   A software company avoiding certain data processing activities due to privacy regulation risks
 
 -   A startup avoiding partnerships with politically sensitive organizations
 
 **Personal Finance:**
 
--    Choosing not to invest in highly volatile penny stocks
+-   Choosing not to invest in highly volatile penny stocks
 
 -   Avoiding high-risk investment schemes with unclear regulatory status
 
@@ -125,7 +125,7 @@ The risk treatment process follows a systematic approach:
 
 **Advantages:**
 
--    Provides certainty about risk elimination
+-   Provides certainty about risk elimination
 
 -   Prevents catastrophic losses
 
@@ -133,7 +133,7 @@ The risk treatment process follows a systematic approach:
 
 **Limitations:**
 
--    May limit growth opportunities
+-   May limit growth opportunities
 
 -   Could create competitive disadvantages
 
@@ -158,7 +158,7 @@ The risk treatment process follows a systematic approach:
 
 **Active Retention (Deliberate):**
 
--    Self-insurance programs
+-   Self-insurance programs
 
 -   Establishing contingency funds
 
@@ -166,9 +166,9 @@ The risk treatment process follows a systematic approach:
 
 **Passive Retention (Inadvertent):**
 
--    Unidentified risks
+-   Unidentified risks
 
--    Risks assumed by default
+-   Risks assumed by default
 
 -   Coverage gaps in insurance policies
 
@@ -176,7 +176,7 @@ The risk treatment process follows a systematic approach:
 
 **Corporate Applications:**
 
--    **Technology Company:** Retaining cybersecurity risks for minor data breaches while investing heavily in security infrastructure
+-   **Technology Company:** Retaining cybersecurity risks for minor data breaches while investing heavily in security infrastructure
 
 -   **Retail Chain:** Self-insuring for employee medical benefits through partially self-funded plans
 
@@ -184,13 +184,13 @@ The risk treatment process follows a systematic approach:
 
 **Financial Institutions:**
 
--    **Commercial Bank:** Retaining credit risk on small business loans while using statistical models for pricing
+-   **Commercial Bank:** Retaining credit risk on small business loans while using statistical models for pricing
 
 -   **Insurance Company:** Retaining catastrophe risk up to a certain threshold before purchasing reinsurance
 
 **Government Entities:**
 
--    **Municipalities:** Self-insuring for vehicle damage and workers' compensation claims
+-   **Municipalities:** Self-insuring for vehicle damage and workers' compensation claims
 
 -   **School Districts:** Retaining risks for minor property damage while maintaining repair funds
 
@@ -206,7 +206,7 @@ The risk treatment process follows a systematic approach:
 
 **Reserve Calculation:**
 
--    Historical loss data analysis
+-   Historical loss data analysis
 
 -   Statistical modeling for future losses
 
@@ -236,7 +236,7 @@ The risk treatment process follows a systematic approach:
 
 **Frequency Reduction (Prevention):**
 
--    Reducing the likelihood of adverse events
+-   Reducing the likelihood of adverse events
 
 -   Implementing safety protocols
 
@@ -246,7 +246,7 @@ The risk treatment process follows a systematic approach:
 
 **Severity Reduction (Protection):**
 
--    Minimizing impact when events occur
+-   Minimizing impact when events occur
 
 -   Emergency response planning
 
@@ -260,7 +260,7 @@ The risk treatment process follows a systematic approach:
 
 **Manufacturing Safety:**
 
--    Installing safety equipment and emergency shutdown systems
+-   Installing safety equipment and emergency shutdown systems
 
 -   Implementing comprehensive employee training programs
 
@@ -270,11 +270,11 @@ The risk treatment process follows a systematic approach:
 
 **Information Security:**
 
--    Multi-factor authentication systems
+-   Multi-factor authentication systems
 
 -   Regular security audits and penetration testing
 
--    Employee cybersecurity training programs
+-   Employee cybersecurity training programs
 
 -   Data backup and disaster recovery systems
 
@@ -282,7 +282,7 @@ The risk treatment process follows a systematic approach:
 
 **Credit Risk Management:**
 
--    Comprehensive credit scoring and analysis
+-   Comprehensive credit scoring and analysis
 
 -   Diversification across borrower types and geographic regions - Regular portfolio monitoring and stress testing
 
@@ -290,7 +290,7 @@ The risk treatment process follows a systematic approach:
 
 **Market Risk Mitigation:**
 
--    Portfolio diversification across asset classes
+-   Portfolio diversification across asset classes
 
 -   Hedging strategies using derivatives
 
@@ -302,9 +302,9 @@ The risk treatment process follows a systematic approach:
 
 **Supply Chain Management:**
 
--    Multiple supplier relationships for critical components
+-   Multiple supplier relationships for critical components
 
--    Geographic diversification of suppliers
+-   Geographic diversification of suppliers
 
 -   Inventory management and safety stock levels
 
@@ -312,7 +312,7 @@ The risk treatment process follows a systematic approach:
 
 **Human Resources:**
 
--    Comprehensive recruitment and background checking
+-   Comprehensive recruitment and background checking
 
 -   Skills development and cross-training programs
 
@@ -340,7 +340,7 @@ The risk treatment process follows a systematic approach:
 
 **Insurance Transfer:**
 
--    Traditional insurance policies
+-   Traditional insurance policies
 
 -   Captive insurance arrangements
 
@@ -350,7 +350,7 @@ The risk treatment process follows a systematic approach:
 
 **Contractual Transfer:**
 
--    Hold harmless agreements
+-   Hold harmless agreements
 
 -   Indemnification clauses
 
@@ -360,7 +360,7 @@ The risk treatment process follows a systematic approach:
 
 **Financial Transfer:**
 
--    Derivatives and hedging instruments
+-   Derivatives and hedging instruments
 
 -   Securitization
 
@@ -374,7 +374,7 @@ The risk treatment process follows a systematic approach:
 
 **Property and Casualty:**
 
--    **Real Estate Developer:** Purchasing comprehensive general liability, property, and professional indemnity insurance
+-   **Real Estate Developer:** Purchasing comprehensive general liability, property, and professional indemnity insurance
 
 -   **Transportation Company:** Obtaining commercial auto, cargo, and workers' compensation coverage
 
@@ -382,7 +382,7 @@ The risk treatment process follows a systematic approach:
 
 **Specialized Coverage:**
 
--    **Technology Startup:** Acquiring errors and omissions, cyber liability, and key person life insurance
+-   **Technology Startup:** Acquiring errors and omissions, cyber liability, and key person life insurance
 
 -   **International Trader:** Obtaining political risk, trade credit, and marine cargo insurance
 
@@ -400,7 +400,7 @@ The risk treatment process follows a systematic approach:
 
 **Service Agreements:**
 
--    **Software Company:** Including disclaimers and limitations in software licenses
+-   **Software Company:** Including disclaimers and limitations in software licenses
 
 -   **Consulting Firm:** Using engagement letters with scope limitations and indemnification provisions
 
@@ -410,7 +410,7 @@ The risk treatment process follows a systematic approach:
 
 **Derivatives and Hedging:**
 
--    **Airlines:** Using fuel price swaps to hedge against oil price volatility
+-   **Airlines:** Using fuel price swaps to hedge against oil price volatility
 
 -   **Exporters:** Employing foreign exchange forwards to manage currency risk
 
@@ -418,7 +418,7 @@ The risk treatment process follows a systematic approach:
 
 **Capital Market Solutions:**
 
--    **Insurance Companies:** Issuing catastrophe bonds to transfer extreme weather risks
+-   **Insurance Companies:** Issuing catastrophe bonds to transfer extreme weather risks
 
 -   **Governments:** Using disaster bonds for earthquake and hurricane exposure
 
@@ -458,7 +458,7 @@ The risk treatment process follows a systematic approach:
 
 **Strategic Opportunities:**
 
--    Market expansion into new regions
+-   Market expansion into new regions
 
 -   Product development and innovation
 

@@ -28,5 +28,8 @@
   },
   "posts/ggplot-visualization-guide.qmd": {
     "ggplot-visualization-guide.html": "579985e7"
+  },
+  "posts/data-pipeline-guide.qmd": {
+    "data-pipeline-guide.html": "3da827d8"
   }
 }
