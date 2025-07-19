@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="IKSHRESTHA">
+<meta name="dcterms.date" content="2025-07-19">
+<meta name="description" content="A comprehensive guide to data pipelines, their uses, and essential tools for implementation.">
+
+<title>Data Pipelines: The Backbone of Modern Data Engineering – Actuarial-Reflections</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-a986a95301e671fce2c6472dffc862a1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-LSZ7YTNKVY"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LSZ7YTNKVY', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Actuarial-Reflections</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../all-blogs.html"> 
+<span class="menu-text">All Blog Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/IKSHRESTHA"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/ikshrestha/"> <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-data-pipelines" id="toc-introduction-to-data-pipelines" class="nav-link active" data-scroll-target="#introduction-to-data-pipelines">Introduction to Data Pipelines</a></li>
+  <li><a href="#the-anatomy-of-a-data-pipeline" id="toc-the-anatomy-of-a-data-pipeline" class="nav-link" data-scroll-target="#the-anatomy-of-a-data-pipeline">The Anatomy of a Data Pipeline</a></li>
+  <li><a href="#visual-overview-what-is-a-data-pipeline" id="toc-visual-overview-what-is-a-data-pipeline" class="nav-link" data-scroll-target="#visual-overview-what-is-a-data-pipeline">Visual Overview: What is a Data Pipeline?</a></li>
+  <li><a href="#how-data-pipelines-are-being-used" id="toc-how-data-pipelines-are-being-used" class="nav-link" data-scroll-target="#how-data-pipelines-are-being-used">How Data Pipelines Are Being Used</a>
+  <ul class="collapse">
+  <li><a href="#industry-applications" id="toc-industry-applications" class="nav-link" data-scroll-target="#industry-applications">Industry Applications</a></li>
+  <li><a href="#modern-pipeline-architectures" id="toc-modern-pipeline-architectures" class="nav-link" data-scroll-target="#modern-pipeline-architectures">Modern Pipeline Architectures</a></li>
+  </ul></li>
+  <li><a href="#essential-tools-for-data-pipeline-implementation" id="toc-essential-tools-for-data-pipeline-implementation" class="nav-link" data-scroll-target="#essential-tools-for-data-pipeline-implementation">Essential Tools for Data Pipeline Implementation</a>
+  <ul class="collapse">
+  <li><a href="#data-extraction-and-integration" id="toc-data-extraction-and-integration" class="nav-link" data-scroll-target="#data-extraction-and-integration">Data Extraction and Integration</a></li>
+  <li><a href="#data-processing-frameworks" id="toc-data-processing-frameworks" class="nav-link" data-scroll-target="#data-processing-frameworks">Data Processing Frameworks</a></li>
+  <li><a href="#workflow-orchestration" id="toc-workflow-orchestration" class="nav-link" data-scroll-target="#workflow-orchestration">Workflow Orchestration</a></li>
+  <li><a href="#data-storage-solutions" id="toc-data-storage-solutions" class="nav-link" data-scroll-target="#data-storage-solutions">Data Storage Solutions</a></li>
+  </ul></li>
+  <li><a href="#building-a-modern-data-pipeline-step-by-step" id="toc-building-a-modern-data-pipeline-step-by-step" class="nav-link" data-scroll-target="#building-a-modern-data-pipeline-step-by-step">Building a Modern Data Pipeline: Step-by-Step</a>
+  <ul class="collapse">
+  <li><a href="#define-pipeline-requirements" id="toc-define-pipeline-requirements" class="nav-link" data-scroll-target="#define-pipeline-requirements">1. Define Pipeline Requirements</a></li>
+  <li><a href="#choose-the-right-architecture" id="toc-choose-the-right-architecture" class="nav-link" data-scroll-target="#choose-the-right-architecture">2. Choose the Right Architecture</a></li>
+  <li><a href="#implement-data-quality-controls" id="toc-implement-data-quality-controls" class="nav-link" data-scroll-target="#implement-data-quality-controls">3. Implement Data Quality Controls</a></li>
+  <li><a href="#orchestrate-pipeline-flows" id="toc-orchestrate-pipeline-flows" class="nav-link" data-scroll-target="#orchestrate-pipeline-flows">4. Orchestrate Pipeline Flows</a></li>
+  </ul></li>
+  <li><a href="#learning-path-for-data-pipeline-engineering" id="toc-learning-path-for-data-pipeline-engineering" class="nav-link" data-scroll-target="#learning-path-for-data-pipeline-engineering">Learning Path for Data Pipeline Engineering</a>
+  <ul class="collapse">
+  <li><a href="#fundamental-skills" id="toc-fundamental-skills" class="nav-link" data-scroll-target="#fundamental-skills">Fundamental Skills</a></li>
+  <li><a href="#intermediate-skills" id="toc-intermediate-skills" class="nav-link" data-scroll-target="#intermediate-skills">Intermediate Skills</a></li>
+  <li><a href="#advanced-skills" id="toc-advanced-skills" class="nav-link" data-scroll-target="#advanced-skills">Advanced Skills</a></li>
+  </ul></li>
+  <li><a href="#future-trends-in-data-pipelines" id="toc-future-trends-in-data-pipelines" class="nav-link" data-scroll-target="#future-trends-in-data-pipelines">Future Trends in Data Pipelines</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#example-batch-processing-life-insurance-data-from-sql" id="toc-example-batch-processing-life-insurance-data-from-sql" class="nav-link" data-scroll-target="#example-batch-processing-life-insurance-data-from-sql">Example: Batch Processing Life Insurance Data from SQL</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Pipelines: The Backbone of Modern Data Engineering</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">data engineering</div>
+    <div class="quarto-category">pipelines</div>
+    <div class="quarto-category">tools</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A comprehensive guide to data pipelines, their uses, and essential tools for implementation.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>IKSHRESTHA </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 19, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction-to-data-pipelines" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-data-pipelines">Introduction to Data Pipelines</h2>
+<p>Data pipelines are structured systems designed to automate the flow of data from various sources to destination systems where it can be analyzed and used for business intelligence. These pipelines handle extraction, transformation, loading, processing, and management of data across different environments.</p>
+<p>In today’s data-driven world, organizations face overwhelming volumes of data from disparate sources. Data pipelines enable businesses to efficiently process this information, ensuring data reliability, consistency, and accessibility when needed.</p>
+</section>
+<section id="the-anatomy-of-a-data-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="the-anatomy-of-a-data-pipeline">The Anatomy of a Data Pipeline</h2>
+<p>A typical data pipeline consists of these core components:</p>
+<ol type="1">
+<li><strong>Data Sources</strong>: Where raw data originates (databases, applications, APIs, streaming sources)</li>
+<li><strong>Extraction Layer</strong>: Pulls data from source systems</li>
+<li><strong>Transformation Layer</strong>: Cleans, validates, and restructures data</li>
+<li><strong>Loading Layer</strong>: Delivers processed data to destination systems</li>
+<li><strong>Orchestration</strong>: Manages workflow scheduling and dependencies</li>
+<li><strong>Monitoring</strong>: Tracks pipeline health and performance</li>
+</ol>
+</section>
+<section id="visual-overview-what-is-a-data-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="visual-overview-what-is-a-data-pipeline">Visual Overview: What is a Data Pipeline?</h2>
+<p><img src="https://cdn.prod.website-files.com/61ddd0b42c51f89b7de1e910/66f1ada0cecc5ac7950ab2e2_AD_4nXep5NmTxDzxUIQHnnP2D6kuFEW6ndRFC6qV05L_XUOfO2QfN7S_FnzGc1BFhiZahkq7BUnlEDeis-cAyExJvpH9XXnTZodeEYc8zlqcjE5gRbajR2UwltENxZ8nRkiuY3tS9NZlwVnjLSV-WAhnkDMLxMw.png" class="img-fluid"></p>
+</section>
+<section id="how-data-pipelines-are-being-used" class="level2">
+<h2 class="anchored" data-anchor-id="how-data-pipelines-are-being-used">How Data Pipelines Are Being Used</h2>
+<section id="industry-applications" class="level3">
+<h3 class="anchored" data-anchor-id="industry-applications">Industry Applications</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Industry</th>
+<th>Pipeline Use Cases</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Finance</td>
+<td>Real-time fraud detection, algorithmic trading, risk analysis</td>
+</tr>
+<tr class="even">
+<td>Healthcare</td>
+<td>Patient data integration, clinical trial analysis, insurance claims processing</td>
+</tr>
+<tr class="odd">
+<td>Retail</td>
+<td>Customer behavior analysis, inventory optimization, personalized recommendations</td>
+</tr>
+<tr class="even">
+<td>Manufacturing</td>
+<td>Predictive maintenance, quality control, supply chain optimization</td>
+</tr>
+<tr class="odd">
+<td>Media</td>
+<td>Content recommendation, user engagement analytics, ad performance tracking</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="modern-pipeline-architectures" class="level3">
+<h3 class="anchored" data-anchor-id="modern-pipeline-architectures">Modern Pipeline Architectures</h3>
+<section id="batch-processing" class="level4">
+<h4 class="anchored" data-anchor-id="batch-processing">Batch Processing</h4>
+<p>Batch processing means working with a lot of data at once, instead of one record at a time. In life insurance, actuaries use batch processing to study how policies and claims behave over time. For example, you might want to see how many claims happened in different age groups, and compare that to what you expected.</p>
+<p>In R, you can connect to a SQL database and use two helpful packages: - <strong>DBI</strong>: Lets you connect to databases like MySQL, SQL Server, or PostgreSQL. - <strong>dplyr</strong>: Makes it easy to select, join, and summarize data.</p>
+<p>Here is a simple example. This code will NOT run unless you change <code>eval=FALSE</code> to <code>eval=TRUE</code> and fill in your real database details.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)      <span class="co"># Connect to databases</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)    <span class="co"># Work with data easily</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to your SQL database (update with your info)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  RMySQL<span class="sc">::</span><span class="fu">MySQL</span>(),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">dbname =</span> <span class="st">"life_insurance_db"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">host =</span> <span class="st">"your_host"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">user =</span> <span class="st">"your_user"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">password =</span> <span class="st">"your_password"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Get policy and claims data from the database</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>df_policies <span class="ot">&lt;-</span> <span class="fu">tbl</span>(con, <span class="st">"policies"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>df_claims <span class="ot">&lt;-</span> <span class="fu">tbl</span>(con, <span class="st">"claims"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Join and summarize: How many claims vs expected, by age and policy type</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>summary <span class="ot">&lt;-</span> df_policies <span class="sc">%&gt;%</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(df_claims, <span class="at">by =</span> <span class="st">"policy_id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age_band, policy_type) <span class="sc">%&gt;%</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_policies =</span> <span class="fu">n</span>(),</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_claims =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(claim_id)),</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">expected_claims =</span> <span class="fu">sum</span>(expected_claim),</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">actual_claims =</span> <span class="fu">sum</span>(claim_amount, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">claim_ratio =</span> actual_claims <span class="sc">/</span> expected_claims</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># To see the results, collect the summary from the database</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># summary %&gt;% collect()</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Always disconnect when done</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># dbDisconnect(con)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>What does this do?</strong> - Connects to your database - Gets policy and claims data - Joins them together - Groups by age and policy type - Counts policies, claims, and calculates actual vs expected claims</p>
+<p>This is a common way actuaries use R and SQL to study insurance data in batches. You can change the code to fit your own database and analysis needs.</p>
+</section>
+<section id="stream-processing" class="level4">
+<h4 class="anchored" data-anchor-id="stream-processing">Stream Processing</h4>
+<p>Processes data in real-time as it arrives. Essential for applications requiring immediate insights.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conceptual example: Stream processing in R (using a simulated stream)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>stream_data <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="sc">~</span><span class="fu">data.frame</span>(<span class="at">timestamp =</span> <span class="fu">Sys.time</span>(), <span class="at">value =</span> <span class="fu">rnorm</span>(<span class="dv">1</span>)))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>stream_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(stream_data)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Real-time aggregation</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>stream_df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">minute =</span> <span class="fu">format</span>(timestamp, <span class="st">"%H:%M"</span>)) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">avg_value =</span> <span class="fu">mean</span>(value))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  minute avg_value
+  &lt;chr&gt;      &lt;dbl&gt;
+1 15:32    -0.0317</code></pre>
+</div>
+</div>
+</section>
+<section id="elt-vs-etl" class="level4">
+<h4 class="anchored" data-anchor-id="elt-vs-etl">ELT vs ETL</h4>
+<p>Modern pipelines often adopt ELT (Extract, Load, Transform) over traditional ETL, leveraging cloud data warehouses for transformations.</p>
+</section>
+</section>
+</section>
+<section id="essential-tools-for-data-pipeline-implementation" class="level2">
+<h2 class="anchored" data-anchor-id="essential-tools-for-data-pipeline-implementation">Essential Tools for Data Pipeline Implementation</h2>
+<section id="data-extraction-and-integration" class="level3">
+<h3 class="anchored" data-anchor-id="data-extraction-and-integration">Data Extraction and Integration</h3>
+<ul>
+<li><strong>Apache NiFi</strong>: Visual dataflow tool for automation</li>
+<li><strong>Airbyte</strong>: Open-source ELT platform</li>
+<li><strong>Fivetran</strong>: Managed data integration</li>
+<li><strong>Stitch</strong>: Simple, extensible ETL service</li>
+</ul>
+</section>
+<section id="data-processing-frameworks" class="level3">
+<h3 class="anchored" data-anchor-id="data-processing-frameworks">Data Processing Frameworks</h3>
+<ul>
+<li><strong>Apache Spark</strong>: Unified analytics engine</li>
+<li><strong>Apache Flink</strong>: Stream processing framework</li>
+<li><strong>dbt</strong>: Data transformation tool</li>
+<li><strong>Pandas (Python)</strong>: Data manipulation, exploration</li>
+<li><strong>dplyr (R)</strong>: Data manipulation</li>
+</ul>
+</section>
+<section id="workflow-orchestration" class="level3">
+<h3 class="anchored" data-anchor-id="workflow-orchestration">Workflow Orchestration</h3>
+<ul>
+<li><strong>Apache Airflow</strong>: Workflow management platform</li>
+<li><strong>Dagster</strong>: Data orchestration platform</li>
+<li><strong>Prefect</strong>: Modern workflow orchestration</li>
+<li><strong>Luigi</strong>: Python-based workflow manager</li>
+</ul>
+</section>
+<section id="data-storage-solutions" class="level3">
+<h3 class="anchored" data-anchor-id="data-storage-solutions">Data Storage Solutions</h3>
+<ul>
+<li><strong>Snowflake</strong>: Cloud data warehouse</li>
+<li><strong>BigQuery</strong>: Serverless data warehouse</li>
+<li><strong>Databricks</strong>: Unified analytics platform</li>
+<li><strong>Delta Lake</strong>: Open storage layer</li>
+</ul>
+</section>
+</section>
+<section id="building-a-modern-data-pipeline-step-by-step" class="level2">
+<h2 class="anchored" data-anchor-id="building-a-modern-data-pipeline-step-by-step">Building a Modern Data Pipeline: Step-by-Step</h2>
+<section id="define-pipeline-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="define-pipeline-requirements">1. Define Pipeline Requirements</h3>
+<ul>
+<li>What data sources need to be integrated?</li>
+<li>What is the required data freshness (real-time vs.&nbsp;batch)?</li>
+<li>What transformations are needed?</li>
+<li>What’s the expected data volume?</li>
+<li>What are the end-user requirements?</li>
+</ul>
+</section>
+<section id="choose-the-right-architecture" class="level3">
+<h3 class="anchored" data-anchor-id="choose-the-right-architecture">2. Choose the Right Architecture</h3>
+<ul>
+<li><strong>Batch processing</strong> (Spark, dbt, dplyr)</li>
+<li><strong>Stream processing</strong> (Kafka, Flink)</li>
+<li><strong>Hybrid approaches</strong> (Lambda or Kappa architecture)</li>
+</ul>
+</section>
+<section id="implement-data-quality-controls" class="level3">
+<h3 class="anchored" data-anchor-id="implement-data-quality-controls">3. Implement Data Quality Controls</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Data quality check in R</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">customer_id =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="cn">NA</span>,<span class="dv">4</span>), <span class="at">transaction_amount =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="cn">NA</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing values</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">summarise_all</span>(data, <span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  customer_id transaction_amount
+1           1                  1</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for valid transaction amounts</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(data<span class="sc">$</span>transaction_amount <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> data<span class="sc">$</span>transaction_amount <span class="sc">&lt;=</span> <span class="dv">10000</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="orchestrate-pipeline-flows" class="level3">
+<h3 class="anchored" data-anchor-id="orchestrate-pipeline-flows">4. Orchestrate Pipeline Flows</h3>
+<ul>
+<li>Use tools like Airflow, Prefect, or R’s <code>targets</code> package for workflow management.</li>
+</ul>
+</section>
+</section>
+<section id="learning-path-for-data-pipeline-engineering" class="level2">
+<h2 class="anchored" data-anchor-id="learning-path-for-data-pipeline-engineering">Learning Path for Data Pipeline Engineering</h2>
+<section id="fundamental-skills" class="level3">
+<h3 class="anchored" data-anchor-id="fundamental-skills">Fundamental Skills</h3>
+<ul>
+<li>Programming: R, Python, SQL</li>
+<li>Data Structures &amp; Algorithms</li>
+<li>Database Concepts</li>
+<li>Cloud Computing</li>
+</ul>
+</section>
+<section id="intermediate-skills" class="level3">
+<h3 class="anchored" data-anchor-id="intermediate-skills">Intermediate Skills</h3>
+<ul>
+<li>Big Data Technologies</li>
+<li>Stream Processing</li>
+<li>Workflow Management</li>
+<li>Data Modeling</li>
+</ul>
+</section>
+<section id="advanced-skills" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-skills">Advanced Skills</h3>
+<ul>
+<li>Performance Optimization</li>
+<li>System Design</li>
+<li>MLOps</li>
+<li>Data Governance</li>
+</ul>
+</section>
+</section>
+<section id="future-trends-in-data-pipelines" class="level2">
+<h2 class="anchored" data-anchor-id="future-trends-in-data-pipelines">Future Trends in Data Pipelines</h2>
+<ul>
+<li>Serverless Data Processing</li>
+<li>Real-time Everything</li>
+<li>DataOps and Pipeline Automation</li>
+<li>Data Mesh Architecture</li>
+<li>Unified Batch and Stream Processing</li>
+</ul>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Data pipelines are essential infrastructure for modern data-driven organizations. By understanding the tools, architectures, and implementation patterns discussed in this article, you can start building robust, scalable data pipelines that deliver reliable insights to your organization.</p>
+<p>Whether you’re processing batch data for daily reports or streaming data for real-time analytics, the principles of well-designed data pipelines remain consistent: reliability, scalability, and maintainability. As data volumes continue to grow and business requirements evolve, investing in strong data pipeline skills will remain valuable for years to come.</p>
+</section>
+<section id="example-batch-processing-life-insurance-data-from-sql" class="level2">
+<h2 class="anchored" data-anchor-id="example-batch-processing-life-insurance-data-from-sql">Example: Batch Processing Life Insurance Data from SQL</h2>
+<p>Batch processing means working with large amounts of data at once, instead of handling each record one by one. In life insurance, actuaries often use batch processing to study how policies perform over time. For example, you might want to compare the number of claims to what you expected for different age groups and policy types.</p>
+<p>In R, you can connect to a SQL database and use two main packages: - <strong>DBI</strong>: Helps you connect to databases like MySQL, SQL Server, or PostgreSQL. - <strong>dplyr</strong>: Makes it easy to select, join, and summarize data.</p>
+<section id="batch-processing-in-life-insurance-advanced-example" class="level4">
+<h4 class="anchored" data-anchor-id="batch-processing-in-life-insurance-advanced-example">Batch Processing in Life Insurance (Advanced Example)</h4>
+<p>Batch processing lets actuaries analyze large amounts of insurance data efficiently. For complex experience studies, you might want to: - Calculate actual vs expected claims by age, gender, and product type - Analyze lapse rates and persistency - Segment results by region or distribution channel - Join multiple tables (policies, claims, premiums, agents) - Apply business rules for exclusions or adjustments</p>
+<p>In R, you use <code>DBI</code> to connect to your SQL database and <code>dplyr</code> to write readable, powerful queries. Below is an advanced example.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)      <span class="co"># For database connections</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)    <span class="co"># For data manipulation</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to your SQL database (update with your info)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  RMySQL<span class="sc">::</span><span class="fu">MySQL</span>(),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">dbname =</span> <span class="st">"life_insurance_db"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">host =</span> <span class="st">"your_host"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">user =</span> <span class="st">"your_user"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">password =</span> <span class="st">"your_password"</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Get tables from the database</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>df_policies <span class="ot">&lt;-</span> <span class="fu">tbl</span>(con, <span class="st">"policies"</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>df_claims <span class="ot">&lt;-</span> <span class="fu">tbl</span>(con, <span class="st">"claims"</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>df_premiums <span class="ot">&lt;-</span> <span class="fu">tbl</span>(con, <span class="st">"premiums"</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>df_agents <span class="ot">&lt;-</span> <span class="fu">tbl</span>(con, <span class="st">"agents"</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Advanced aggregation: Experience study by age, gender, product, and region</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>experience_summary <span class="ot">&lt;-</span> df_policies <span class="sc">%&gt;%</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(df_claims, <span class="at">by =</span> <span class="st">"policy_id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(df_premiums, <span class="at">by =</span> <span class="st">"policy_id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(df_agents, <span class="at">by =</span> <span class="st">"agent_id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(policy_status <span class="sc">==</span> <span class="st">"active"</span>, <span class="sc">!</span><span class="fu">is.na</span>(issue_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age_band, gender, product_type, region) <span class="sc">%&gt;%</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_policies =</span> <span class="fu">n</span>(),</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_claims =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(claim_id)),</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_premium =</span> <span class="fu">sum</span>(premium_amount, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">expected_claims =</span> <span class="fu">sum</span>(expected_claim),</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">actual_claims =</span> <span class="fu">sum</span>(claim_amount, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">claim_ratio =</span> actual_claims <span class="sc">/</span> expected_claims,</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_policy_duration =</span> <span class="fu">mean</span>(<span class="fu">as.numeric</span>(<span class="fu">difftime</span>(<span class="fu">Sys.Date</span>(), issue_date, <span class="at">units =</span> <span class="st">"days"</span>)) <span class="sc">/</span> <span class="fl">365.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">lapse_rate =</span> <span class="fu">mean</span>(policy_status <span class="sc">==</span> <span class="st">"lapsed"</span>),</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">agent_count =</span> <span class="fu">n_distinct</span>(agent_id)</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="co"># To see the results, collect the summary from the database</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>experience_summary <span class="sc">%&gt;%</span> <span class="fu">collect</span>()</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="fu">dbDisconnect</span>(con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/IKSHRESTHA\.github\.io\/Actuarial-Reflections\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
